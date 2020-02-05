@@ -1,7 +1,7 @@
 ---
-title: "Using CMD and ENTRYPOINT in Dockerfiles"
-teaching: 20
-exercises: 10
+title: "Bonus: Using CMD and ENTRYPOINT in Dockerfiles"
+teaching: 0
+exercises: 0
 questions:
 - "How are default commands set in Dockerfiles?"
 objectives:
