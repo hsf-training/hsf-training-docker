@@ -108,7 +108,7 @@ Add the following lines at the end of the `.gitlab-ci.yml` file to build the ima
 build_image:
   stage: build
   variables:
-    TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   tags:
     - docker-image-build
   script:
