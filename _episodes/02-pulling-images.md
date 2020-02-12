@@ -32,7 +32,7 @@ To begin with we're going to [pull][docker-docs-pull] down the Docker image we'r
 to be working in for the tutorial
 
 ~~~
-docker pull matthewfeickert/intro-to-docker
+docker pull matthewfeickert/intro-to-docker #you may need 'sudo docker pull'
 ~~~
 {: .source}
 
