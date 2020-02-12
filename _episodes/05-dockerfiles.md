@@ -241,32 +241,29 @@ way to bring them into the Docker build.
 > > ~~~
 > > {: .bash}
 > >
-> >~~~
-> ># Dockerfile.arg-py3
-> ># Make the base image configurable
-> >ARG BASE_IMAGE=python:3.6
-> >FROM ${BASE_IMAGE}
-> >USER root
-> >RUN apt-get -qq -y update && \
-> >    apt-get -qq -y upgrade && \
-> >    apt-get -y autoclean && \
-> >    apt-get -y autoremove && \
-> >    rm -rf /var/lib/apt-get/lists/*
-> >COPY install_python_deps.sh install_python_deps.sh
-> >RUN bash install_python_deps.sh && \
-> >    rm install_python_deps.sh
-> >COPY install_tree.sh install_tree.sh
-> >RUN bash install_tree.sh && \
-> >    rm install_tree.sh
-> ># Create user "docker"
-> >RUN useradd -m docker && \
-> >    cp /root/.bashrc /home/docker/ && \
-> >    mkdir /home/docker/data && \
-> >    chown -R --from=root docker /home/docker
-> >ENV HOME /home/docker
-> >WORKDIR ${BASE_IMAGE}/data
-> >USER docker
-> >~~~
+> > ~~~
+> > # Dockerfile
+> > FROM python:3.7
+> > USER root
+> > RUN apt-get -qq -y update && \
+> > apt-get -qq -y upgrade && \
+> > apt-get -qq -y install cowsay && \
+> > apt-get -y autoclean && \
+> > apt-get -y autoremove && \
+> > rm -rf /var/lib/apt-get/lists/* && \
+> > ln -s /usr/games/cowsay /usr/bin/cowsay
+> > COPY install_python_deps.sh install_python_deps.sh
+> > RUN bash install_python_deps.sh && \
+> > rm install_python_deps.sh
+> > # Create user "docker"
+> > RUN useradd -m docker && \
+> > cp /root/.bashrc /home/docker/ && \
+> > mkdir /home/docker/data && \
+> > chown -R --from=root docker /home/docker
+> > ENV HOME /home/docker
+> > WORKDIR ${BASE_IMAGE}/data
+> > USER docker
+> > ~~~
 > >{: .source}
 > >
 > >~~~
