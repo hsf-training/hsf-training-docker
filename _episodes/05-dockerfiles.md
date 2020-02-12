@@ -186,7 +186,7 @@ then this could be copied into the Docker image of the previous example during t
 and then used (and then removed as it is no longer needed) with the following
 
 ~~~
-# Dockerfile
+# Dockerfile.copy
 FROM python:3.7
 USER root
 RUN apt-get -qq -y update && \
@@ -210,7 +210,7 @@ USER docker
 {: .source}
 
 ~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest .
+docker build -f Dockerfile.copy -t copy-example:latest .
 ~~~
 {: .source}
 
