@@ -27,14 +27,16 @@ To bring it all together, we can also preserve our fitting framework in its own 
 > > ## Solution
 > > ~~~yaml
 > > FROM rootproject/root-conda
-> > ADD . /fit
+> > COPY . /fit
 > > WORKDIR /fit
 > > ~~~
 > > {: .source}
 > {: .solution}
 {: .challenge}
 
-Now, add the same image-building stage to the `.gitlab-ci.yml` file as we added for the skimming repo. If the image-building completes successfully, you should be able to pull your fitting container, just as you did the skimming container:
+Now, add the same image-building stage to the `.gitlab-ci.yml` file as we added for the skimming repo. You will also need to add a `-build` stage at the top in addition to the `- fit` stage.
+
+If the image-building completes successfully, you should be able to pull your fitting container, just as you did the skimming container:
 
 ~~~bash
 docker login gitlab-registry.cern.ch

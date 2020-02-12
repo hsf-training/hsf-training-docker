@@ -68,7 +68,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > > 
 > > # Put the current repo (the one in which this Dockerfile resides) in the /analysis/skim directory
 > > # Note that this directory is created on the fly and does not need to reside in the repo already
-> > ADD . /analysis/skim
+> > COPY . /analysis/skim
 > > 
 > > # Make /analysis/skim the default working directory (again, it will create the directory if it doesn't already exist)
 > > WORKDIR /analysis/skim
@@ -116,6 +116,8 @@ build_image:
 ~~~
 {: .source}
 
+Now, remove the line `image: rootproject/root-conda` underneath the stages, since the image-building stage uses its own dedicated image for automated image building (see callout below). You'll then need to explicitly specify that the other stages use this image by adding the line `image: rootproject/root-conda` to the stages, since it's no longer a global specification.
+
 Once this is done, you can commit and push the updated `.gitlab-ci.yml` file to your gitlab repo and check to make sure the pipeline passed. If it passed, the repo image built by the pipeline should now be stored on the docker registry, and be accessible as follows:
 
 ~~~bash
@@ -130,7 +132,8 @@ Notice that the script to run is just a dummy 'ignore' command. This is because 
 > You'll notice the environment variable `TO` in the `.gitlab-ci.yml` script above. This controls the name of the Docker image that is produced in the CI step. Here, the image name will be `<reponame>:<branch or tagname>`. This way images built from different branches do not overwrite each other and tagged commits will correspond to tagged images.
 {: .callout} 
 
-> ## Updated Skimming Script (10 mins)
+
+> ## Exercise (10 mins)
 > Since we're now taking care of building the skimming executable during image building, let's make an updated version of skim.sh that excludes the step of building the `skim` executable. 
 > 
 > The updated script should just directly run the pre-existing `skim` executable on the input samples. You could call it eg. `skim_prebuilt.sh`.
@@ -161,8 +164,9 @@ Notice that the script to run is just a dummy 'ignore' command. This is because 
 > > ./skim $INPUT $OUTPUT $XSEC $LUMI $SCALE
 > > done < skim.csv
 > > ~~~
+> > {: .source}
 > {: .solution}
-{: challenge}
+{: .challenge}
 
 {% include links.md %}
 

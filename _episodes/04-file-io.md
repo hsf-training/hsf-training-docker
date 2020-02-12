@@ -121,46 +121,46 @@ even just having a specific version of software perform a task (e.g., using Pyth
     you don't want it on your machine, or using a specific release of
     [TeX Live][Tex-Live-image] when you aren't ready to update your system release).
 
-# Running Jupyter from a Docker Container
-
-You can run a Jupyter server from inside of your Docker container.
-First run a container while [exposing][docker-docs-run-expose-ports] the container's
-internal port `8888` with the `-p` flag
-
-~~~
-docker run --rm -it -p 8888:8888 matthewfeickert/intro-to-docker /bin/bash
-~~~
-{: .source}
-
-Then [start a Jupyter server][jupyter-docs-server] with the server listening on all IPs
-
-~~~
-jupyter notebook --allow-root --no-browser --ip 0.0.0.0
-~~~
-{: .source}
-
-though for your convince the example container has been configured with these default
-settings so you can just run
-
-~~~
-jupyter notebook
-~~~
-{: .source}
-
-Finally, copy and paste the following with the generated token from the server as
-`<token>` into your web browser on your local host machine
-
-~~~
-http://localhost:8888/?token=<token>
-~~~
-{: .source}
-
-You now have access to Jupyter running on your Docker container.
-
-[docker-docs-cp]: https://docs.docker.com/engine/reference/commandline/cp/
-[docker-docs-volumes]: https://docs.docker.com/storage/volumes/
-[Tex-Live-image]: https://hub.docker.com/r/matthewfeickert/latex-docker/
-[docker-docs-run-expose-ports]: https://docs.docker.com/engine/reference/run/#expose-incoming-ports
-[jupyter-docs-server]: https://jupyter.readthedocs.io/en/latest/running.html#starting-the-notebook-server
+<!--# Running Jupyter from a Docker Container-->
+<!---->
+<!--You can run a Jupyter server from inside of your Docker container.-->
+<!--First run a container while [exposing][docker-docs-run-expose-ports] the container's-->
+<!--internal port `8888` with the `-p` flag-->
+<!---->
+<!--~~~-->
+<!--docker run --rm -it -p 8888:8888 matthewfeickert/intro-to-docker /bin/bash-->
+<!--~~~-->
+<!--{: .source}-->
+<!---->
+<!--Then [start a Jupyter server][jupyter-docs-server] with the server listening on all IPs-->
+<!---->
+<!--~~~-->
+<!--jupyter notebook --allow-root --no-browser --ip 0.0.0.0-->
+<!--~~~-->
+<!--{: .source}-->
+<!---->
+<!--though for your convince the example container has been configured with these default-->
+<!--settings so you can just run-->
+<!---->
+<!--~~~-->
+<!--jupyter notebook-->
+<!--~~~-->
+<!--{: .source}-->
+<!---->
+<!--Finally, copy and paste the following with the generated token from the server as-->
+<!--`<token>` into your web browser on your local host machine-->
+<!---->
+<!--~~~-->
+<!--http://localhost:8888/?token=<token>-->
+<!--~~~-->
+<!--{: .source}-->
+<!---->
+<!--You now have access to Jupyter running on your Docker container.-->
+<!---->
+<!--[docker-docs-cp]: https://docs.docker.com/engine/reference/commandline/cp/-->
+<!--[docker-docs-volumes]: https://docs.docker.com/storage/volumes/-->
+<!--[Tex-Live-image]: https://hub.docker.com/r/matthewfeickert/latex-docker/-->
+<!--[docker-docs-run-expose-ports]: https://docs.docker.com/engine/reference/run/#expose-incoming-ports-->
+<!--[jupyter-docs-server]: https://jupyter.readthedocs.io/en/latest/running.html#starting-the-notebook-server-->
 
 {% include links.md %}

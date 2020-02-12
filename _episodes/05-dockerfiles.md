@@ -70,7 +70,7 @@ Then [`build`][docker-docs-build] an image from the `Dockerfile` and tag it with
 readable name
 
 ~~~
-docker build -f Dockerfile -t extend-example:latest --compress .
+docker build -f Dockerfile -t extend-example:latest .
 ~~~
 {: .source}
 
@@ -98,135 +98,6 @@ python3 -c "import sklearn as sk; print(sk)"
 
 scikit-learn       0.21.3
 <module 'sklearn' from '/usr/local/lib/python3.6/site-packages/sklearn/__init__.py'>
-~~~
-{: .output}
-
-# Beyond the basics
-
-## `ARG`s and `ENV`s
-
-Even though the Dockerfile is a set of specific build instructions to the Docker engine it
-can still be scripted to give greater flexibility by using the Dockerfile
-[`ARG`][docker-docs-ARG] instruction and the [`build-arg`][docker-docs-build-arg] flag to
-define build time variables to be evaluated. For example, consider an example Dockerfile
-with a configurable [`FROM`][docker-docs-FROM] image
-
-~~~
-# Dockerfile.arg-py3
-# Make the base image configurable
-ARG BASE_IMAGE=python:3.6
-FROM ${BASE_IMAGE}
-USER root
-RUN apt-get -qq -y update && \
-    apt-get -qq -y upgrade && \
-    apt-get -y autoclean && \
-    apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
-RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
-    pip install --no-cache-dir -q scikit-learn
-# Create user "docker"
-RUN useradd -m docker && \
-    cp /root/.bashrc /home/docker/ && \
-    mkdir /home/docker/data && \
-    chown -R --from=root docker /home/docker
-WORKDIR /home/docker/data
-USER docker
-~~~
-{: .source}
-
-and then build it using the `python:3.7` image as the `FROM` image
-
-~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:py-37 --compress .
-~~~
-{: .source}
-
-which you can check has Python 3.7 and not Python 3.6
-
-~~~
-docker run --rm -it arg-example:py-37 /bin/bash
-which python3
-python3 --version
-~~~
-{: .source}
-
-~~~
-/usr/local/bin/python3
-
-Python 3.7.4
-~~~
-{: .output}
-
-> ## Default `ARG` values
->
->Setting the value of the `ARG` inside of the Dockerfile allows for default values to be
->used if no `--build-arg` is passed to `docker build`.
-{: .callout}
-
-[`ENV`][docker-docs-ENV] variables are similar to `ARG` variables, except that they persist
-past the build stage and still accessible in the container runtime.
-Think of using `ENV` in a similar manner to how you would use `export` in Bash.
-
-~~~
-# Dockerfile.arg-py3
-# Make the base image configurable
-ARG BASE_IMAGE=python:3.6
-FROM ${BASE_IMAGE}
-USER root
-RUN apt-get -qq -y update && \
-    apt-get -qq -y upgrade && \
-    apt-get -y autoclean && \
-    apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/*
-RUN pip install --upgrade --no-cache-dir pip setuptools wheel && \
-    pip install --no-cache-dir -q scikit-learn
-# Create user "docker"
-RUN useradd -m docker && \
-    cp /root/.bashrc /home/docker/ && \
-    mkdir /home/docker/data && \
-    chown -R --from=root docker /home/docker
-# Use C.UTF-8 locale to avoid issues with ASCII encoding
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
-
-ENV HOME /home/docker
-WORKDIR ${BASE_IMAGE}/data
-USER docker
-~~~
-{: .source}
-
-~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest --compress .
-~~~
-{: .source}
-
-~~~
-docker run --rm -it arg-example:latest /bin/bash
-echo $HOME
-echo $LC_ALL
-~~~
-{: .source}
-
-~~~
-/home/docker
-
-C.UTF-8
-~~~
-{: .output}
-
-whereas for
-
-~~~
-docker run --rm -it arg-example:py-37 /bin/bash
-echo $HOME
-echo $LC_ALL
-~~~
-{: .source}
-
-~~~
-/home/docker
-
-
 ~~~
 {: .output}
 
@@ -341,7 +212,7 @@ USER docker
 {: .source}
 
 ~~~
-docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest --compress .
+docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest .
 ~~~
 {: .source}
 
@@ -399,7 +270,7 @@ way to bring them into the Docker build.
 > >{: .source}
 > >
 > >~~~
-> >docker build -f Dockerfile.arg-py3 --build-arg BASE_IMAGE=python:3.7 -t arg-example:latest --compress .
+> >docker build -f Dockerfile.copy -t copy-example:latest .
 > >~~~
 > >{: .source}
 > >
