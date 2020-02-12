@@ -157,10 +157,10 @@ even just having a specific version of software perform a task (e.g., using Pyth
 <!---->
 <!--You now have access to Jupyter running on your Docker container.-->
 <!---->
-<!--[docker-docs-cp]: https://docs.docker.com/engine/reference/commandline/cp/-->
-<!--[docker-docs-volumes]: https://docs.docker.com/storage/volumes/-->
-<!--[Tex-Live-image]: https://hub.docker.com/r/matthewfeickert/latex-docker/-->
-<!--[docker-docs-run-expose-ports]: https://docs.docker.com/engine/reference/run/#expose-incoming-ports-->
-<!--[jupyter-docs-server]: https://jupyter.readthedocs.io/en/latest/running.html#starting-the-notebook-server-->
+[docker-docs-cp]: https://docs.docker.com/engine/reference/commandline/cp/
+[docker-docs-volumes]: https://docs.docker.com/storage/volumes/
+[Tex-Live-image]: https://hub.docker.com/r/matthewfeickert/latex-docker/
+[docker-docs-run-expose-ports]: https://docs.docker.com/engine/reference/run/#expose-incoming-ports
+[jupyter-docs-server]: https://jupyter.readthedocs.io/en/latest/running.html#starting-the-notebook-server
 
 {% include links.md %}
