@@ -32,7 +32,10 @@ To begin with we're going to [pull][docker-docs-pull] down the Docker image we'r
 to be working in for the tutorial
 
 ~~~
-docker pull matthewfeickert/intro-to-docker #you may need 'sudo docker pull'
+docker pull matthewfeickert/intro-to-docker
+
+#if you run into a premission error, use "sudo docker run ..." as a quick fix
+# to fix this for the future, see https://docs.docker.com/install/linux/linux-postinstall/
 ~~~
 {: .source}
 
