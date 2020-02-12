@@ -12,7 +12,6 @@ keypoints:
 - "Dockerfiles are written as text file commands to the Docker engine"
 - "Docker images are built with `docker build`"
 - "Built time variables can be defined with `ARG` and set with `--build-arg`"
-- "`ENV` arguments persist into the container runtime"
 - "Docker images can have multiple tags associated to them"
 - "Docker images can use `COPY` to copy files into them during build"
 ---
@@ -205,8 +204,7 @@ RUN useradd -m docker && \
     cp /root/.bashrc /home/docker/ && \
     mkdir /home/docker/data && \
     chown -R --from=root docker /home/docker
-ENV HOME /home/docker
-WORKDIR ${BASE_IMAGE}/data
+WORKDIR /home/data
 USER docker
 ~~~
 {: .source}
