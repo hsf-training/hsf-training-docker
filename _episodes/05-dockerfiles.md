@@ -11,7 +11,6 @@ objectives:
 keypoints:
 - "Dockerfiles are written as text file commands to the Docker engine"
 - "Docker images are built with `docker build`"
-- "Built time variables can be defined with `ARG` and set with `--build-arg`"
 - "Docker images can have multiple tags associated to them"
 - "Docker images can use `COPY` to copy files into them during build"
 ---
@@ -26,7 +25,7 @@ some simple extensions of the [official Python 3.6.8 Docker image][python-docker
 As a very simple of extending the example image into a new image create a `Dockerfile`
 on your local machine
 
-~~~
+~~~bash
 touch Dockerfile
 ~~~
 {: .source}
@@ -34,10 +33,16 @@ touch Dockerfile
 and then write in it the Docker engine instructions to add [`cowsay`][cowsay] and
 [`scikit-learn`][scikit-learn] to the environment
 
-~~~
+~~~yaml
 # Dockerfile
+
+# Specify the base image that we're building the image on top of
 FROM matthewfeickert/intro-to-docker:latest
+
+# Build the image as root user
 USER root
+
+# Run some bash commands to install packages
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
     apt-get -qq -y install cowsay && \
@@ -46,16 +51,28 @@ RUN apt-get -qq -y update && \
     rm -rf /var/lib/apt-get/lists/* && \
     ln -s /usr/games/cowsay /usr/bin/cowsay
 RUN pip install --no-cache-dir -q scikit-learn
+
+# This sets the default working directory when a container is launched from the image
+WORKDIR /home/docker
+
+# Run as docker user by default when the container starts up
 USER docker
 ~~~
 {: .source}
 
-> ## Dockerfile layers
+> ## Dockerfile layers (or: why all these '&&'s??)
 >
 >Each `RUN` command in a Dockerfile creates a new layer to the Docker image.
 >In general, each layer should try to do one job and the fewer layers in an image
-> the easier it is compress. When trying to upload and download images on demand the
-> smaller the size the better.
+> the easier it is compress. 
+> This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will take place in a single layer. 
+> When trying to upload and download images on demand the smaller the size the better.
+> 
+> Another thing to keep in mind is that each `RUN` command occurs in its own shell, so any environment variables, etc. set in one `RUN` command will not persist to the next. 
+{: .callout}
+
+> ## Garbage cleanup
+> Notice that the last few lines of the `RUN` command clean up and remove unneeded files that get produced during the installation process. This is important for keeping images sizes small, since files produced during each image-building layer will persist into the final image and add unnecessary bulk. 
 {: .callout}
 
 > ## Don't run as `root`
@@ -68,14 +85,14 @@ USER docker
 Then [`build`][docker-docs-build] an image from the `Dockerfile` and tag it with a human
 readable name
 
-~~~
+~~~bash
 docker build -f Dockerfile -t extend-example:latest .
 ~~~
 {: .source}
 
 You can now run the image as a container and verify for yourself that your additions exist
 
-~~~
+~~~bash
 docker run --rm -it extend-example:latest /bin/bash
 which cowsay
 cowsay "Hello from Docker"
@@ -109,7 +126,7 @@ New tags can be specified in the `docker build` command by giving the `-t` flag 
 times or they can be specified after an image is built by using
 [`docker tag`][docker-docs-tag].
 
-~~~
+~~~bash
 docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 ~~~
 {: .source}
@@ -152,7 +169,7 @@ build with the [`COPY`][docker-docs-COPY] Dockerfile command.
 Which allows copying a target file on the from a host file system into the Docker image
 file system
 
-~~~
+~~~yaml
 COPY <path on host> <path in Docker image>
 ~~~
 {: .source}
@@ -160,14 +177,14 @@ COPY <path on host> <path in Docker image>
 For example, if there is a file called `install_python_deps.sh` in the same directory as
 the build is executed from
 
-~~~
+~~~bash
 touch install_python_deps.sh
 ~~~
 {: .source}
 
 with contents
 
-~~~
+~~~bash
 cat install_python_deps.sh
 ~~~
 {: .source}
@@ -183,9 +200,18 @@ pip install --no-cache-dir -q scikit-learn
 {: .output}
 
 then this could be copied into the Docker image of the previous example during the build
-and then used (and then removed as it is no longer needed) with the following
+and then used (and then removed as it is no longer needed). 
 
+Create a new file called `Dockerfile.copy`:
+
+~~~bash
+touch Dockerfile.copy
 ~~~
+{: .source}
+
+and fill it with a modified version of the above Dockerfile, where we now copy `install_python_deps.sh` from the local working directory into the container and use it to install the specified python dependencies:
+
+~~~yaml
 # Dockerfile.copy
 FROM python:3.7
 USER root
@@ -209,7 +235,7 @@ USER docker
 ~~~
 {: .source}
 
-~~~
+~~~bash
 docker build -f Dockerfile.copy -t copy-example:latest .
 ~~~
 {: .source}

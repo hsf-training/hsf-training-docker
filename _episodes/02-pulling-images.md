@@ -31,14 +31,14 @@ pushes to repositories.
 To begin with we're going to [pull][docker-docs-pull] down the Docker image we're going
 to be working in for the tutorial
 
-~~~
+~~~bash
 docker pull matthewfeickert/intro-to-docker
 ~~~
 {: .source}
 
 and then [list the images][docker-docs-images] that we have available to us locally
 
-~~~
+~~~bash
 docker images
 ~~~
 {: .source}
@@ -46,7 +46,7 @@ docker images
 If you have many images and want to get information on a particular one you can apply a
 filter, such as the repository name
 
-~~~
+~~~bash
 docker images matthewfeickert/intro-to-docker
 ~~~
 {: .source}
@@ -59,7 +59,7 @@ matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 mont
 
 or more explicitly
 
-~~~
+~~~bash
 docker images --filter=reference="matthewfeickert/intro-to-docker"
 ~~~
 {: .source}
@@ -76,7 +76,7 @@ Tags are way of further specifying different versions of the same image.
 As an example, let's pull the buster release tag of the
 [Debian image](https://hub.docker.com/_/debian).
 
-~~~
+~~~bash
 docker pull debian:buster
 docker images debian
 ~~~
@@ -101,7 +101,7 @@ debian              buster              00bf7fdd8baf        5 weeks ago         
 >
 > > ## Solution
 > >
-> > ~~~
+> > ~~~bash
 > > docker pull python:3.7
 > > docker images --filter=reference="matthewfeickert/intro-to-docker" --filter=reference="python"
 > > ~~~

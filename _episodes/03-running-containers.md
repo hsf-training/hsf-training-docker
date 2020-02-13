@@ -22,16 +22,18 @@ To use a Docker image as a particular instance on a host machine you [run][docke
 it as a container.
 You can run in either a [detached or foreground][docker-docs-run-detached] (interactive) mode.
 
-Run the image we pulled as an interactive container
+Run the image we pulled as a container with an interactive bash terminal:
 
-~~~
+~~~bash
 docker run -it matthewfeickert/intro-to-docker:latest /bin/bash
 ~~~
 {: .source}
 
+The `-i` option here enables the interactive session, the `-t` option gives access to a terminal and the `/bin/bash` command makes the container start up in a bash session. 
+
 You are now inside the container in an interactive bash session. Check the file directory
 
-~~~
+~~~bash
 pwd
 ~~~
 {: .source}
@@ -43,7 +45,7 @@ pwd
 
 and check the host to see that you are not in your local host system
 
-~~~
+~~~bash
 hostname
 ~~~
 {: .source}
@@ -56,7 +58,7 @@ hostname
 Further, check the `os-release` to see that you are actually inside a release of Debian
 (given the [Docker Library's Python image][docker-hub-python] Dockerfile choices)
 
-~~~
+~~~bash
 cat /etc/os-release
 ~~~
 {: .source}
@@ -78,7 +80,7 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 Open up a new terminal tab on the host machine and
 [list the containers that are currently running][docker-docs-ps]
 
-~~~
+~~~bash
 docker ps
 ~~~
 {: .source}
@@ -92,14 +94,14 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 Notice that the name of your container is some randomly generated name.
 To make the name more helpful, [rename][docker-docs-rename] the running container
 
-~~~
+~~~bash
 docker rename <CONTAINER ID> my-example
 ~~~
 {: .source}
 
 and then verify it has been renamed
 
-~~~
+~~~bash
 docker ps
 ~~~
 {: .source}
@@ -114,7 +116,7 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 >
 >You can also identify containers to rename by their current name
 >
->~~~
+>~~~bash
 >docker rename <NAME> my-example
 >~~~
 >{: .source}
@@ -124,14 +126,14 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 
 As a test, create a file in your container
 
-~~~
+~~~bash
 touch test.txt
 ~~~
 {: .source}
 
 In the container exit at the command line
 
-~~~
+~~~bash
 exit
 ~~~
 {: .source}
@@ -139,7 +141,7 @@ exit
 You are returned to your shell.
 If you list the containers you will notice that none are running
 
-~~~
+~~~bash
 docker ps
 ~~~
 {: .source}
@@ -151,7 +153,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 but you can see all containers that have been run and not removed with
 
-~~~
+~~~bash
 docker ps -a
 ~~~
 {: .source}
@@ -163,19 +165,30 @@ CONTAINER ID        IMAGE         COMMAND             CREATED            STATUS 
 {: .output}
 
 To restart your exited Docker container [start][docker-docs-start] it again and then
-[attach][docker-docs-attach] it to your shell
+[attach][docker-docs-attach] it interactively to your shell
 
-~~~
+~~~bash
 docker start <CONTAINER ID>
 docker attach <CONTAINER ID>
 ~~~
 {: .source}
 
+> ## `exec` command
+> The [attach][docker-docs-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with. 
+>
+> In case you'd like some more flexibility, the [exec][docker-docs-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc. 
+>
+> For example, the `exec` equivalent to `attach`ing in our case would look like:
+> ~~~bash
+> docker exec -it <CONTAINER ID> /bin/bash
+> ~~~
+{: .callout}
+
 > ## Starting and attaching by name
 >
 >You can also start and attach containers by their name
 >
->~~~
+>~~~bash
 >docker start <NAME>
 >docker attach <NAME>
 >~~~
@@ -186,7 +199,7 @@ docker attach <CONTAINER ID>
 Notice that your entry point is still `/home/docker/data` and then check that your
 `test.txt` still exists
 
-~~~
+~~~bash
 ls
 ~~~
 {: .source}
@@ -204,7 +217,7 @@ return to our working environment inside of them as desired.
 >If you want a container to be [cleaned up][docker-docs-run-clean-up] &mdash; that is
 >deleted &mdash; after you exit it then run with the `--rm` option flag
 >
->~~~
+>~~~bash
 >docker run --rm -it <IMAGE> /bin/bash
 >~~~
 >{: .source}
@@ -218,5 +231,6 @@ return to our working environment inside of them as desired.
 [docker-docs-rename]: https://docs.docker.com/engine/reference/commandline/rename/
 [docker-docs-start]: https://docs.docker.com/engine/reference/commandline/start/
 [docker-docs-attach]: https://docs.docker.com/engine/reference/commandline/attach/
+[docker-docs-exec]: https://docs.docker.com/engine/reference/commandline/exec/
 
 {% include links.md %}

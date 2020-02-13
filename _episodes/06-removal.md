@@ -14,7 +14,7 @@ keypoints:
 ---
 
 You can cleanup/remove a container [`docker rm`][docker-docs-rm]
-~~~
+~~~bash
 docker rm <CONTAINER ID>
 ~~~
 {: .source}
@@ -26,7 +26,7 @@ docker rm <CONTAINER ID>
 >
 > > ## Solution
 > >
-> > ~~~
+> > ~~~bash
 > > docker run matthewfeickert/intro-to-docker:latest
 > > docker ps -a
 > > docker rm <CONTAINER ID>
@@ -47,7 +47,7 @@ docker rm <CONTAINER ID>
 {: .challenge}
 
 You can remove an image from your computer entirely with [`docker rmi`][docker-docs-rmi]
-~~~
+~~~bash
 docker rmi <IMAGE ID>
 ~~~
 {: .source}
@@ -58,7 +58,7 @@ docker rmi <IMAGE ID>
 >
 > > ## Solution
 > >
-> > ~~~
+> > ~~~bash
 > > docker pull python:2.7
 > > docker images python
 > > docker rmi <IMAGE ID>

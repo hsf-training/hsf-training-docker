@@ -14,7 +14,7 @@ keypoints:
 ---
 
 ## Introduction
-In this section, we see how to combine the forces of docker and gitlab CI to automatically keep your analysis environment up-to-date. This is accomplished by adding an extra stage to the CI pipeline for each analysis repo, which builds a container image that includes all aspects of the environment needed to run the code. 
+In this section, we learn how to combine the forces of docker and gitlab CI to automatically keep your analysis environment up-to-date. This is accomplished by adding an extra stage to the CI pipeline for each analysis repo, which builds a container image that includes all aspects of the environment needed to run the code. 
 
 
 ### Writing your Gitlab Dockerfile
@@ -108,7 +108,7 @@ Add the following lines at the end of the `.gitlab-ci.yml` file to build the ima
 build_image:
   stage: build
   variables:
-    TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
   tags:
     - docker-image-build
   script:
@@ -122,14 +122,18 @@ Once this is done, you can commit and push the updated `.gitlab-ci.yml` file to 
 
 ~~~bash
 docker login gitlab-registry.cern.ch
-docker pull gitlab-registry.cern.ch/[repo owner's username]/[skimming repo name]:[branch name]
+docker pull gitlab-registry.cern.ch/[repo owner's username]/[skimming repo name]:[branch name]-[shortened commit SHA]
 ~~~
 {: .source}
 
 Notice that the script to run is just a dummy 'ignore' command. This is because using the docker-image-build tag, the jobs always land on special runners that are managed by CERN IT which run a custom script in the background. You can safely ignore the details.
 
 > ## Recommended Tag Structure
-> You'll notice the environment variable `TO` in the `.gitlab-ci.yml` script above. This controls the name of the Docker image that is produced in the CI step. Here, the image name will be `<reponame>:<branch or tagname>`. This way images built from different branches do not overwrite each other and tagged commits will correspond to tagged images.
+> You'll notice the environment variable `TO` in the `.gitlab-ci.yml` script above. This controls the name of the Docker image that is produced in the CI step. Here, the image name will be `<reponame>:<branch or tagname>-<short commit SHA>`. The shortened 8-character commit SHA ensures that each image created from a different commit will be unique, and you can easily go back and find images from previous commits for debugging, etc. 
+>
+> As you'll see tomorrow, it's recommended when using your images as part of a REANA workflow to make a unique image for each gitlab commit, because REANA will only attempt to update an image that it's already pulled if it sees that there's a new tag associated with the image. 
+>
+> If you feel it's overkill for your specific use case to save a unique image for every commit, the `-$CI_COMMIT_SHORT_SHA` can be removed. Then the `$CI_COMMIT_REF_SLUG` will at least ensure that images built from different branches will not overwrite each other, and tagged commits will correspond to tagged images.
 {: .callout} 
 
 
