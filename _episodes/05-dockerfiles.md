@@ -22,7 +22,7 @@ operating system commands to execute commands during the build.
 The [`Dockerfile` for the example image][example-Dockerfile] being used is an example of
 some simple extensions of the [official Python 3.6.8 Docker image][python-docker-image].
 
-As a very simple of extending the example image into a new image create a `Dockerfile`
+As a very simple example of extending the example image into a new image create a `Dockerfile`
 on your local machine
 
 ~~~bash
@@ -166,7 +166,7 @@ docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 
 Docker also gives you the ability to copy external files into a Docker image during the
 build with the [`COPY`][docker-docs-COPY] Dockerfile command.
-Which allows copying a target file on the from a host file system into the Docker image
+Which allows copying a target file from a host file system into the Docker image
 file system
 
 ~~~yaml

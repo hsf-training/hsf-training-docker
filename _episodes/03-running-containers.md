@@ -124,7 +124,7 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 
 # Exiting and restarting containers
 
-As a test, create a file in your container
+As a test, go back into the terminal used for your container, and create a file in the container
 
 ~~~bash
 touch test.txt
@@ -180,6 +180,7 @@ docker attach <CONTAINER ID>
 >
 > For example, the `exec` equivalent to `attach`ing in our case would look like:
 > ~~~bash
+> docker start <CONTAINER ID>
 > docker exec -it <CONTAINER ID> /bin/bash
 > ~~~
 {: .callout}

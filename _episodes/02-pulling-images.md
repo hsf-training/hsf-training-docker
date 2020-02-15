@@ -29,7 +29,7 @@ pushes to repositories.
 # Pulling Images
 
 To begin with we're going to [pull][docker-docs-pull] down the Docker image we're going
-to be working in for the tutorial
+to be working in for the tutorial (note: if you did all the docker pulls in the setup instructions, this image will already be on your machine, in which case docker should notice it's there and not attempt to re-pull it unless it's changed in the meantime):
 
 ~~~bash
 docker pull matthewfeickert/intro-to-docker
@@ -74,7 +74,7 @@ You can see here that there is the `TAG` field associated with the
 `matthewfeickert/intro-to-docker` image.
 Tags are way of further specifying different versions of the same image.
 As an example, let's pull the buster release tag of the
-[Debian image](https://hub.docker.com/_/debian).
+[Debian image](https://hub.docker.com/_/debian) (again, if it was already pulled during setup, docker won't attempt to re-pull it unless it's changed since last pulled).
 
 ~~~bash
 docker pull debian:buster
