@@ -23,7 +23,9 @@ To bring it all together, we can also preserve our fitting framework in its own 
 > 
 > **Note:** Since the fitting code just runs a python script, there's no need to pre-compile any executables in this Dockerfile. It's sufficient to add the source code to the base image and make the directory containing the code your default working directory.'
 >
-> Once you're happy with the Dockerfile, commit and push the new file to the fitting repo.
+> Once you're happy with the Dockerfile, commit and push the new file to the fitting repo. 
+>
+> **Note:** Since we're now moving between repos, you can quickly double-check that you're in the desired repo using eg. `git remote -v`. 
 > > ## Solution
 > > ~~~yaml
 > > FROM rootproject/root-conda

@@ -10,9 +10,9 @@ Once you've got docker up and running, do the following docker image pulls in ad
 
 ~~~bash
 docker pull matthewfeickert/intro-to-docker
-docker pull debian:buster
-docker pull python:2.7
-docker pull python:3.7
+docker pull debian:buster-slim
+docker pull python:2.7-slim
+docker pull python:3.7-slim
 docker pull rootproject/root-conda
 ~~~
 

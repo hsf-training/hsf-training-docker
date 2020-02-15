@@ -92,7 +92,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > ~~~
 > {: .source}
 > 
-> When your container builds successfully, you can `exec` into it and poke around to make sure it's set up exactly as you want, and that you can successfully run the executable you built:
+> When your image builds successfully, you can `run` it and poke around to make sure it's set up exactly as you want, and that you can successfully run the executable you built:
 > ~~~bash
 > docker run -it --rm payload_analysis /bin/bash
 > ~~~
@@ -126,6 +126,10 @@ docker pull gitlab-registry.cern.ch/[repo owner's username]/[skimming repo name]
 ~~~
 {: .source}
 
+You can also go to the container registry on the gitlab UI to see all the images you've built:
+
+<img src="../fig/ContainerRegistry.png" alt="ContainerRegistry" style="width:900px"> 
+
 Notice that the script to run is just a dummy 'ignore' command. This is because using the docker-image-build tag, the jobs always land on special runners that are managed by CERN IT which run a custom script in the background. You can safely ignore the details.
 
 > ## Recommended Tag Structure
@@ -140,7 +144,7 @@ Notice that the script to run is just a dummy 'ignore' command. This is because 
 > ## Exercise (10 mins)
 > Since we're now taking care of building the skimming executable during image building, let's make an updated version of skim.sh that excludes the step of building the `skim` executable. 
 > 
-> The updated script should just directly run the pre-existing `skim` executable on the input samples. You could call it eg. `skim_prebuilt.sh`.
+> The updated script should just directly run the pre-existing `skim` executable on the input samples. You could call it eg. `skim_prebuilt.sh`. We'll be using this updated script in an exercise later on in which we'll be going through the full analysis in containers launched from the images we create with gitlab CI.
 >
 > Once you're happy with the script, you can commit and push it to the repo. 
 > 
