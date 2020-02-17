@@ -1,7 +1,7 @@
 ---
 title: "Running our Containerized Analysis"
 teaching: 10
-exercises: 30
+exercises: 35
 questions:
 - "How do I run my full analysis chain inside docker containers?"
 objectives:

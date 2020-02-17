@@ -15,33 +15,33 @@ keypoints:
 
 So far everytime we've run the Docker containers we've typed
 
-~~~
+~~~bash
 docker run --rm -it <IMAGE>:<TAG> <command>
 ~~~
 {: .source}
 
 like
 
-~~~
+~~~bash
 docker run --rm -it python:3.7 /bin/bash
 ~~~
 {: .source}
 
 Running this dumps us into a Bash session
 
-~~~
+~~~bash
 printenv | grep SHELL
 ~~~
 {: .source}
 
-~~~
+~~~bash
 SHELL=/bin/bash
 ~~~
 {: .output}
 
 However, if no `/bin/bash` is given then you are placed inside the Python 3.7 REPL.
 
-~~~
+~~~bash
 docker run --rm -it python:3.7
 ~~~
 {: .source}
@@ -57,9 +57,16 @@ Type "help", "copyright", "credits" or "license" for more information.
 These are very different behaviors, so let's understand what is happening.
 
 The Python 3.7 Docker image has a default command that runs when the container is executed,
-which is specified in the Dockerfile with [`CMD`][docker-docs-CMD].
+which is specified in the Dockerfile with [`CMD`][docker-docs-CMD]. 
 
+Create a file named `Dockerfile.defaults`
+
+~~~bash
+touch Dockerfile.defaults
 ~~~
+{: .source}
+
+~~~yaml
 # Dockerfile.defaults
 # Make the base image configurable
 ARG BASE_IMAGE=python:3.7
@@ -83,8 +90,10 @@ CMD ["/bin/bash"]
 ~~~
 {: .source}
 
+Now build the dockerfile, specifying its name with the `-f` argument since docker will otherwise look for a file named `Dockerfile` by default. 
+
 ~~~
-docker build -f Dockerfile.defaults -t defaults-example:latest --compress .
+docker build -f Dockerfile.defaults -t defaults-example:latest .
 ~~~
 {: .source}
 

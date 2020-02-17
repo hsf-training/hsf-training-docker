@@ -26,6 +26,10 @@ In case you'd like to start fresh, we provide two such 'starter' repos that you 
 
 **Fitting code:** https://gitlab.cern.ch/awesome-workshop/Payload-Stage2-Stats
 
-**WARNING:** Please make sure you've forked the starter repos into your own namespace before cloning and making commits to them, otherwise you'll run into permissions issues when you try to push your commits!!
+A few things to keep in mind if starting from these 'starter repos':
+
+* **<font color="red">First and foremost:</font>** Please make sure you've forked the starter repos into your own namespace before cloning and making commits to them, otherwise you'll run into permissions issues when you try to push your commits!!
+* Remember to add your CERN credentials as CI/CD variables to both repos for the `kinit` authentication in the `.gitlab-ci.yml` files to work. 
+* For the fitting code repo, the [fit_simple](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-statistics-stage2/blob/master/.gitlab-ci.yml#L5) gitlab-ci.yml file expects to receive the file `histograms.root` produced by the skimming code. You'll need to copy this file to your personal eos user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`). In case you haven't had a chance to produce this file yet, it can be downloaded from [here]().
 
 {% include links.md %}
