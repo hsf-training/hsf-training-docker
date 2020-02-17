@@ -22,9 +22,9 @@ Having completed yesterday's gitlab-CI tutorial, we assume you now have two gitl
 
 In case you'd like to start fresh, we provide two such 'starter' repos that you can fork into your namespace and work directly from:
 
-**Skimming code:** https://gitlab.cern.ch/awesome-workshop/Payload-Stage2-Analysis
+**Skimming code:** https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2
 
-**Fitting code:** https://gitlab.cern.ch/awesome-workshop/Payload-Stage2-Stats
+**Fitting code:** https://gitlab.cern.ch/awesome-workshop/awesome-analysis-statistics-stage2
 
 A few things to keep in mind if starting from these 'starter repos':
 
