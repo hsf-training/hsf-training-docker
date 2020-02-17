@@ -37,14 +37,14 @@ OS per application.
 As discrete processes containers take up only as much memory as necessary, making them
 very lightweight and fast to spin up to run.
 
-[![Docker structure](https://www.docker.com/sites/default/files/styles/large/public/container-what-is-container.png)](https://www.docker.com/resources/what-container)
+<img src="../fig/DockerVM.png" alt="DockerVM" style="width:800px"> 
 
 > ## Singularity
 > Docker is the most popular containerization tool these days, particularly in industry, but it's not the only one. There are other kids on the block including Rocket and Singularity which are in use, but just haven't gained as much large-scale traction. 
 >
 > Singularity in particular is used widely in HPC, and particularly by CMS, so you may have need to familiarize yourself with it at some point. 
 > 
-> The RECAST FAQ includes a brief intro to the important differences between docker and singularity. 
+> The [RECAST FAQ](https://recast-docs.web.cern.ch/recast-docs/faq/#q-how-are-docker-and-singularity-different) includes a brief intro to the important differences between docker and singularity. 
 {: .callout}
 
 [docker-tutorial]: https://docs.docker.com/get-started

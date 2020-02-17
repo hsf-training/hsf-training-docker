@@ -99,13 +99,13 @@ debian              buster              00bf7fdd8baf        5 weeks ago         
 
 > ## Pulling Python
 >
-> Pull the image for Python 3.7 and then list all `python` images along with
+> Pull the image python3.7-slim for Python 3.7 and then list all `python` images along with
 > the `matthewfeickert/intro-to-docker` image
 >
 > > ## Solution
 > >
 > > ~~~bash
-> > docker pull python:3.7
+> > docker pull python:3.7-slim
 > > docker images --filter=reference="matthewfeickert/intro-to-docker" --filter=reference="python"
 > > ~~~
 > > {: .source}
