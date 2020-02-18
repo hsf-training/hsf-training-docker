@@ -213,7 +213,7 @@ and fill it with a modified version of the above Dockerfile, where we now copy `
 
 ~~~yaml
 # Dockerfile.copy
-FROM python:3.7
+FROM matthewfeickert/intro-to-docker:latest
 USER root
 RUN apt-get -qq -y update && \
     apt-get -qq -y upgrade && \
@@ -225,11 +225,6 @@ RUN apt-get -qq -y update && \
 COPY install_python_deps.sh install_python_deps.sh
 RUN bash install_python_deps.sh && \
     rm install_python_deps.sh
-# Create user "docker"
-RUN useradd -m docker && \
-    cp /root/.bashrc /home/docker/ && \
-    mkdir /home/docker/data && \
-    chown -R --from=root docker /home/docker
 WORKDIR /home/data
 USER docker
 ~~~

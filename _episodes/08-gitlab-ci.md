@@ -43,7 +43,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > Now open the Dockerfile with a text editor and, starting with the following skeleton, fill in the FIXMEs to make a Dockerfile that fully specifies your analysis environment in this repo. 
 > 
 > ~~~yaml
-> # Start from the rootproject/root-conda base image
+> # Start from the rootproject/root-conda:6.18.04 base image
 > [FIXME]
 > 
 > # Put the current repo (the one in which this Dockerfile resides) in the /analysis/skim directory
@@ -64,7 +64,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > > ## Solution
 > > ~~~yaml
 > > # Start from the rootproject/root-conda base image
-> > FROM rootproject/root-conda
+> > FROM rootproject/root-conda:6.18.04
 > > 
 > > # Put the current repo (the one in which this Dockerfile resides) in the /analysis/skim directory
 > > # Note that this directory is created on the fly and does not need to reside in the repo already

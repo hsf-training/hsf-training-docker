@@ -13,7 +13,7 @@ docker pull matthewfeickert/intro-to-docker
 docker pull debian:buster-slim
 docker pull python:2.7-slim
 docker pull python:3.7-slim
-docker pull rootproject/root-conda
+docker pull rootproject/root-conda:6.18.04
 ~~~
 
 ## Analysis Code

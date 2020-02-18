@@ -15,7 +15,7 @@ keypoints:
 
 You can cleanup/remove a container [`docker rm`][docker-docs-rm]
 ~~~bash
-docker rm <CONTAINER ID>
+docker rm <CONTAINER NAME>
 ~~~
 {: .source}
 
@@ -29,7 +29,7 @@ docker rm <CONTAINER ID>
 > > ~~~bash
 > > docker run matthewfeickert/intro-to-docker:latest
 > > docker ps -a
-> > docker rm <CONTAINER ID>
+> > docker rm <CONTAINER NAME>
 > > docker ps -a
 > > ~~~
 > > {: .source}
