@@ -87,7 +87,7 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > mkdir fitting_output
 > ~~~
 >
-> Find a partner and pull the image they've built for their skimming repo from the gitlab registry. Launch a container using your partner's image. Try to run the analysis code to produce the `histogram.root` file that will get input to the fitting repo, using the `skim_prebuilt.sh` script we created in the previous lesson for the first skimming step. You can follow the instructions in [step 1](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2/blob/master/README.md#step-1-skimming) and [step 2](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2/blob/master/README.md#step-2-histograms) of the skimming repo README.
+> Find a partner and pull the image they've built for their skimming repo from the gitlab registry. Launch a container using your partner's image. Try to run the analysis code to produce the `histogram.root` file that will get input to the fitting repo, using the `skim_prebuilt.sh` script we created in the previous lesson for the first skimming step. You can follow the skimming instructions in [step 1](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2/blob/master/README.md#step-1-skimming) and [step 2](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2/blob/master/README.md#step-2-histograms) of the README.
 >
 > **Note:** We'll need to pass the output from the skimming stage to the fitting stage. To enable this, you can volume mount the `skimming_output` directory into the container. Then, as long as you save the skimming output to the volume-mounted location in the container, it will also be available locally under `skimming_output`.
 >
@@ -104,11 +104,8 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > > docker run --rm -it -v $(PWD)/skimming_output:/skimming_output gitlab-registry.cern.ch/[your_partners_username]/[skimming repo name]:[branch name]-[shortened commit SHA] /bin/bash
 > > 
 > > # Run the skimming code
-> > mkdir /skimming_output/skimmed_histos
-> > bash skim_prebuilt.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ /skimming_output/skimmed_histos
-> > bash histograms.sh /skimming_output/skimmed_histos
-> > mkdir /skimming_output/plots
-> > bash plot.sh /skimming_output/skimmed_histos/histograms.root /skimming_output/plots
+> > bash skim_prebuilt.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ /skimming_output
+> > bash histograms.sh /skimming_output
 > > ~~~
 > > {: .source}
 > > 
@@ -121,7 +118,7 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > > docker run --rm -it -v $(PWD)/skimming_output:/skimming_output -v $(PWD)/fitting_output:/fitting_output gitlab-registry.cern.ch/[your_partners_username]/[fitting repo name]:[branch name]-[shortened commit SHA] /bin/bash
 > > 
 > > # Run the fitting code
-> > bash fit.sh /skimming_output/skimmed_histos/histograms.root /fitting_output
+> > bash fit.sh /skimming_output/histograms.root /fitting_output
 > > ~~~
 > {: .solution}
 {: .testimonial}
