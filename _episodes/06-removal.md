@@ -14,8 +14,8 @@ keypoints:
 ---
 
 You can cleanup/remove a container [`docker rm`][docker-docs-rm]
-~~~
-docker rm <CONTAINER ID>
+~~~bash
+docker rm <CONTAINER NAME>
 ~~~
 {: .source}
 
@@ -26,10 +26,10 @@ docker rm <CONTAINER ID>
 >
 > > ## Solution
 > >
-> > ~~~
+> > ~~~bash
 > > docker run matthewfeickert/intro-to-docker:latest
 > > docker ps -a
-> > docker rm <CONTAINER ID>
+> > docker rm <CONTAINER NAME>
 > > docker ps -a
 > > ~~~
 > > {: .source}
@@ -47,19 +47,19 @@ docker rm <CONTAINER ID>
 {: .challenge}
 
 You can remove an image from your computer entirely with [`docker rmi`][docker-docs-rmi]
-~~~
+~~~bash
 docker rmi <IMAGE ID>
 ~~~
 {: .source}
 
 > ## Remove an image
 >
-> Pull down the Python 2.7 image from Docker Hub and then delete it.
+> Pull down the Python 2.7 image (2.7-slim tag) from Docker Hub and then delete it.
 >
 > > ## Solution
 > >
-> > ~~~
-> > docker pull python:2.7
+> > ~~~bash
+> > docker pull python:2.7-slim
 > > docker images python
 > > docker rmi <IMAGE ID>
 > > docker images python
@@ -77,12 +77,12 @@ docker rmi <IMAGE ID>
 > ><some numbers>: Pull complete
 > ><some numbers>: Pull complete
 > >Digest: sha256:<the relevant SHA hash>
-> >Status: Downloaded newer image for python:2.7
-> >docker.io/library/python:2.7
+> >Status: Downloaded newer image for python:2.7-slim
+> >docker.io/library/python:2.7-slim
 > >
 > >REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-> >python              2.7                 d75b4eed9ada        14 hours ago        886MB
-> >python              3.7                 e440e2151380        23 hours ago        918MB
+> >python              2.7-slim            d75b4eed9ada        14 hours ago        886MB
+> >python              3.7-slim            e440e2151380        23 hours ago        918MB
 > >
 > >Untagged: python@sha256:<the relevant SHA hash>
 > >Deleted: sha256:<layer SHA hash>
@@ -97,7 +97,7 @@ docker rmi <IMAGE ID>
 > >Deleted: sha256:<layer SHA hash>
 > >
 > >REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-> >python              3.7                 e440e2151380        23 hours ago        918MB
+> >python              3.7-slim            e440e2151380        23 hours ago        918MB
 > > ~~~
 > > {: .output}
 > {: .solution}

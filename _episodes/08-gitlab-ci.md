@@ -14,7 +14,7 @@ keypoints:
 ---
 
 ## Introduction
-In this section, we see how to combine the forces of docker and gitlab CI to automatically keep your analysis environment up-to-date. This is accomplished by adding an extra stage to the CI pipeline for each analysis repo, which builds a container image that includes all aspects of the environment needed to run the code. 
+In this section, we learn how to combine the forces of docker and gitlab CI to automatically keep your analysis environment up-to-date. This is accomplished by adding an extra stage to the CI pipeline for each analysis repo, which builds a container image that includes all aspects of the environment needed to run the code. 
 
 
 ### Writing your Gitlab Dockerfile
@@ -43,7 +43,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > Now open the Dockerfile with a text editor and, starting with the following skeleton, fill in the FIXMEs to make a Dockerfile that fully specifies your analysis environment in this repo. 
 > 
 > ~~~yaml
-> # Start from the rootproject/root-conda base image
+> # Start from the rootproject/root-conda:6.18.04 base image
 > [FIXME]
 > 
 > # Put the current repo (the one in which this Dockerfile resides) in the /analysis/skim directory
@@ -64,11 +64,11 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > > ## Solution
 > > ~~~yaml
 > > # Start from the rootproject/root-conda base image
-> > FROM rootproject/root-conda
+> > FROM rootproject/root-conda:6.18.04
 > > 
 > > # Put the current repo (the one in which this Dockerfile resides) in the /analysis/skim directory
 > > # Note that this directory is created on the fly and does not need to reside in the repo already
-> > ADD . /analysis/skim
+> > COPY . /analysis/skim
 > > 
 > > # Make /analysis/skim the default working directory (again, it will create the directory if it doesn't already exist)
 > > WORKDIR /analysis/skim
@@ -92,7 +92,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > ~~~
 > {: .source}
 > 
-> When your container builds successfully, you can `exec` into it and poke around to make sure it's set up exactly as you want, and that you can successfully run the executable you built:
+> When your image builds successfully, you can `run` it and poke around to make sure it's set up exactly as you want, and that you can successfully run the executable you built:
 > ~~~bash
 > docker run -it --rm payload_analysis /bin/bash
 > ~~~
@@ -108,7 +108,7 @@ Add the following lines at the end of the `.gitlab-ci.yml` file to build the ima
 build_image:
   stage: build
   variables:
-    TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
   tags:
     - docker-image-build
   script:
@@ -116,24 +116,35 @@ build_image:
 ~~~
 {: .source}
 
+<!--Now, remove the line `image: rootproject/root-conda` underneath the stages, since the image-building stage uses its own dedicated image for automated image building. You'll then need to explicitly specify that the other stages use this image by adding the line `image: rootproject/root-conda` to the stages, since it's no longer a global specification.-->
+
 Once this is done, you can commit and push the updated `.gitlab-ci.yml` file to your gitlab repo and check to make sure the pipeline passed. If it passed, the repo image built by the pipeline should now be stored on the docker registry, and be accessible as follows:
 
 ~~~bash
 docker login gitlab-registry.cern.ch
-docker pull gitlab-registry.cern.ch/[repo owner's username]/[skimming repo name]:[branch name]
+docker pull gitlab-registry.cern.ch/[repo owner's username]/[skimming repo name]:[branch name]-[shortened commit SHA]
 ~~~
 {: .source}
+
+You can also go to the container registry on the gitlab UI to see all the images you've built:
+
+<img src="../fig/ContainerRegistry.png" alt="ContainerRegistry" style="width:900px"> 
 
 Notice that the script to run is just a dummy 'ignore' command. This is because using the docker-image-build tag, the jobs always land on special runners that are managed by CERN IT which run a custom script in the background. You can safely ignore the details.
 
 > ## Recommended Tag Structure
-> You'll notice the environment variable `TO` in the `.gitlab-ci.yml` script above. This controls the name of the Docker image that is produced in the CI step. Here, the image name will be `<reponame>:<branch or tagname>`. This way images built from different branches do not overwrite each other and tagged commits will correspond to tagged images.
+> You'll notice the environment variable `TO` in the `.gitlab-ci.yml` script above. This controls the name of the Docker image that is produced in the CI step. Here, the image name will be `<reponame>:<branch or tagname>-<short commit SHA>`. The shortened 8-character commit SHA ensures that each image created from a different commit will be unique, and you can easily go back and find images from previous commits for debugging, etc. 
+>
+> As you'll see tomorrow, it's recommended when using your images as part of a REANA workflow to make a unique image for each gitlab commit, because REANA will only attempt to update an image that it's already pulled if it sees that there's a new tag associated with the image. 
+>
+> If you feel it's overkill for your specific use case to save a unique image for every commit, the `-$CI_COMMIT_SHORT_SHA` can be removed. Then the `$CI_COMMIT_REF_SLUG` will at least ensure that images built from different branches will not overwrite each other, and tagged commits will correspond to tagged images.
 {: .callout} 
 
-> ## Updated Skimming Script (10 mins)
+
+> ## Exercise (10 mins)
 > Since we're now taking care of building the skimming executable during image building, let's make an updated version of skim.sh that excludes the step of building the `skim` executable. 
 > 
-> The updated script should just directly run the pre-existing `skim` executable on the input samples. You could call it eg. `skim_prebuilt.sh`.
+> The updated script should just directly run the pre-existing `skim` executable on the input samples. You could call it eg. `skim_prebuilt.sh`. We'll be using this updated script in an exercise later on in which we'll be going through the full analysis in containers launched from the images we create with gitlab CI.
 >
 > Once you're happy with the script, you can commit and push it to the repo. 
 > 
@@ -161,8 +172,9 @@ Notice that the script to run is just a dummy 'ignore' command. This is because 
 > > ./skim $INPUT $OUTPUT $XSEC $LUMI $SCALE
 > > done < skim.csv
 > > ~~~
+> > {: .source}
 > {: .solution}
-{: challenge}
+{: .challenge}
 
 {% include links.md %}
 
