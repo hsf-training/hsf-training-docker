@@ -46,7 +46,7 @@ source /cvmfs/cms.cern.ch/cmsset_default.sh
 If you are asked for a docker username and password, just hit
 enter twice.
 
-One particular difference to note w.r.t. to Docker is that the image
+One particular difference from Docker is that the image
 name needs to be prepended by `docker://` to tell Singularity that this
 is a Docker image.
 As you can see from the output, Singularity first downloads the layers
@@ -54,7 +54,7 @@ from the registry, and is then unpacking the layers into a format that
 can be read by Singularity. This is somewhat a technical detail, but 
 is different from Docker.
 
-In the next example, we are executing a script with singularity using a docker CERN cent0S 7 image.
+In the next example, we are executing a script with singularity using a Docker CERN Cent0S 7 image.
 
 ~~~
 export SINGULARITY_CACHEDIR="/tmp/$(whoami)/singularity"
@@ -93,7 +93,7 @@ export SINGULARITY_DOCKER_PASSWORD='mysecretpass'
 {: .language-bash}
 
 > ## Exercise (5 min)
-> Working from lxplus, use Singularity to pull the docker image created in lesson 8 for the skimming repository and use this image to start an interactive Singularity container.
+> Working from lxplus, use Singularity to pull the Docker image created in lesson 8 for the skimming repository and use this image to start an interactive Singularity container.
 >
 > > ## Solution
 > > ~~~bash
