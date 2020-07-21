@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hsf-training/hsf-training-docker.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-docker)
+
 # Introduction to Docker
 
 This repository generates the corresponding lesson website from [The Carpentries](https://carpentries.org/) repertoire of lessons.
