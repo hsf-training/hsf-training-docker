@@ -31,7 +31,7 @@ Some of the LHC experiments have scripts for running singularity that hide the c
 For the purpose of running a custom analysis image, Singularity must be run manually.
 
 As an example, we are going to run a container using the `matthewfeickert/intro-to-docker`
-image. Before running Singularity, one should set the cache directory (i.e.
+image. Before running Singularity, you should set the cache directory (i.e.
 the directory to which the images are being pulled) to a
 place outside your AFS space (here we use the `tmp` directory):
 
@@ -70,7 +70,7 @@ singularity exec -B /afs -B /eos -B /cvmfs docker://cmssw/cc7:latest bash .gitla
 >
 {: .callout}
 
-> ## `-B (bind strings)
+> ## `-B` (bind strings)
 >
 > The -B option allows the user to specify paths to bind to the Singularity container.
 > This option is similar to '-v' in docker. By default paths are mounted as rw (read/write),
