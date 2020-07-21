@@ -33,11 +33,13 @@ to be working in for the tutorial (note: if you did all the docker pulls in the 
 
 ~~~bash
 docker pull matthewfeickert/intro-to-docker
-
-#if you run into a premission error, use "sudo docker run ..." as a quick fix
-# to fix this for the future, see https://docs.docker.com/install/linux/linux-postinstall/
 ~~~
 {: .source}
+
+> ## Permission errors
+> If you run into a premission error, use `sudo docker run ...` as a quick fix.
+> To fix this for the future (**recommended**), see [the docker docs](https://docs.docker.com/install/linux/linux-postinstall/).
+{: .callout}
 
 and then [list the images][docker-docs-images] that we have available to us locally
 
