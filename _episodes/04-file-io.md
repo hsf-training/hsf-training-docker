@@ -5,9 +5,11 @@ exercises: 5
 questions:
 - "How do containers interact with my local file system?"
 objectives:
-- "First learning objective."
+- "Copy files to and from the docker container"
+- "Mount directories to be accessed and manipulated by the docker container"
 keypoints:
-- "First key point. Brief Answer to questions."
+- "We can copy files with ``docker cp``"
+- "We can mount volumes with ``docker run -v <path on host>:<path in container> <image>``"
 ---
 
 # Copying
@@ -32,6 +34,16 @@ cat io_example.txt
 echo "This was written inside Docker" >> io_example.txt
 ~~~
 {: .source}
+
+>## Permission issues
+>If you run into a `Permission denied` error, there is a simple and quick fix:
+>~~~bash
+>exit  # exit container
+>chmod a+w io_example.txt  # add write permissions for all users
+>~~~
+>{: .source}
+>And continue from the ``docker cp ...`` command above.
+{: .callout}
 
 ~~~
 /home/docker/data
@@ -72,7 +84,7 @@ docker run -v <path on host>:<path in container> <image>
 ~~~
 {: .source}
 
-For example, to mount your current working directory on your local machine to the `data`
+For example, to mount your current working directory (``$PWD``) on your local machine to the `data`
 directory in the example container
 
 ~~~bash
@@ -108,6 +120,10 @@ exit
 ls *.txt
 ~~~
 {: .source}
+
+>## Permission issues
+>If you run into a `Permission denied` error, you can use ``sudo`` for a quick fix if you have superuser access (but this is not recommended).
+{: .callout}
 
 ~~~
 created_inside.txt
