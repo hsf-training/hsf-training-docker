@@ -6,9 +6,6 @@ branches:
   - gh-pages
   - /.*/
 before_install:
-  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-  - echo "deb https://cran.rstudio.com/bin/linux/ubuntu trusty/" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update -y
   - rvm default
   - gem install json kramdown jekyll
 install:
