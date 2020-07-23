@@ -11,5 +11,6 @@ before_install:
 install:
   - pip install pyyaml
 script:
+  - bundle config build.nokogiri --use-system-libraries
   - make lesson-check-all
   - make --always-make site
