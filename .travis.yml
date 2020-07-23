@@ -1,4 +1,4 @@
-dist: xenial  # Ubuntu 16.04 (required for python 3.7)
+dist: focal # Ubuntu 20.04
 language: python
 python: 3.7
 branches:
@@ -9,7 +9,7 @@ before_install:
   - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
   - echo "deb https://cran.rstudio.com/bin/linux/ubuntu trusty/" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -y
-  - rvm 2.5.5
+  - rvm default
   - gem install json kramdown jekyll
 install:
   - pip install pyyaml
