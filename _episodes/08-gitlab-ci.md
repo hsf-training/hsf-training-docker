@@ -170,7 +170,7 @@ dockerhub.
 7. Click ``Create & Build``.
 
 That's it! Back on the home screen your repository should appear. Click on it and select the
-``Builds`` tab to watch your image getting guild (it probably will take a couple of minutes
+``Builds`` tab to watch your image getting build (it probably will take a couple of minutes
 before this starts). If something goes wrong check the logs.
 
 <img src="../fig/dockerhub_build.png" alt="DockerHub" style="width:900px"> 
