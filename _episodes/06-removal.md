@@ -12,6 +12,7 @@ keypoints:
 - "Remove images with `docker rmi`"
 - "Perform faster cleanup with `docker container prune`, `docker image prune`, and `docker system prune`"
 ---
+<iframe width="427" height="251" src="https://www.youtube.com/embed/Gsp6EapBcoo?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 You can cleanup/remove a container [`docker rm`][docker-docs-rm]
 ~~~bash

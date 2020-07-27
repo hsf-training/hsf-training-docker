@@ -11,6 +11,7 @@ keypoints:
 - "We can copy files with ``docker cp``"
 - "We can mount volumes with ``docker run -v <path on host>:<path in container> <image>``"
 ---
+<iframe width="427" height="251" src="https://www.youtube.com/embed/t93igGemQi8?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Copying
 

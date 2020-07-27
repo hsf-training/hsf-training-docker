@@ -18,13 +18,13 @@ docker pull rootproject/root-conda:6.18.04
 
 ## Analysis Code
 
-Having completed yesterday's gitlab-CI tutorial, we assume you now have two gitlab repos in your namespace: one containing code to skim the NanoAOD-like samples and convert them to histograms, and the other containing the code needed to do the final fit. 
+Having completed yesterday's gitlab-CI tutorial, we assume you now have two gitlab repos in your namespace: one containing code to skim the NanoAOD-like samples and convert them to histograms, and the other containing the code needed to do the final fit.
 
 In case you'd like to start fresh, we provide two such 'starter' repos that you can fork into your namespace and work directly from:
 
-**Skimming code:** https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2
+**Skimming code:** [repo on gitlab.cern.ch](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2)
 
-**Fitting code:** https://gitlab.cern.ch/awesome-workshop/awesome-analysis-statistics-stage2
+**Fitting code:** [repo on gitlab.cern.ch](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-statistics-stage2)
 
 A few things to keep in mind if starting from these 'starter repos':
 
