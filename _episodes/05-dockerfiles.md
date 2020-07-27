@@ -14,7 +14,7 @@ keypoints:
 - "Docker images can have multiple tags associated to them"
 - "Docker images can use `COPY` to copy files into them during build"
 ---
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/8BhkS2rZQ6E?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="427" height="251" src="https://www.youtube.com/embed/8BhkS2rZQ6E?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Docker images are built through the Docker engine by reading the instructions from a
 [`Dockerfile`][docker-docs-builder].
