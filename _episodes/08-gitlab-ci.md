@@ -10,7 +10,7 @@ objectives:
 - "Understand what needs to be added to your `.gitlab-ci.yml` file to keep the containerized environment continuously up to date for your repo."
 keypoints:
 - "gitlab CI allows you to re-build a container that encapsulates the environment each time new commits are pushed to the analysis repo."
-- "This functionality is enabled by adding a Dockerfile to your repo that specifies how to build the environment, and an image-building stage to the .gitlab-ci.yml file."
+- "This functionality is enabled by adding a Dockerfile to your repo that specifies how to build the environment, and an image-building stage to the `.gitlab-ci.yml` file."
 ---
 
 ## Introduction
@@ -45,11 +45,11 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > ~~~yaml
 > # Start from the rootproject/root-conda:6.18.04 base image
 > [FIXME]
-> 
+>
 > # Put the current repo (the one in which this Dockerfile resides) in the /analysis/skim directory
 > # Note that this directory is created on the fly and does not need to reside in the repo already
-> [FIXME] 
-> 
+> [FIXME]
+>
 > # Make /analysis/skim the default working directory (again, it will create the directory if it doesn't already exist)
 > [FIXME]
 > 
@@ -142,7 +142,7 @@ Notice that the script to run is just a dummy 'ignore' command. This is because 
 
 
 > ## Exercise (10 mins)
-> Since we're now taking care of building the skimming executable during image building, let's make an updated version of skim.sh that excludes the step of building the `skim` executable. 
+> Since we're now taking care of building the skimming executable during image building, let's make an updated version of `skim.sh` that excludes the step of building the `skim` executable. 
 > 
 > The updated script should just directly run the pre-existing `skim` executable on the input samples. You could call it eg. `skim_prebuilt.sh`. We'll be using this updated script in an exercise later on in which we'll be going through the full analysis in containers launched from the images we create with gitlab CI.
 >
