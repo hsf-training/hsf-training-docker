@@ -11,6 +11,7 @@ keypoints:
 - "Containerized analysis environments allow for fully reproducible code testing and development, with the convenience of working on your local machine."
 - "Fortunately, there are tools to help you automate all of this."
 ---
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/SMyI7vz0EAY?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
 

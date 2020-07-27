@@ -17,6 +17,7 @@ keypoints:
 - "Exit interactive sessions just as you would a shell"
 - "Restart stopped containers with `docker start`"
 ---
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/UejGBfppmZY?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 To use a Docker image as a particular instance on a host machine you [run][docker-docs-run]
 it as a container.
