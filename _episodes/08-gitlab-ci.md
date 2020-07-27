@@ -17,7 +17,7 @@ keypoints:
 In this section, we learn how to combine the forces of docker and gitlab CI to automatically keep your analysis environment up-to-date. This is accomplished by adding an extra stage to the CI pipeline for each analysis repo, which builds a container image that includes all aspects of the environment needed to run the code. 
 
 
-### Writing your Gitlab Dockerfile
+### Writing your Dockerfile
 
 The goal of automated environment preservation is to create a docker image that you can **immediately** start executing your analysis code inside upon startup. Let's review the needed components for this.
 
@@ -99,6 +99,15 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > {: .source}
 {: .callout}
 
+## Add docker building to your gitlab CI
+
+> ## If you don't have access to gitlab.cern.ch
+> While [gitlab.com](https://gitlab.com) offers CI/CD tools, the docker builder is not available. That means that you will not be able
+> to get it to build your docker image with the instructions below.
+> However, if you still want to have an automatic build, you can do the same with github + dockerhub as explained in the next 
+> subsection.
+{: .callout}
+
 Now, you can proceed with updating your `.gitlab-ci.yml` to actually build the container during the CI/CD pipeline and store it in the gitlab registry. You can later pull it from the gitlab registry just as you would any other container, but in this case using your CERN credentials. 
 
 
@@ -140,6 +149,44 @@ Notice that the script to run is just a dummy 'ignore' command. This is because 
 > If you feel it's overkill for your specific use case to save a unique image for every commit, the `-$CI_COMMIT_SHORT_SHA` can be removed. Then the `$CI_COMMIT_REF_SLUG` will at least ensure that images built from different branches will not overwrite each other, and tagged commits will correspond to tagged images.
 {: .callout} 
 
+## Alternative: Automatic image building with github + dockerhub
+
+If you don't have access to [gitlab.cern.ch](https://gitlab.cern.ch), you can still 
+automatically build a docker image everytime you push to a repository with github and
+dockerhub.
+
+1. Create a clone of the skim and the fitting repository on your private github. 
+  You can use the 
+  [GitHub Importer](https://docs.github.com/en/github/importing-your-projects-to-github/importing-a-repository-with-github-importer) 
+  for this. It's up to you whether you want to make this repository public or private.
+
+2. Create a free account on [dockerhub](http://hub.docker.com/). 
+3. Once you confirmed your email, head to ``Settings`` > ``Linked Accounts``
+   and connect your github account.
+4. Go back to the home screen (click the dockerhub icon top left) and click ``Create Repository``. 
+5. Choose a name of your liking, then click on the  github icon in the ``Build settings``. 
+   Select your account name as organization and select your repository.
+6. Click on the ``+`` next to ``Build rules``. The default one does fine
+7. Click ``Create & Build``.
+
+That's it! Back on the home screen your repository should appear. Click on it and select the
+``Builds`` tab to watch your image getting guild (it probably will take a couple of minutes
+before this starts). If something goes wrong check the logs.
+
+<img src="../fig/dockerhub_build.png" alt="DockerHub" style="width:900px"> 
+
+Once the build is completed, you can pull your image in the usual way.
+
+~~~bash
+# If you made your docker repository private, you first need to login,
+# else you can skip the following line
+docker login
+# Now pull
+docker pull <username>/<image name>:<tag>
+~~~
+{: .source}
+
+## An updated version of `skim.sh`
 
 > ## Exercise (10 mins)
 > Since we're now taking care of building the skimming executable during image building, let's make an updated version of skim.sh that excludes the step of building the `skim` executable. 
