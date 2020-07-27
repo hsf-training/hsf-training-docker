@@ -22,14 +22,14 @@ Having completed yesterday's gitlab-CI tutorial, we assume you now have two gitl
 
 In case you'd like to start fresh, we provide two such 'starter' repos that you can fork into your namespace and work directly from:
 
-**Skimming code:** [repo on gitlab.cern.ch](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2)
+**Skimming code:** [https://github.com/hsf-training/hsf-training-cms-analysis-snapshot](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot)
 
-**Fitting code:** [repo on gitlab.cern.ch](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-statistics-stage2)
+**Fitting code:** [https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats)
 
 A few things to keep in mind if starting from these 'starter repos':
 
 * **<font color="red">First and foremost:</font>** Please make sure you've forked the starter repos into your own namespace before cloning and making commits to them, otherwise you'll run into permissions issues when you try to push your commits!!
 * Remember to add your CERN credentials as CI/CD variables to both repos for the `kinit` authentication in the `.gitlab-ci.yml` files to work. 
-* For the fitting code repo, the [fit_simple](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-statistics-stage2/blob/master/.gitlab-ci.yml#L5) gitlab-ci.yml file expects to receive the file `histograms.root` produced by the skimming code. You'll need to copy this file to your personal eos user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`). In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://cernbox.cern.ch/index.php/s/krURAx8AkmnlTGX).
+* For the fitting code repo, the [fit_simple](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats/blob/master/.gitlab-ci.yml#L5) gitlab-ci.yml file expects to receive the file `histograms.root` produced by the skimming code. You'll need to copy this file to your personal eos user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`). In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://cernbox.cern.ch/index.php/s/krURAx8AkmnlTGX).
 
 {% include links.md %}
