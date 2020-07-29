@@ -123,6 +123,16 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 >{: .source}
 {: .callout}
 
+Alternatively, you can also give the container a name at creation, using the `--name ` option: 
+
+~~~bash
+docker run -it --name my-fancy-name matthewfeickert/intro-to-docker:latest /bin/bash
+~~~
+{: .source}
+
+This way, it has a custom chosen name to start with, which you can use later on to interact with it. 
+
+
 # Exiting and restarting containers
 
 As a test, go back into the terminal used for your container, and create a file in the container
