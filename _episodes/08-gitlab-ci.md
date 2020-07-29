@@ -17,6 +17,8 @@ keypoints:
 ## Introduction
 In this section, we learn how to combine the forces of docker and gitlab CI to automatically keep your analysis environment up-to-date. This is accomplished by adding an extra stage to the CI pipeline for each analysis repo, which builds a container image that includes all aspects of the environment needed to run the code. 
 
+We will be doing this using the (CMS OpenData HTauTau Analysis Payload)[https://hsf-training.github.io/hsf-training-cms-analysis-webpage/]. Specifically, we will be using two "snapshots" of this code which are the repositories described on the (setup page)[https://hsf-training.github.io/hsf-training-docker/setup.html] of this training.  A walkthrough of how to setup those repositories can also be found (on this video)[https://www.youtube.com/watch?v=krsBupoxoNI&list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj&index=7].  If you don't already have this setup, take a detour now and watch that video and revisit the setup page.
+
 
 ### Writing your Dockerfile
 
@@ -34,7 +36,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 {: .callout} 
 
 > ## Exercise (15 min)
-> Working from your bash shell, cd into the top level of the repo you use for skimming. Create an empty file named `Dockerfile`. 
+> Working from your bash shell, cd into the top level of the repo you use for skimming, that being the "event selection" snapshot of the CMS HTauTau analysis payload. Create an empty file named `Dockerfile`. 
 >
 > ~~~bash
 > touch Dockerfile
