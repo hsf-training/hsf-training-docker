@@ -14,10 +14,12 @@ keypoints:
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/krsBupoxoNI?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<iframe width="427" height="251" src="https://www.youtube.com/watch?v=YmLmWm3RNwg&list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj&index=8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Introduction
 In this section, we learn how to combine the forces of docker and gitlab CI to automatically keep your analysis environment up-to-date. This is accomplished by adding an extra stage to the CI pipeline for each analysis repo, which builds a container image that includes all aspects of the environment needed to run the code. 
 
-We will be doing this using the (CMS OpenData HTauTau Analysis Payload)[https://hsf-training.github.io/hsf-training-cms-analysis-webpage/]. Specifically, we will be using two "snapshots" of this code which are the repositories described on the (setup page)[https://hsf-training.github.io/hsf-training-docker/setup.html] of this training.  A walkthrough of how to setup those repositories can also be found (on this video)[https://www.youtube.com/watch?v=krsBupoxoNI&list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj&index=7].  If you don't already have this setup, take a detour now and watch that video and revisit the setup page.
+We will be doing this using the [CMS OpenData HTauTau Analysis Payload](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/). Specifically, we will be using two "snapshots" of this code which are the repositories described on the [setup page](https://hsf-training.github.io/hsf-training-docker/setup.html) of this training.  A walkthrough of how to setup those repositories can also be found [on this video](https://www.youtube.com/watch?v=krsBupoxoNI&list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj&index=7).  If you don't already have this setup, take a detour now and watch that video and revisit the setup page.
 
 
 ### Writing your Dockerfile
