@@ -26,6 +26,9 @@ On LXPLUS, the tool to run containers is Singularity.
 **The following commands will therefore all be run on LXPLUS**
 (`lxplus7.cern.ch` or later specifically).
 
+This lesson will teach the basics of using Singularity to make containers of docker containers, 
+for more information please see the [Singularity Documentation](https://sylabs.io/guides/3.6/user-guide/singularity_and_docker.html)
+
 ## Running custom images with Singularity
 
 Some of the LHC experiments have scripts for running singularity that hide the complexity.
@@ -99,7 +102,7 @@ export SINGULARITY_DOCKER_PASSWORD='mysecretpass'
 > > ## Solution
 > > ~~~bash
 > > export SINGULARITY_CACHEDIR="/tmp/$(whoami)/singularity"
-> > singularity shell -B /afs -B /eos -B /cvmfs docker://gitlab-registry.cern.ch/[repo owner's username]/[skimming repo name]:[branch name]-[shortened commit SHA] --docker-login
+> > singularity shell -B /afs -B /eos -B /cvmfs --docker-login docker://gitlab-registry.cern.ch/[repo owner's username]/[skimming repo name]:[branch name]-[shortened commit SHA]
 > > ~~~
 > > {: .source}
 > {: .solution}
