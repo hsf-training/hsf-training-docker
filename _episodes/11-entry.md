@@ -23,7 +23,7 @@ docker run --rm -it <IMAGE>:<TAG> <command>
 like
 
 ~~~bash
-docker run --rm -it python:3.7 /bin/bash
+docker run --rm -it python:3.7-slim /bin/bash
 ~~~
 {: .source}
 
@@ -42,7 +42,7 @@ SHELL=/bin/bash
 However, if no `/bin/bash` is given then you are placed inside the Python 3.7 REPL.
 
 ~~~bash
-docker run --rm -it python:3.7
+docker run --rm -it python:3.7-slim
 ~~~
 {: .source}
 
@@ -69,7 +69,7 @@ touch Dockerfile.defaults
 ~~~yaml
 # Dockerfile.defaults
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.7
+ARG BASE_IMAGE=python:3.7-slim
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
@@ -139,7 +139,7 @@ main "$@"
 ~~~
 # Dockerfile.defaults
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.7
+ARG BASE_IMAGE=python:3.7-slim
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
