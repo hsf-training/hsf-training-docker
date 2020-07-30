@@ -12,9 +12,7 @@ keypoints:
 - "gitlab CI allows you to re-build a container that encapsulates the environment each time new commits are pushed to the analysis repo."
 - "This functionality is enabled by adding a Dockerfile to your repo that specifies how to build the environment, and an image-building stage to the `.gitlab-ci.yml` file."
 ---
-<iframe width="427" height="251" src="https://www.youtube.com/embed/krsBupoxoNI?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<iframe width="427" height="251" src="https://www.youtube.com/watch?v=YmLmWm3RNwg&list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj&index=8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="427" height="251" src="https://www.youtube.com/embed/YmLmWm3RNwg?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
 In this section, we learn how to combine the forces of docker and gitlab CI to automatically keep your analysis environment up-to-date. This is accomplished by adding an extra stage to the CI pipeline for each analysis repo, which builds a container image that includes all aspects of the environment needed to run the code. 
