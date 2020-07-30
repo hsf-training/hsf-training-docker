@@ -102,7 +102,7 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > > docker pull gitlab-registry.cern.ch/[your_partners_username]/[skimming repo name]:[branch name]-[shortened commit SHA]
 > > 
 > > # Start up the container and volume-mount the skimming_output directory into it
-> > docker run --rm -it -v $(PWD)/skimming_output:/skimming_output gitlab-registry.cern.ch/[your_partners_username]/[skimming repo name]:[branch name]-[shortened commit SHA] /bin/bash
+> > docker run --rm -it -v ${PWD}/skimming_output:/skimming_output gitlab-registry.cern.ch/[your_partners_username]/[skimming repo name]:[branch name]-[shortened commit SHA] /bin/bash
 > > 
 > > # Run the skimming code
 > > bash skim_prebuilt.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ /skimming_output
