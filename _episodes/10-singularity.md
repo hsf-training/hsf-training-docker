@@ -27,7 +27,7 @@ On LXPLUS, the tool to run containers is Singularity.
 (`lxplus7.cern.ch` or later specifically).
 
 This lesson will teach the basics of using Singularity to make containers of docker containers, 
-for more information please see the [Singularity Documentation](https://sylabs.io/guides/3.6/user-guide/singularity_and_docker.html)
+for more information please see the [Singularity Documentation](https://sylabs.io/guides/3.6/user-guide/singularity_and_docker.html).
 
 ## Running custom images with Singularity
 
@@ -62,7 +62,7 @@ In the next example, we are executing a script with singularity using a Docker C
 
 ~~~
 export SINGULARITY_CACHEDIR="/tmp/$(whoami)/singularity"
-singularity exec -B /afs -B /eos -B /cvmfs docker://cmssw/cc7:latest bash .gitlab/build.sh
+singularity exec -B /afs -B /eos -B /cvmfs docker://matthewfeickert/intro-to-docker:latest bash /cvmfs/cms.cern.ch/cmsset_default.sh
 ~~~
 {: .language-bash}
 
