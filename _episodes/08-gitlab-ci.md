@@ -104,15 +104,11 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 
 ## Add docker building to your gitlab CI
 
-> ## If you don't have access to gitlab.cern.ch
-> While [gitlab.com](https://gitlab.com) offers CI/CD tools, the docker builder is not available. That means that you will not be able
-> to get it to build your docker image with the instructions below.
-> However, if you still want to have an automatic build, you can do the same with github + dockerhub as explained in the next 
-> subsection.
-{: .callout}
-
 Now, you can proceed with updating your `.gitlab-ci.yml` to actually build the container during the CI/CD pipeline and store it in the gitlab registry. You can later pull it from the gitlab registry just as you would any other container, but in this case using your CERN credentials. 
 
+> ## Not from CERN?
+> If you do not have a CERN computing account with access to [gitlab.cern.ch](https://[gitlab.cern.ch), then everything discussed here is also available on [gitlab.com](https://gitlab.com) offers CI/CD tools, including the docker builder. Furthermore, you can do the same with github + dockerhub as explained in the next subsection.
+{: .callout}
 
 Add the following lines at the end of the `.gitlab-ci.yml` file to build the image and save it to the docker registry. 
 
@@ -151,6 +147,34 @@ Notice that the script to run is just a dummy 'ignore' command. This is because 
 >
 > If you feel it's overkill for your specific use case to save a unique image for every commit, the `-$CI_COMMIT_SHORT_SHA` can be removed. Then the `$CI_COMMIT_REF_SLUG` will at least ensure that images built from different branches will not overwrite each other, and tagged commits will correspond to tagged images.
 {: .callout} 
+
+## Alternative: GitLab.com
+
+This training module is rather CERN-centric and assumes you have a CERN computing account with access to [gitlab.cern.ch](https://[gitlab.cern.ch).  If this is not the case, then as with the [CICD training module](https://hsf-training.github.io/hsf-training-cicd/), everything can be carried out using [gitlab.com](https://gitlab.com) with a few slight modifications. These changes are largely surrounding the syntax and the concept remains that you will have to specify that your pipeline job that builds the image is executed on a special type of runner with the appropriate `services`.  However, unlike at CERN, there is not pre-defined `script` that runs on these runners and pushes to your registry, so you will have to write this script yourself but this will be little more than adding commands that you have been exposed to in previous section of this training like `docker build`.  
+
+Add the following lines at the end of the `.gitlab-ci.yml` file to build the image and save it to the docker registry. 
+
+~~~yaml
+build image:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t registry.gitlab.com/burakh/docker-training .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push registry.gitlab.com/burakh/docker-training
+~~~
+{: .source}
+
+In this job, the specific `image: docker:latest`, along with specifying the `services` to contain `docker:dind` is equivalent to the requesting the `docker-build-image` tag on [gitlab.cern.ch](https://[gitlab.cern.ch).  If you are curious to read about this in detail, refer to the [official gitlab documentation](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html) or (this example)[https://gitlab.com/gitlab-examples/docker].
+
+In the `script` of this job there are three components :
+  - [`docker build`](https://docs.docker.com/engine/reference/commandline/build/) : This is performing the same build of our docker image to the tagged image which we will call `registry.gitlab.com/burakh/docker-training`
+  - [`docker login`](https://docs.docker.com/engine/reference/commandline/login/) : This call is performing [an authentication of the user to the gitlab registry](https://docs.gitlab.com/ee/user/packages/container_registry/#authenticating-to-the-gitlab-container-registry) using a set of [predefined environment variables](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html) that are automatically available in any gitlab repository.
+  - [`docker push`](https://docs.docker.com/engine/reference/commandline/push/) : This call is pushing the docker image which exists locally on the runner to the gitlab.com registry associated with the repository against which we have performed the authentication in the previous step.
+  
+If the job runs successfully, then in the same way as described for [gitlab.cern.ch](https://[gitlab.cern.ch) in the previous section, you will be able to find the `Container Registry` on the left hand icon menu of your gitlab.com web browser and navigate to the image that was pushed to the registry.  Et voila, c'est fini, exactement comme au CERN!
 
 ## Alternative: Automatic image building with github + dockerhub
 
