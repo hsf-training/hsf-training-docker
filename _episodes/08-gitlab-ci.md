@@ -148,7 +148,7 @@ Notice that the script to run is just a dummy 'ignore' command. This is because 
 > If you feel it's overkill for your specific use case to save a unique image for every commit, the `-$CI_COMMIT_SHORT_SHA` can be removed. Then the `$CI_COMMIT_REF_SLUG` will at least ensure that images built from different branches will not overwrite each other, and tagged commits will correspond to tagged images.
 {: .callout} 
 
-## Alternative: GitLab.com
+### Alternative: GitLab.com
 
 This training module is rather CERN-centric and assumes you have a CERN computing account with access to [gitlab.cern.ch](https://[gitlab.cern.ch).  If this is not the case, then as with the [CICD training module](https://hsf-training.github.io/hsf-training-cicd/), everything can be carried out using [gitlab.com](https://gitlab.com) with a few slight modifications. These changes are largely surrounding the syntax and the concept remains that you will have to specify that your pipeline job that builds the image is executed on a special type of runner with the appropriate `services`.  However, unlike at CERN, there is not pre-defined `script` that runs on these runners and pushes to your registry, so you will have to write this script yourself but this will be little more than adding commands that you have been exposed to in previous section of this training like `docker build`.  
 
@@ -176,7 +176,7 @@ In the `script` of this job there are three components :
   
 If the job runs successfully, then in the same way as described for [gitlab.cern.ch](https://[gitlab.cern.ch) in the previous section, you will be able to find the `Container Registry` on the left hand icon menu of your gitlab.com web browser and navigate to the image that was pushed to the registry.  Et voila, c'est fini, exactement comme au CERN!
 
-## Alternative: Automatic image building with github + dockerhub
+### Alternative: Automatic image building with github + dockerhub
 
 If you don't have access to [gitlab.cern.ch](https://gitlab.cern.ch), you can still 
 automatically build a docker image everytime you push to a repository with github and
