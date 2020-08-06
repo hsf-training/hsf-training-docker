@@ -6,6 +6,8 @@ title: Setup
 
 To install Docker Community Edition on your Linux, Mac, or Windows machine follow the [instructions in the Docker docs](https://docs.docker.com/install/).
 
+### Optional: Fetch docker images in advance
+
 Once you've got docker up and running, do the following docker image pulls in advance to save waiting during the tutorial:
 
 ~~~bash
@@ -18,7 +20,16 @@ docker pull rootproject/root-conda:6.18.04
 
 ## Analysis Code
 
-Later in this tutorial, you will be asked to work with a simple analysis that utilizes the CMS OpenData to search for Higgs to 2 tau leptons.  The full analysis itself can be found here - [https://github.com/hsf-training/hsf-training-cms-analysis](https://github.com/hsf-training/hsf-training-cms-analysis) - and there is a dedicated set of training lessons provided here - [Link to CMS Payload Videos](https://www.youtube.com/watch?v=gplMywJAFDI&list=PLKZ9c4ONm-Vk0wnDKaaovoEkOk3PVdL0V) - which are then used as input to the continuous integration training here - [Link to CICD Videos](https://www.youtube.com/watch?v=NcVGX8zWzQY&list=PLKZ9c4ONm-VmmTObyNWpz4hB3Hgx8ZWSb).  Though it is best if you work through these lessons, the key point is that we will assume you have two GitLab repos in your namespace : one containing code to skim the NanoAOD-like samples and convert them to histograms, and the other containing the code needed to do the final fit.  You can either do this yourself, or if you'd like to start fresh, we provide two such 'starter' repos that you can fork into your namespace and work directly from:
+Later in this tutorial, you will be asked to work with a simple analysis that utilizes the CMS OpenData to search for Higgs to 2 tau leptons.  
+The full analysis itself can be found [here](https://github.com/hsf-training/hsf-training-cms-analysis) - and there is a dedicated set of [training lessons](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/index.html) ([videos available](https://www.youtube.com/watch?v=gplMywJAFDI&list=PLKZ9c4ONm-Vk0wnDKaaovoEkOk3PVdL0V)). 
+These are then used as input to the [continuous integration training](https://hsf-training.github.io/hsf-training-cicd/) ([videos available](https://www.youtube.com/watch?v=NcVGX8zWzQY&list=PLKZ9c4ONm-VmmTObyNWpz4hB3Hgx8ZWSb)).  
+
+Though it is best if you work through these lessons, the key point is that we will assume you have two GitLab repos in your namespace : 
+
+* one containing code to skim the NanoAOD-like samples and convert them to histograms, 
+* one  containing the code needed to do the final fit.  
+
+You can either do this yourself, or if you'd like to start fresh (bu following the above training) or use the following  'starter' repos that you can directly fork into your namespace and work directly from:
 
 **Skimming code:** [https://github.com/hsf-training/hsf-training-cms-analysis-snapshot](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot)
 
