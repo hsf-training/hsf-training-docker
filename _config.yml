@@ -26,10 +26,10 @@ kind: "lesson"
 # Magic to make URLs resolve both locally and on GitHub.
 # See https://help.github.com/articles/repository-metadata-on-github-pages/.
 # Please don't change it: <USERNAME>/<PROJECT> is correct.
-repository: matthewfeickert/intro-to-docker
+repository: hsf-training/hsf-training-docker
 
 # Email address, no mailto:
-email: "matthew.feickert@cern.ch"
+email: "hsf-training-wg@googlegroups.com"
 
 # Sites.
 amy_site: "https://amy.software-carpentry.org/workshops"
