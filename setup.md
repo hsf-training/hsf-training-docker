@@ -6,6 +6,14 @@ title: Setup
 
 To install Docker Community Edition on your Linux, Mac, or Windows machine follow the [instructions in the Docker docs](https://docs.docker.com/install/).
 
+If you are using Linux, then please also follow these [post installation instructions](https://docs.docker.com/engine/install/linux-postinstall/).
+
+To test your docker set up, run the following command:
+
+~~~bash
+docker run hello-world
+~~~
+
 Once you've got docker up and running, do the following docker image pulls in advance to save waiting during the tutorial:
 
 ~~~bash
