@@ -99,7 +99,7 @@ export SINGULARITY_DOCKER_PASSWORD='mysecretpass'
 > > ## Solution
 > > ~~~bash
 > > export SINGULARITY_CACHEDIR="/tmp/$(whoami)/singularity"
-> > singularity shell -B /afs -B /eos -B /cvmfs docker://gitlab-registry.cern.ch/[repo owner's username]/[skimming repo name]:[branch name]-[shortened commit SHA] --docker-login
+> > singularity shell -B /afs -B /eos -B /cvmfs --docker-login docker://gitlab-registry.cern.ch/[repo owner's username]/[skimming repo name]:[branch name]-[shortened commit SHA]
 > > ~~~
 > > {: .source}
 > {: .solution}
