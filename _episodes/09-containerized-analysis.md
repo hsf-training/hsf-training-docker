@@ -106,7 +106,7 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > > 
 > > # Run the skimming code
 > > bash skim_prebuilt.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ /skimming_output
-> > bash histograms.sh /skimming_output
+> > bash histograms.sh /skimming_output /skimming_output
 > > ~~~
 > > {: .source}
 > > 
