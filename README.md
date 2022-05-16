@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/hsf-training/hsf-training-docker.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-docker)
-
 # Introduction to Docker
+[![Build Status](https://travis-ci.org/hsf-training/hsf-training-docker.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-docker)
+[![HSF Training Center](https://img.shields.io/badge/HSF%20Training%20Center-browse-ff69b4)](https://hepsoftwarefoundation.org/training/curriculum.html)
 
 This repository generates the corresponding lesson website from [The Carpentries](https://carpentries.org/) repertoire of lessons.
 
