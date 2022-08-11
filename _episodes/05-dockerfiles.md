@@ -65,15 +65,15 @@ USER docker
 >
 >Each `RUN` command in a Dockerfile creates a new layer to the Docker image.
 >In general, each layer should try to do one job and the fewer layers in an image
-> the easier it is compress. 
-> This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will take place in a single layer. 
+> the easier it is compress.
+> This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will take place in a single layer.
 > When trying to upload and download images on demand the smaller the size the better.
-> 
-> Another thing to keep in mind is that each `RUN` command occurs in its own shell, so any environment variables, etc. set in one `RUN` command will not persist to the next. 
+>
+> Another thing to keep in mind is that each `RUN` command occurs in its own shell, so any environment variables, etc. set in one `RUN` command will not persist to the next.
 {: .callout}
 
 > ## Garbage cleanup
-> Notice that the last few lines of the `RUN` command clean up and remove unneeded files that get produced during the installation process. This is important for keeping images sizes small, since files produced during each image-building layer will persist into the final image and add unnecessary bulk. 
+> Notice that the last few lines of the `RUN` command clean up and remove unneeded files that get produced during the installation process. This is important for keeping images sizes small, since files produced during each image-building layer will persist into the final image and add unnecessary bulk.
 {: .callout}
 
 > ## Don't run as `root`
@@ -201,7 +201,7 @@ pip install --no-cache-dir -q scikit-learn
 {: .output}
 
 then this could be copied into the Docker image of the previous example during the build
-and then used (and then removed as it is no longer needed). 
+and then used (and then removed as it is no longer needed).
 
 Create a new file called `Dockerfile.copy`:
 

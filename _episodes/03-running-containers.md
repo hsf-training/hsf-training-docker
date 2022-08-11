@@ -30,7 +30,7 @@ docker run -it matthewfeickert/intro-to-docker:latest /bin/bash
 ~~~
 {: .source}
 
-The `-i` option here enables the interactive session, the `-t` option gives access to a terminal and the `/bin/bash` command makes the container start up in a bash session. 
+The `-i` option here enables the interactive session, the `-t` option gives access to a terminal and the `/bin/bash` command makes the container start up in a bash session.
 
 You are now inside the container in an interactive bash session. Check the file directory
 
@@ -123,14 +123,14 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 >{: .source}
 {: .callout}
 
-Alternatively, you can also give the container a name at creation, using the `--name ` option: 
+Alternatively, you can also give the container a name at creation, using the `--name ` option:
 
 ~~~bash
 docker run -it --name my-fancy-name matthewfeickert/intro-to-docker:latest /bin/bash
 ~~~
 {: .source}
 
-This way, it has a custom chosen name to start with, which you can use later on to interact with it. 
+This way, it has a custom chosen name to start with, which you can use later on to interact with it.
 
 
 # Exiting and restarting containers
@@ -185,9 +185,9 @@ docker attach <CONTAINER ID>
 {: .source}
 
 > ## `exec` command
-> The [attach][docker-docs-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with. 
+> The [attach][docker-docs-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with.
 >
-> In case you'd like some more flexibility, the [exec][docker-docs-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc. 
+> In case you'd like some more flexibility, the [exec][docker-docs-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc.
 >
 > For example, the `exec` equivalent to `attach`ing in our case would look like:
 > ~~~bash
