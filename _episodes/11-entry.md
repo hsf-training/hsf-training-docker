@@ -57,7 +57,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 These are very different behaviors, so let's understand what is happening.
 
 The Python 3.7 Docker image has a default command that runs when the container is executed,
-which is specified in the Dockerfile with [`CMD`][docker-docs-CMD]. 
+which is specified in the Dockerfile with [`CMD`][docker-docs-CMD].
 
 Create a file named `Dockerfile.defaults`
 
@@ -90,7 +90,7 @@ CMD ["/bin/bash"]
 ~~~
 {: .source}
 
-Now build the dockerfile, specifying its name with the `-f` argument since docker will otherwise look for a file named `Dockerfile` by default. 
+Now build the dockerfile, specifying its name with the `-f` argument since docker will otherwise look for a file named `Dockerfile` by default.
 
 ~~~
 docker build -f Dockerfile.defaults -t defaults-example:latest .

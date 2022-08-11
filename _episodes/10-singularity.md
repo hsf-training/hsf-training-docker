@@ -15,13 +15,13 @@ keypoints:
 
 ## Introduction
 
-Analysis containers allow software development to occur on a local computer        
-with the only requirement being that Docker is installed. The same containers 
-can be run in GitLab CI/CD via Docker. These containers can also be run on 
+Analysis containers allow software development to occur on a local computer
+with the only requirement being that Docker is installed. The same containers
+can be run in GitLab CI/CD via Docker. These containers can also be run on
 LXPLUS, but this requires some additional steps.
 
-When dealing with Analysis Containers, *privileged* containers are often needed. 
-These are not available to you on LXPLUS (nor is the `docker`command). 
+When dealing with Analysis Containers, *privileged* containers are often needed.
+These are not available to you on LXPLUS (nor is the `docker`command).
 On LXPLUS, the tool to run containers is Singularity.
 **The following commands will therefore all be run on LXPLUS**
 (`lxplus7.cern.ch` or later specifically).
@@ -52,7 +52,7 @@ name needs to be prepended by `docker://` to tell Singularity that this
 is a Docker image.
 As you can see from the output, Singularity first downloads the layers
 from the registry, and is then unpacking the layers into a format that
-can be read by Singularity. This is somewhat a technical detail, but 
+can be read by Singularity. This is somewhat a technical detail, but
 is different from Docker.
 
 In the next example, we are executing a script with singularity using a Docker CERN Cent0S 7 image.
@@ -103,9 +103,5 @@ export SINGULARITY_DOCKER_PASSWORD='mysecretpass'
 > > ~~~
 > > {: .source}
 > {: .solution}
-> 
+>
 {: .challenge}
-
-
-
-
