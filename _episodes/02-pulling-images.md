@@ -38,7 +38,7 @@ docker pull matthewfeickert/intro-to-docker
 {: .source}
 
 > ## Permission errors
-> If you run into a premission error, use `sudo docker run ...` as a quick fix.
+> If you run into a permission error, use `sudo docker run ...` as a quick fix.
 > To fix this for the future (**recommended**), see [the docker docs](https://docs.docker.com/install/linux/linux-postinstall/).
 {: .callout}
 

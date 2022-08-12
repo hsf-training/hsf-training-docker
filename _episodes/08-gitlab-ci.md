@@ -179,7 +179,7 @@ If the job runs successfully, then in the same way as described for [gitlab.cern
 ### Alternative: Automatic image building with github + dockerhub
 
 If you don't have access to [gitlab.cern.ch](https://gitlab.cern.ch), you can still
-automatically build a docker image everytime you push to a repository with github and
+automatically build a docker image every time you push to a repository with github and
 dockerhub.
 
 1. Create a clone of the skim and the fitting repository on your private github.
