@@ -13,7 +13,7 @@ keypoints:
 - "`ENTRYPOINT` allows you to configure commands that will always run for an executing container"
 ---
 
-So far everytime we've run the Docker containers we've typed
+So far every time we've run the Docker containers we've typed
 
 ~~~bash
 docker run --rm -it <IMAGE>:<TAG> <command>
