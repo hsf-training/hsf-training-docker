@@ -26,7 +26,7 @@ On LXPLUS, the tool to run containers is Singularity.
 **The following commands will therefore all be run on LXPLUS**
 (`lxplus7.cern.ch` or later specifically).
 
-This lesson will teach the basics of using Singularity to make containers of docker containers, 
+This lesson will teach the basics of using Singularity to make containers of docker containers,
 for more information please see the [Singularity Documentation](https://sylabs.io/guides/3.6/user-guide/singularity_and_docker.html).
 
 ## Running custom images with Singularity
