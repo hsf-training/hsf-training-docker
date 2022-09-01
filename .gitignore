@@ -12,6 +12,7 @@ _site
 .jekyll-cache/**
 .bundle/
 .vendor/
+vendor/
 .docker-vendor/
 Gemfile.lock
 .*history

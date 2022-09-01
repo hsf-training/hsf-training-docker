@@ -15,18 +15,18 @@ keypoints:
 
 ## Introduction
 
-To bring it all together, we can also preserve our fitting framework in its own docker image, then run our full analysis workflow within these containerized environments. 
+To bring it all together, we can also preserve our fitting framework in its own docker image, then run our full analysis workflow within these containerized environments.
 
 ## Preserve the Fitting Repo Environment
 
 > ## Exercise (10 min)
-> Just as we did for the analysis repo, cd into your the repo containing your statistical fitting code and create a Dockerfile to preserve the environment. You can again start from the `rootproject/root-conda:6.18.04` base image. 
-> 
+> Just as we did for the analysis repo, cd into your the repo containing your statistical fitting code and create a Dockerfile to preserve the environment. You can again start from the `rootproject/root-conda:6.18.04` base image.
+>
 > **Note:** Since the fitting code just runs a python script, there's no need to pre-compile any executables in this Dockerfile. It's sufficient to add the source code to the base image and make the directory containing the code your default working directory.'
 >
-> Once you're happy with the Dockerfile, commit and push the new file to the fitting repo. 
+> Once you're happy with the Dockerfile, commit and push the new file to the fitting repo.
 >
-> **Note:** Since we're now moving between repos, you can quickly double-check that you're in the desired repo using eg. `git remote -v`. 
+> **Note:** Since we're now moving between repos, you can quickly double-check that you're in the desired repo using eg. `git remote -v`.
 > > ## Solution
 > > ~~~yaml
 > > FROM rootproject/root-conda
@@ -39,8 +39,8 @@ To bring it all together, we can also preserve our fitting framework in its own 
 
 > ## Exercise (5 min)
 > Now, add the same image-building stage to the `.gitlab-ci.yml` file as we added for the skimming repo. You will also need to add a `- build` stage at the top in addition to any other stages.
-> 
-> **Note:** I would suggest listing the `- build` stage before the other stages so it will run first. This way, even if the other stages fail for whatever reason, the image can still be built with the `- build` stage. 
+>
+> **Note:** I would suggest listing the `- build` stage before the other stages so it will run first. This way, even if the other stages fail for whatever reason, the image can still be built with the `- build` stage.
 >
 > Once you're happy with the .gitlab-ci.yml, commit and push the new file to the fitting repo.
 > > ## Solution
@@ -93,31 +93,31 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > **Note:** We'll need to pass the output from the skimming stage to the fitting stage. To enable this, you can volume mount the `skimming_output` directory into the container. Then, as long as you save the skimming output to the volume-mounted location in the container, it will also be available locally under `skimming_output`.
 >
 > ### Part 2: Fitting
-> Now, pull your partner's fitting image and use it to produce the final fit result. Remember to volume-mount the `skimming_output` and `fitting_output` so the container has access to both. At the end, the `fitting_output` directory on your local machine should contain the final fit results. You can follow the instructions in [step 4](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2/blob/master/README.md#step-4-fit) of the README. 
+> Now, pull your partner's fitting image and use it to produce the final fit result. Remember to volume-mount the `skimming_output` and `fitting_output` so the container has access to both. At the end, the `fitting_output` directory on your local machine should contain the final fit results. You can follow the instructions in [step 4](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2/blob/master/README.md#step-4-fit) of the README.
 >
 > > ## Solution
 > > ### Part 1:  Skimming
 > > ~~~bash
 > > # Pull the image for the skimming repo
 > > docker pull gitlab-registry.cern.ch/[your_partners_username]/[skimming repo name]:[branch name]-[shortened commit SHA]
-> > 
+> >
 > > # Start up the container and volume-mount the skimming_output directory into it
 > > docker run --rm -it -v ${PWD}/skimming_output:/skimming_output gitlab-registry.cern.ch/[your_partners_username]/[skimming repo name]:[branch name]-[shortened commit SHA] /bin/bash
-> > 
+> >
 > > # Run the skimming code
 > > bash skim_prebuilt.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ /skimming_output
-> > bash histograms.sh /skimming_output
+> > bash histograms.sh /skimming_output /skimming_output
 > > ~~~
 > > {: .source}
-> > 
+> >
 > > ### Part 2: Fitting
 > > ~~~bash
 > > # Pull the image for the fitting repo
 > > docker pull gitlab-registry.cern.ch/[your_partners_username]/[fitting repo name]:[branch name]-[shortened commit SHA]
-> > 
+> >
 > > # Start up the container and volume-mount the skimming_output and fitting_output directories into it
 > > docker run --rm -it -v ${PWD}/skimming_output:/skimming_output -v ${PWD}/fitting_output:/fitting_output gitlab-registry.cern.ch/[your_partners_username]/[fitting repo name]:[branch name]-[shortened commit SHA] /bin/bash
-> > 
+> >
 > > # Run the fitting code
 > > bash fit.sh /skimming_output/histograms.root /fitting_output
 > > ~~~
@@ -126,10 +126,10 @@ Now that we've preserved our full analysis environment in docker images, let's t
 
 > ## Containerized Workflow Automation
 > At this point, you may already have come to appreciate that it could get a bit tedious having to manually start up the containers and keep track of the mounted volumes every time you want to develop and test your containerized workflow. It would be pretty nice to have something to automate all of this.
->  
-> <img src="../fig/BeachBoys.png" alt="BeachBoys" style="width:300px"> 
 >
-> Fortunately, containerized workflow automation tools such as [yadage](https://yadage.github.io/tutorial/) have been developed to do exactly this. Yadage was developed by Lukas Heinrich specifically for HEP applications, and is now used widely in ATLAS for designing re-interpretable analyses. The afternoon session will give you some hands-on practice with this tool. 
-{: .callout} 
+> <img src="../fig/BeachBoys.png" alt="BeachBoys" style="width:300px">
+>
+> Fortunately, containerized workflow automation tools such as [yadage](https://yadage.github.io/tutorial/) have been developed to do exactly this. Yadage was developed by Lukas Heinrich specifically for HEP applications, and is now used widely in ATLAS for designing re-interpretable analyses. The afternoon session will give you some hands-on practice with this tool.
+{: .callout}
 
 {% include links.md %}

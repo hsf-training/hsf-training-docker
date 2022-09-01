@@ -26,10 +26,10 @@ kind: "lesson"
 # Magic to make URLs resolve both locally and on GitHub.
 # See https://help.github.com/articles/repository-metadata-on-github-pages/.
 # Please don't change it: <USERNAME>/<PROJECT> is correct.
-repository: matthewfeickert/intro-to-docker
+repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "matthew.feickert@cern.ch"
+email: "hsf-training-wg@googlegroups.com"
 
 # Sites.
 amy_site: "https://amy.software-carpentry.org/workshops"
@@ -48,6 +48,7 @@ training_site: "https://carpentries.github.io/instructor-training"
 workshop_repo: "https://github.com/carpentries/workshop-template"
 workshop_site: "https://carpentries.github.io/workshop-template"
 cc_by_human: "https://creativecommons.org/licenses/by/4.0/"
+hsf_site: "https://hepsoftwarefoundation.org"
 swc_github: "https://github.com/swcarpentry"
 swc_pages: "https://swcarpentry.github.io"
 swc_site: "https://software-carpentry.org"
@@ -102,3 +103,5 @@ exclude:
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
+
+remote_theme: hsf-training/hsf-training-theme

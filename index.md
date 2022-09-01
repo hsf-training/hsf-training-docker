@@ -17,4 +17,6 @@ Originally developed by Matthew Feickert for the [**2019 USATLAS Computing Bootc
 > A computer with Docker installed on it
 {: .prereq}
 
+{% include curriculum.html %}
+
 {% include links.md %}

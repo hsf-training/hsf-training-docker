@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/hsf-training/hsf-training-docker.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-docker)
-
 # Introduction to Docker
+[![Build Status](https://travis-ci.org/hsf-training/hsf-training-docker.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-docker)
+[![HSF Training Center](https://img.shields.io/badge/HSF%20Training%20Center-browse-ff69b4)](https://hepsoftwarefoundation.org/training/curriculum.html)
 
 This repository generates the corresponding lesson website from [The Carpentries](https://carpentries.org/) repertoire of lessons.
 
@@ -17,7 +17,7 @@ Please see the current list of [issues][github-issues] for ideas for contributin
 repository. For making your contribution, we use the GitHub flow, which is
 nicely explained in the chapter [Contributing to a Project](http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project) in Pro Git
 by Scott Chacon.
-Look for the tag ![good_first_issue](https://img.shields.io/badge/-good%20first%20issue-gold.svg). This indicates that the mantainers will welcome a pull request fixing this issue.  
+Look for the tag ![good_first_issue](https://img.shields.io/badge/-good%20first%20issue-gold.svg). This indicates that the maintainers will welcome a pull request fixing this issue.
 
 ## Maintainer(s)
 
