@@ -44,6 +44,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.matthewfeickert.com/"><img src="https://avatars.githubusercontent.com/u/5142394?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matthew Feickert</b></sub></a><br /><a href="#content-matthewfeickert" title="Content">🖋</a></td>
+    <td align="center"><a href="https://bregnery.github.io/"><img src="https://avatars.githubusercontent.com/u/7606867?v=4?s=100" width="100px;" alt=""/><br /><sub><b>bregnery</b></sub></a><br /><a href="#content-bregnery" title="Content">🖋</a></td>
+  </tr>
+</table>
+
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
