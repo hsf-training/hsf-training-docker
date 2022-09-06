@@ -51,6 +51,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/danikam"><img src="https://avatars.githubusercontent.com/u/43050968?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Danika MacDonell</b></sub></a><br /><a href="#content-danikam" title="Content">🖋</a></td>
     <td align="center"><a href="https://github.com/smeehan12"><img src="https://avatars.githubusercontent.com/u/13018253?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Samuel Meehan</b></sub></a><br /><a href="#content-smeehan12" title="Content">🖋</a></td>
     <td align="center"><a href="https://github.com/mhuwiler"><img src="https://avatars.githubusercontent.com/u/30265206?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mhuwiler</b></sub></a><br /><a href="#content-mhuwiler" title="Content">🖋</a></td>
+    <td align="center"><a href="http://linkedin.com/in/bruno-alves-"><img src="https://avatars.githubusercontent.com/u/20703947?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bruno Alves</b></sub></a><br /><a href="#content-bfonta" title="Content">🖋</a></td>
   </tr>
 </table>
 
