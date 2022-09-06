@@ -3,11 +3,21 @@
     "README.md",
     "_includes/authors.html"
   ],
-  "projectName": "{{cookiecutter.project_name}}",
+  "projectName": "hsf-training-docker",
   "projectOwner": "hsf-training",
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "matthewfeickert",
+      "name": "Matthew Feickert",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5142394?v=4",
+      "profile": "http://www.matthewfeickert.com/",
+      "contributions": [
+        "content"
+      ]
+    }
+  ],
   "contributorsPerLine": 7
 }
