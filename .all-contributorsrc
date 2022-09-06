@@ -53,6 +53,15 @@
       "contributions": [
         "content"
       ]
+    },
+    {
+      "login": "bfonta",
+      "name": "Bruno Alves",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20703947?v=4",
+      "profile": "http://linkedin.com/in/bruno-alves-",
+      "contributions": [
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7
