@@ -29,7 +29,7 @@ Though it is best if you work through these lessons, the key point is that we wi
 * one containing code to skim the NanoAOD-like samples and convert them to histograms,
 * one  containing the code needed to do the final fit.
 
-You can either do this yourself, or if you'd like to start fresh (bu following the above training) or use the following  'starter' repos that you can directly fork into your namespace and work directly from:
+You can either do this yourself, or if you'd like to start fresh (by following the above training) or use the following  'starter' repos that you can directly fork into your namespace and work directly from:
 
 **Skimming code:** [https://github.com/hsf-training/hsf-training-cms-analysis-snapshot](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot)
 
