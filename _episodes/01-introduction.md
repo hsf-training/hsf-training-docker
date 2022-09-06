@@ -23,9 +23,8 @@ A note up front, Docker has very similar syntax to Git and Linux, so if you are 
 with the command line tools for them then most of Docker should seem somewhat natural
 (though you should still read the docs!).
 
-[![Docker logo](https://www.docker.com/sites/default/files/social/docker_twitter_share_new.png)](https://www.docker.com/)
+<img src="https://www.docker.com/wp-content/uploads/2022/05/Docker_Temporary_Image_Google_Blue_1080x1080_v1.png" width="200" alt="Docker logo" />
 
-# Docker Images and Containers
 
 It is still important to know what Docker _is_ and what the components of it _are_.
 Docker images are executables that bundle together all necessary components for an
