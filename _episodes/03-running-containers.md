@@ -12,9 +12,9 @@ objectives:
 - "Understand container state"
 - "Stop and restart containers"
 keypoints:
-- "Run containers with `docker run`"
+- "Run containers with `docker run <image-id>`"
 - "Monitor containers with `docker ps`"
-- "Exit interactive sessions just as you would a shell"
+- "Exit interactive sessions just using the `exit` command"
 - "Restart stopped containers with `docker start`"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/UejGBfppmZY?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
