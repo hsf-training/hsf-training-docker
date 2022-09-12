@@ -8,8 +8,8 @@ questions:
 objectives:
 - "Learn how to cleanup after Docker"
 keypoints:
-- "Remove containers with `docker rm`"
-- "Remove images with `docker rmi`"
+- "Remove containers with `docker rm <CONTAINER NAME>`"
+- "Remove images with `docker rmi <IMAGE ID>`"
 - "Perform faster cleanup with `docker container prune`, `docker image prune`, and `docker system prune`"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/Gsp6EapBcoo?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

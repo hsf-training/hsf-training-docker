@@ -10,8 +10,8 @@ objectives:
 - "List local images"
 - "Introduce image tags"
 keypoints:
-- "Pull images with `docker pull`"
-- "List images with `docker images`"
+- "Pull images with `docker pull <image-id>`"
+- "List all images on the computer and other information with `docker images`"
 - "Image tags distinguish releases or version and are appended to the image name with a colon"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/JihkukeoNVs?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
