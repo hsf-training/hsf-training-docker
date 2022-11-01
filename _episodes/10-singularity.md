@@ -108,3 +108,10 @@ export SINGULARITY_DOCKER_PASSWORD='mysecretpass'
 > {: .solution}
 >
 {: .challenge}
+
+
+
+> ## Notice
+> This page shows only a little taste of Singularity. 
+> For more information visit our [Singularity training module](https://hsf-training.github.io/hsf-training-singularity-webpage/)
+{: .callout}
