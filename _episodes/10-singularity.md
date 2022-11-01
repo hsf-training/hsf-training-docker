@@ -112,6 +112,6 @@ export SINGULARITY_DOCKER_PASSWORD='mysecretpass'
 
 
 > ## Notice
-> This page shows only a little taste of Singularity. 
+> This page shows only a little taste of Singularity.
 > For more information visit our [Singularity training module](https://hsf-training.github.io/hsf-training-singularity-webpage/)
 {: .callout}
