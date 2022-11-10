@@ -78,7 +78,7 @@ matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 mont
 
 You can see here that there is the `TAG` field associated with the
 `matthewfeickert/intro-to-docker` image.
-Tags are way of further specifying different versions of the same image.
+Tags are a way of further specifying different versions of the same image.
 As an example, let's pull the buster release tag of the
 [Debian image](https://hub.docker.com/_/debian) (again, if it was already pulled during setup, docker won't attempt to re-pull it unless it's changed since last pulled).
 
