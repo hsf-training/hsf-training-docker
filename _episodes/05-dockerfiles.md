@@ -18,7 +18,7 @@ keypoints:
 
 Docker images are built through the Docker engine by reading the instructions from a
 [`Dockerfile`][docker-docs-builder].
-These text based documents provide the instructions though an API similar to the Linux
+These text based documents provide the instructions through an API similar to the Linux
 operating system commands to execute commands during the build.
 The [`Dockerfile` for the example image][example-Dockerfile] being used is an example of
 some simple extensions of the [official Python 3.6.8 Docker image][python-docker-image].
@@ -73,7 +73,7 @@ USER docker
 {: .callout}
 
 > ## Garbage cleanup
-> Notice that the last few lines of the `RUN` command clean up and remove unneeded files that get produced during the installation process. This is important for keeping images sizes small, since files produced during each image-building layer will persist into the final image and add unnecessary bulk.
+> Notice that the last few lines of the `RUN` command clean up and remove unneeded files that get produced during the installation process. This is important for keeping image sizes small, since files produced during each image-building layer will persist into the final image and add unnecessary bulk.
 {: .callout}
 
 > ## Don't run as `root`

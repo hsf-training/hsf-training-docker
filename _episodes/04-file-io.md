@@ -16,7 +16,8 @@ keypoints:
 # Copying
 
 [Copying][docker-docs-cp] files between the local host and Docker containers is possible.
-On your local host find a file that you want to transfer to the container and then
+On your local host, either find a file that you want to transfer to the container or create a new one. Below is the procedure
+for creating a new file called io_example.txt and then copying it to the container:
 
 ~~~bash
 touch io_example.txt
