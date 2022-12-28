@@ -3,7 +3,7 @@ title: "Bonus Episode"
 teaching: 40
 exercises: 0
 questions:
-- How to build Docker container for python packages?
+- How to build a Docker container for python packages?
 - How to share Docker images?
 objectives:
 - To be able to build a Docker container and share it via GitHub packages
@@ -28,13 +28,10 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
- && apt-get install -yq \
- && apt-get update -y \
  && apt-get install wget -y \
  && apt-get install dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev \
   libxft-dev libxext-dev python3 libssl-dev libgsl0-dev libtiff-dev \
   python3-pip -y
-
 
  RUN pip3 install numpy \
   && pip3 install awkward \
@@ -60,7 +57,7 @@ To do so, one needs to use GitHub CI/CD. A step-by-step guide is presented here.
 * **Step 1**: Create a GitHub repository and clone it locally.
 * **Step 2**: In the empty repository, make a folder called `.github/workflows`. In this folder we will store the file containing the YAML script for a GitHub workflow, named `Docker-build-deploy.yml` (the name doesn't really matter).
 * **Step 3**: In the top directory of your GitHub repository, create a file named `Dockerfile`.
-* **Step 4**: Copy-paste the content above and add to the Dockerfile. (In principle it is possible to build this image locally, but we will not do that here, as we wish to build it with GitHub CI/CD).
+* **Step 4**: Copy-paste the content above and add it to the Dockerfile. (In principle it is possible to build this image locally, but we will not do that here, as we wish to build it with GitHub CI/CD).
 * **Step 5**: In the `Docker-build-deploy.yml` file, add the following content:
 
 ```text
