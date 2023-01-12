@@ -129,7 +129,7 @@ Now that we've preserved our full analysis environment in docker images, let's t
 >
 > <img src="../fig/BeachBoys.png" alt="BeachBoys" style="width:300px">
 >
-> Fortunately, containerized workflow automation tools such as [yadage](https://yadage.github.io/tutorial/) have been developed to do exactly this. Yadage was developed by Lukas Heinrich specifically for HEP applications, and is now used widely in ATLAS for designing re-interpretable analyses. The afternoon session will give you some hands-on practice with this tool.
+> Fortunately, containerized workflow automation tools such as [yadage](https://yadage.github.io/tutorial/) have been developed to do exactly this. Yadage was developed by Lukas Heinrich specifically for HEP applications, and is now used widely in ATLAS for designing re-interpretable analyses.
 {: .callout}
 
 {% include links.md %}
