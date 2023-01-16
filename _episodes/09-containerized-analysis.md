@@ -29,7 +29,7 @@ To bring it all together, we can also preserve our fitting framework in its own 
 > **Note:** Since we're now moving between repos, you can quickly double-check that you're in the desired repo using eg. `git remote -v`.
 > > ## Solution
 > > ~~~yaml
-> > FROM rootproject/root-conda
+> > FROM rootproject/root:6.22.06-conda
 > > COPY . /fit
 > > WORKDIR /fit
 > > ~~~
