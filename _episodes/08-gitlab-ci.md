@@ -30,9 +30,9 @@ The goal of automated environment preservation is to create a docker image that 
 
 As we've seen, all these components can be encoded in a Dockerfile. So the first step to set up automated image building is to add a Dockerfile to the repo specifying these components.
 
-> ## The `rootproject/root-conda` docker image
-> In this tutorial, we build our analysis environments on top of the `rootproject/root-conda` base image ([link to project area on docker hub](https://hub.docker.com/r/rootproject/root-conda)). This image comes with root 6.18 and python 3.7 pre-installed. It also comes with XrootD for downloading files from eos.
-> The `rootproject/root-conda` is itself built with a [Dockerfile](https://hub.docker.com/r/rootproject/root-conda/dockerfile), which uses conda to install root and python on top of another base image (`continuumio/miniconda3`).
+> ## The `rootproject/root` docker image
+> In this tutorial, we build our analysis environments on top of the `rootproject/root` base image ([link to project area on docker hub](https://hub.docker.com/r/rootproject/root)) with conda. This image comes with root 6.18 and python 3.7 pre-installed. It also comes with XrootD for downloading files from eos.
+> The `rootproject/root` is itself built with a [Dockerfile](https://github.com/root-project/root-docker/blob/6.22.06-conda/conda/Dockerfile), which uses conda to install root and python on top of another base image (`continuumio/miniconda3`).
 {: .callout}
 
 > ## Exercise (15 min)
@@ -46,7 +46,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > Now open the Dockerfile with a text editor and, starting with the following skeleton, fill in the FIXMEs to make a Dockerfile that fully specifies your analysis environment in this repo.
 >
 > ~~~yaml
-> # Start from the rootproject/root-conda:6.18.04 base image
+> # Start from the rootproject/root:6.22.06-conda base image
 > [FIXME]
 >
 > # Put the current repo (the one in which this Dockerfile resides) in the /analysis/skim directory
@@ -66,8 +66,8 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 >
 > > ## Solution
 > > ~~~yaml
-> > # Start from the rootproject/root-conda base image
-> > FROM rootproject/root-conda:6.18.04
+> > # Start from the rootproject/root base image with conda
+> > FROM rootproject/root:6.22.06-conda
 > >
 > > # Put the current repo (the one in which this Dockerfile resides) in the /analysis/skim directory
 > > # Note that this directory is created on the fly and does not need to reside in the repo already
@@ -124,7 +124,7 @@ build_image:
 ~~~
 {: .source}
 
-<!--Now, remove the line `image: rootproject/root-conda` underneath the stages, since the image-building stage uses its own dedicated image for automated image building. You'll then need to explicitly specify that the other stages use this image by adding the line `image: rootproject/root-conda` to the stages, since it's no longer a global specification.-->
+<!--Now, remove the line `image: rootproject/root` underneath the stages, since the image-building stage uses its own dedicated image for automated image building. You'll then need to explicitly specify that the other stages use this image by adding the line `image: rootproject/root` to the stages, since it's no longer a global specification.-->
 
 Once this is done, you can commit and push the updated `.gitlab-ci.yml` file to your gitlab repo and check to make sure the pipeline passed. If it passed, the repo image built by the pipeline should now be stored on the docker registry, and be accessible as follows:
 

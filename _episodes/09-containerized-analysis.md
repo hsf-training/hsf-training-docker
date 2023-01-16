@@ -20,7 +20,7 @@ To bring it all together, we can also preserve our fitting framework in its own 
 ## Preserve the Fitting Repo Environment
 
 > ## Exercise (10 min)
-> Just as we did for the analysis repo, cd into your the repo containing your statistical fitting code and create a Dockerfile to preserve the environment. You can again start from the `rootproject/root-conda:6.18.04` base image.
+> Just as we did for the analysis repo, cd into your the repo containing your statistical fitting code and create a Dockerfile to preserve the environment. You can again start from the `rootproject/root:6.22.06-conda` base image.
 >
 > **Note:** Since the fitting code just runs a python script, there's no need to pre-compile any executables in this Dockerfile. It's sufficient to add the source code to the base image and make the directory containing the code your default working directory.'
 >
@@ -29,7 +29,7 @@ To bring it all together, we can also preserve our fitting framework in its own 
 > **Note:** Since we're now moving between repos, you can quickly double-check that you're in the desired repo using eg. `git remote -v`.
 > > ## Solution
 > > ~~~yaml
-> > FROM rootproject/root-conda
+> > FROM rootproject/root:6.22.06-conda
 > > COPY . /fit
 > > WORKDIR /fit
 > > ~~~
