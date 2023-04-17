@@ -15,7 +15,6 @@ Originally developed by Matthew Feickert for the [**2019 USATLAS Computing Bootc
 > ## Prerequisites
 >
 > Basic knowledge of the Unix Shell, e.g., from the [carpentry course](https://swcarpentry.github.io/shell-novice/)
-
 {: .prereq}
 
 {% include curriculum.html %}
