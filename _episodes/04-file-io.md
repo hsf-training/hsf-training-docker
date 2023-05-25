@@ -61,7 +61,7 @@ docker cp <NAME>:/home/docker/data/io_example.txt .
 ~~~
 {: .source}
 
-and verify if you want that the file has been modified as you wanted
+and verify if the file has been modified as you wanted
 
 ~~~bash
 cat io_example.txt
@@ -124,7 +124,7 @@ ls *.txt
 {: .source}
 
 >## Permission issues
->If you run into a `Permission denied` error, you can use ``sudo`` for a quick fix if you have superuser access (but this is not recommended).
+>If you run into a `Permission denied` error, you can use ``sudo`` for a quick fix, if you have superuser access (but this is not recommended).
 {: .callout}
 
 ~~~
