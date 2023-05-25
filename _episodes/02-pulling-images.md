@@ -18,7 +18,7 @@ keypoints:
 
 # Docker Hub
 
-Much like GitHub allows for web hosting and searching for code, the [Docker Hub][docker-hub]
+Much like how GitHub allows for web hosting and searching for code, the [Docker Hub][docker-hub]
 image registry allows the same for Docker images.
 Hosting and building of images is [free for public repositories][docker-hub-billing] and
 allows for downloading images as they are needed.
