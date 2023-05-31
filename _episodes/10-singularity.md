@@ -77,8 +77,8 @@ singularity exec -B /afs -B /eos -B /cvmfs docker://matthewfeickert/intro-to-doc
 > ## `-B` (bind strings)
 >
 > The -B option allows the user to specify paths to bind to the Singularity container.
-> This option is similar to '-v' in docker. By default paths are mounted as rw (read/write),
-> but can also be specified as ro (read-only).
+> This option is similar to '-v' in docker. By default paths are mounted as "rw" (read/write),
+> but can also be specified as "ro" (read-only).
 >
 {: .callout}
 
