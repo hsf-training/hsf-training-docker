@@ -36,7 +36,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 {: .callout}
 
 > ## Exercise (15 min)
-> Working from your bash shell, cd into the top level of the repo you use for skimming, that being the "event selection" snapshot of the CMS HTauTau analysis payload. Create an empty file named `Dockerfile`.
+> Working from your bash shell, `cd` into the top level of the repo you use for skimming, that being the "event selection" snapshot of the CMS HTauTau analysis payload. Create an empty file named `Dockerfile`.
 >
 > ~~~bash
 > touch Dockerfile
