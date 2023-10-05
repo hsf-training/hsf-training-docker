@@ -43,8 +43,7 @@ very lightweight and fast to spin up to run.
 >
 > Singularity in particular is used widely in HPC, and particularly by CMS, so you may have need to familiarize yourself with it at some point.
 >
-> The [RECAST FAQ](https://recast-docs.web.cern.ch/recast-docs/faq/#q-how-are-docker-and-singularity-different) includes a brief intro to the important differences between docker and singularity.
-> To learn more about singularity, see for example the [HSF Training Singularity Module](https://github.com/hsf-training/hsf-training-singularity-webpage).
+> To learn more about singularity, see for example the [HSF Training Singularity Module](https://hsf-training.github.io/hsf-training-singularity-webpage/).
 {: .callout}
 
 [docker-tutorial]: https://docs.docker.com/get-started
