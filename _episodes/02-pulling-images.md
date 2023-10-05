@@ -20,12 +20,9 @@ keypoints:
 
 Much like how GitHub allows for web hosting and searching for code, the [Docker Hub][docker-hub]
 image registry allows the same for Docker images.
-Hosting and building of images is [free for public repositories][docker-hub-billing] and
+Hosting images is [free for public repositories][docker-hub-billing] and
 allows for downloading images as they are needed.
-Additionally, through integrations with GitHub and Bitbucket, Docker Hub repositories can
-be linked against Git repositories so that
-[automated builds of Dockerfiles on Docker Hub][docker-hub-builds] will be triggered by
-pushes to repositories.
+Additionally, you can configure your GitLab or GitHub CI pipelines to automatically build and push docker images to Docker Hub.
 
 # Pulling Images
 
@@ -123,7 +120,7 @@ debian              buster              00bf7fdd8baf        5 weeks ago         
 {: .challenge}
 
 [docker-hub]: https://hub.docker.com/
-[docker-hub-billing]: https://hub.docker.com/billing-plans/
+[docker-hub-billing]: https://www.docker.com/pricing/
 [docker-hub-builds]: https://docs.docker.com/docker-hub/builds/
 [docker-docs-pull]: https://docs.docker.com/engine/reference/commandline/pull/
 [docker-docs-images]: https://docs.docker.com/engine/reference/commandline/images/

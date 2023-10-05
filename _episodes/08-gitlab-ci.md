@@ -107,7 +107,9 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 Now, you can proceed with updating your `.gitlab-ci.yml` to actually build the container during the CI/CD pipeline and store it in the gitlab registry. You can later pull it from the gitlab registry just as you would any other container, but in this case using your CERN credentials.
 
 > ## Not from CERN?
-> If you do not have a CERN computing account with access to [gitlab.cern.ch](https://[gitlab.cern.ch), then everything discussed here is also available on [gitlab.com](https://gitlab.com) offers CI/CD tools, including the docker builder. Furthermore, you can do the same with github + dockerhub as explained in the next subsection.
+> If you do not have a CERN computing account with access to [gitlab.cern.ch](https://[gitlab.cern.ch), then everything discussed here is also available on [gitlab.com](https://gitlab.com), which offers CI/CD tools, including the docker builder.
+> Furthermore, you can achieve the same with GitHub + Github Container Registry.
+> To learn more about these methods, see the next subsections.
 {: .callout}
 
 Add the following lines at the end of the `.gitlab-ci.yml` file to build the image and save it to the docker registry.
@@ -176,42 +178,10 @@ In the `script` of this job there are three components :
 
 If the job runs successfully, then in the same way as described for [gitlab.cern.ch](https://[gitlab.cern.ch) in the previous section, you will be able to find the `Container Registry` on the left hand icon menu of your gitlab.com web browser and navigate to the image that was pushed to the registry.  Et voila, c'est fini, exactement comme au CERN!
 
-### Alternative: Automatic image building with github + dockerhub
+### Alternative: GitHub.com
 
-If you don't have access to [gitlab.cern.ch](https://gitlab.cern.ch), you can still
-automatically build a docker image every time you push to a repository with github and
-dockerhub.
-
-1. Create a clone of the skim and the fitting repository on your private github.
-  You can use the
-  [GitHub Importer](https://docs.github.com/en/github/importing-your-projects-to-github/importing-a-repository-with-github-importer)
-  for this. It's up to you whether you want to make this repository public or private.
-
-2. Create a free account on [dockerhub](http://hub.docker.com/).
-3. Once you confirmed your email, head to ``Settings`` > ``Linked Accounts``
-   and connect your github account.
-4. Go back to the home screen (click the dockerhub icon top left) and click ``Create Repository``.
-5. Choose a name of your liking, then click on the  github icon in the ``Build settings``.
-   Select your account name as organization and select your repository.
-6. Click on the ``+`` next to ``Build rules``. The default one does fine
-7. Click ``Create & Build``.
-
-That's it! Back on the home screen your repository should appear. Click on it and select the
-``Builds`` tab to watch your image getting build (it probably will take a couple of minutes
-before this starts). If something goes wrong check the logs.
-
-<img src="../fig/dockerhub_build.png" alt="DockerHub" style="width:900px">
-
-Once the build is completed, you can pull your image in the usual way.
-
-~~~bash
-# If you made your docker repository private, you first need to login,
-# else you can skip the following line
-docker login
-# Now pull
-docker pull <username>/<image name>:<tag>
-~~~
-{: .source}
+You can also build Docker images on [github.com](https://github.com) and push them to the GitHub Container Registry ([ghcr.io](https://ghcr.io)) with the help of [GitHub Actions](https://github.com/features/actions).
+The bonus episode [Building and deploying a Docker container to Github Packages](/hsf-training-docker/12-bonus/index.html) explains how to do so.
 
 ## An updated version of `skim.sh`
 
