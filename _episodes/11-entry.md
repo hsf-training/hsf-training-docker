@@ -30,7 +30,7 @@ docker run --rm -it python:3.7-slim /bin/bash
 Running this dumps us into a Bash session
 
 ~~~bash
-printenv | grep SHELL
+echo $SHELL
 ~~~
 {: .source}
 
