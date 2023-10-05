@@ -52,11 +52,18 @@ To bring it all together, we can also preserve our fitting framework in its own 
 > > build_image:
 > >   stage: build
 > >   variables:
-> >     TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
-> >   tags:
-> >     - docker-image-build
+> >     IMAGE_DESTINATION: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+> >   image:
+> >     # The kaniko debug image is recommended because it has a shell, and a shell is required for an image to be used with GitLab CI/CD.
+> >     name: gcr.io/kaniko-project/executor:debug
+> >     entrypoint: [""]
 > >   script:
-> >     - ignore
+> >     # Prepare Kaniko configuration file
+> >     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+> >     # Build and push the image from the Dockerfile at the root of the project.
+> >     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE_DESTINATION
+> >     # Print the full registry path of the pushed image
+> >     - echo "Image pushed successfully to ${IMAGE_DESTINATION}"
 > >
 > > [... rest of .gitlab-ci.yml]
 > > ~~~

@@ -107,22 +107,30 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 Now, you can proceed with updating your `.gitlab-ci.yml` to actually build the container during the CI/CD pipeline and store it in the gitlab registry. You can later pull it from the gitlab registry just as you would any other container, but in this case using your CERN credentials.
 
 > ## Not from CERN?
-> If you do not have a CERN computing account with access to [gitlab.cern.ch](https://[gitlab.cern.ch), then everything discussed here is also available on [gitlab.com](https://gitlab.com), which offers CI/CD tools, including the docker builder.
+> If you do not have a CERN computing account with access to [gitlab.cern.ch](https://gitlab.cern.ch), then everything discussed here is also available on [gitlab.com](https://gitlab.com), which offers CI/CD tools, including the docker builder.
 > Furthermore, you can achieve the same with GitHub + Github Container Registry.
 > To learn more about these methods, see the next subsections.
 {: .callout}
 
-Add the following lines at the end of the `.gitlab-ci.yml` file to build the image and save it to the docker registry.
+Add the following lines at the end of the `.gitlab-ci.yml` file to build the image with Kaniko and save it to the docker registry.
+For more details about building docker images on CERN's GitLab, see the [Building docker images](https://gitlab.docs.cern.ch/docs/Build%20your%20application/Packages%20&%20Registries/using-gitlab-container-registry#building-docker-images) docs page.
 
 ~~~yaml
 build_image:
   stage: build
   variables:
-    TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
-  tags:
-    - docker-image-build
+    IMAGE_DESTINATION: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+  image:
+    # The kaniko debug image is recommended because it has a shell, and a shell is required for an image to be used with GitLab CI/CD.
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   script:
-    - ignore
+    # Prepare Kaniko configuration file
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    # Build and push the image from the Dockerfile at the root of the project.
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE_DESTINATION
+    # Print the full registry path of the pushed image
+    - echo "Image pushed successfully to ${IMAGE_DESTINATION}"
 ~~~
 {: .source}
 
@@ -143,7 +151,7 @@ You can also go to the container registry on the gitlab UI to see all the images
 Notice that the script to run is just a dummy 'ignore' command. This is because using the docker-image-build tag, the jobs always land on special runners that are managed by CERN IT which run a custom script in the background. You can safely ignore the details.
 
 > ## Recommended Tag Structure
-> You'll notice the environment variable `TO` in the `.gitlab-ci.yml` script above. This controls the name of the Docker image that is produced in the CI step. Here, the image name will be `<reponame>:<branch or tagname>-<short commit SHA>`. The shortened 8-character commit SHA ensures that each image created from a different commit will be unique, and you can easily go back and find images from previous commits for debugging, etc.
+> You'll notice the environment variable `IMAGE_DESTINATION` in the `.gitlab-ci.yml` script above. This controls the name of the Docker image that is produced in the CI step. Here, the image name will be `<reponame>:<branch or tagname>-<short commit SHA>`. The shortened 8-character commit SHA ensures that each image created from a different commit will be unique, and you can easily go back and find images from previous commits for debugging, etc.
 >
 > As you'll see tomorrow, it's recommended when using your images as part of a REANA workflow to make a unique image for each gitlab commit, because REANA will only attempt to update an image that it's already pulled if it sees that there's a new tag associated with the image.
 >
@@ -152,31 +160,34 @@ Notice that the script to run is just a dummy 'ignore' command. This is because 
 
 ### Alternative: GitLab.com
 
-This training module is rather CERN-centric and assumes you have a CERN computing account with access to [gitlab.cern.ch](https://[gitlab.cern.ch).  If this is not the case, then as with the [CICD training module](https://hsf-training.github.io/hsf-training-cicd/), everything can be carried out using [gitlab.com](https://gitlab.com) with a few slight modifications. These changes are largely surrounding the syntax and the concept remains that you will have to specify that your pipeline job that builds the image is executed on a special type of runner with the appropriate `services`.  However, unlike at CERN, there is not pre-defined `script` that runs on these runners and pushes to your registry, so you will have to write this script yourself but this will be little more than adding commands that you have been exposed to in previous section of this training like `docker build`.
+This training module is rather CERN-centric and assumes you have a CERN computing account with access to [gitlab.cern.ch](https://gitlab.cern.ch).  If this is not the case, then as with the [CICD training module](https://hsf-training.github.io/hsf-training-cicd/), everything can be carried out using [gitlab.com](https://gitlab.com) with a few slight modifications.
+In particular, you will have to specify that your pipeline job that builds the image is executed on a special type of runner with the appropriate `services`.  However, unlike at CERN, you can use the docker commands that you have seen in the previous episodes to build and push the docker images.
 
 Add the following lines at the end of the `.gitlab-ci.yml` file to build the image and save it to the docker registry.
 
 ~~~yaml
-build image:
+build_image:
   stage: build
   image: docker:latest
   services:
     - docker:dind
+  variables:
+    IMAGE_DESTINATION: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
   script:
-    - docker build -t registry.gitlab.com/burakh/docker-training .
+    - docker build -t $IMAGE_DESTINATION .
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker push registry.gitlab.com/burakh/docker-training
+    - docker push $IMAGE_DESTINATION
 ~~~
 {: .source}
 
-In this job, the specific `image: docker:latest`, along with specifying the `services` to contain `docker:dind` is equivalent to the requesting the `docker-build-image` tag on [gitlab.cern.ch](https://[gitlab.cern.ch).  If you are curious to read about this in detail, refer to the [official gitlab documentation](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html) or (this example)[https://gitlab.com/gitlab-examples/docker].
+In this job, the specific `image: docker:latest`, along with specifying the `services` to contain `docker:dind` are needed to be able to execute docker commands. If you are curious to read about this in detail, refer to the [official gitlab documentation](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html) or [this example](https://gitlab.com/gitlab-examples/docker).
 
 In the `script` of this job there are three components :
-  - [`docker build`](https://docs.docker.com/engine/reference/commandline/build/) : This is performing the same build of our docker image to the tagged image which we will call `registry.gitlab.com/burakh/docker-training`
+  - [`docker build`](https://docs.docker.com/engine/reference/commandline/build/) : This is performing the same build of our docker image to the tagged image which we will call `<reponame>:<branch or tagname>-<short commit SHA>`
   - [`docker login`](https://docs.docker.com/engine/reference/commandline/login/) : This call is performing [an authentication of the user to the gitlab registry](https://docs.gitlab.com/ee/user/packages/container_registry/#authenticating-to-the-gitlab-container-registry) using a set of [predefined environment variables](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html) that are automatically available in any gitlab repository.
   - [`docker push`](https://docs.docker.com/engine/reference/commandline/push/) : This call is pushing the docker image which exists locally on the runner to the gitlab.com registry associated with the repository against which we have performed the authentication in the previous step.
 
-If the job runs successfully, then in the same way as described for [gitlab.cern.ch](https://[gitlab.cern.ch) in the previous section, you will be able to find the `Container Registry` on the left hand icon menu of your gitlab.com web browser and navigate to the image that was pushed to the registry.  Et voila, c'est fini, exactement comme au CERN!
+If the job runs successfully, then in the same way as described for [gitlab.cern.ch](https://gitlab.cern.ch) in the previous section, you will be able to find the `Container Registry` on the left hand icon menu of your gitlab.com web browser and navigate to the image that was pushed to the registry.  Et voila, c'est fini, exactement comme au CERN!
 
 ### Alternative: GitHub.com
 
