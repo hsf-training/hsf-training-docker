@@ -31,8 +31,8 @@ The goal of automated environment preservation is to create a docker image that 
 As we've seen, all these components can be encoded in a Dockerfile. So the first step to set up automated image building is to add a Dockerfile to the repo specifying these components.
 
 > ## The `rootproject/root` docker image
-> In this tutorial, we build our analysis environments on top of the `rootproject/root` base image ([link to project area on docker hub](https://hub.docker.com/r/rootproject/root)) with conda. This image comes with root 6.22 and python 3.7 pre-installed. It also comes with XrootD for downloading files from eos.
-> The `rootproject/root` is itself built with a [Dockerfile](https://github.com/root-project/root-docker/blob/6.22.06-conda/conda/Dockerfile), which uses conda to install root and python on top of another base image (`continuumio/miniconda3`).
+> In this tutorial, we build our analysis environments on top of the `rootproject/root` base image ([link to project area on docker hub](https://hub.docker.com/r/rootproject/root)) with conda. This image comes with root 6.22 and python 3.8 pre-installed. It also comes with XrootD for downloading files from eos.
+> The `rootproject/root` is itself built with a [Dockerfile](https://github.com/root-project/root-docker/blob/6.22.06-conda/conda/Dockerfile), which uses conda to install root and python on top of another base image (`condaforge/miniforge3`).
 {: .callout}
 
 > ## Exercise (15 min)
