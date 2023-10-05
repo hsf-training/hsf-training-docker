@@ -64,6 +64,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > ~~~
 > {: .source}
 >
+> Hint: have a look at `skim.sh` if you are unsure about how to complete the last `RUN` statement!
 > > ## Solution
 > > ~~~yaml
 > > # Start from the rootproject/root base image with conda
