@@ -49,10 +49,14 @@ A few things to keep in mind if starting from these 'starter repos':
 * Regarding authentication with ``kinit``:
   * If you are from CERN and use gitlab.cern.ch: Remember to add your CERN credentials as CI/CD variables to
     both repos for the `kinit` authentication in the `.gitlab-ci.yml` files to work.
-    To do so, go to _Settings_ -> _CI/CD_ -> _Variables_ and create two new variables: `CERN_USER` should contain your CERN username, and `SERVICE_PASS` should contain your password.
-  * Else, you can remove the ``kinit`` line from `.gitlab-ci.yml` and use the public EOS dataset available at `root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced`.
-* For the fitting code repo, the [fit_simple](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats/blob/master/.gitlab-ci.yml#L5) step in `.gitlab-ci.yml` expects to receive the file `histograms.root` produced by the skimming code. In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://cernbox.cern.ch/index.php/s/LADW94G9fjY7hjF).
-  * If you are from CERN, you'll need to copy this file to your personal eos user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`)
-  * else: use the public eos link.
+    To do so, go to _Settings_ -> _CI/CD_ -> _Variables_ and create two new variables:
+     * `CERN_USER` should contain your CERN username
+     * `SERVICE_PASS` should contain your password.
+  * Else, you can remove the ``kinit`` line from `.gitlab-ci.yml` and use the public EOS datasets:
+    * `root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced` for the skimming repo.
+    * `root://eospublic.cern.ch//eos/opendata/cms/upload/apb2023/histograms.root` for the fitting repo.
+* For the fitting code repo, the [fit_simple](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats/blob/master/.gitlab-ci.yml#L5) step in `.gitlab-ci.yml` expects to receive the file `histograms.root` produced by the skimming code. In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://eospublichttp.cern.ch//eos/opendata/cms/upload/apb2023/histograms.root). In any case you can:
+  * use the public EOS datasets mentioned above.
+  * If you are from CERN, you can copy the downloaded file to your personal eos user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`).
 
 {% include links.md %}
