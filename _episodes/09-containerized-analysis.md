@@ -51,12 +51,26 @@ To bring it all together, we can also preserve our fitting framework in its own 
 > >
 > > build_image:
 > >   stage: build
+> >   image:
+> >     name: gitlab-registry.cern.ch/ci-tools/docker-image-builder
+> >     entrypoint: [""]
+> >   stage: build
 > >   variables:
-> >     TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
-> >   tags:
-> >     - docker-image-build
+> >     GIT_SUBMODULE_STRATEGY: recursive
+> >     GIT_SSL_NO_VERIFY: "true"
 > >   script:
-> >     - ignore
+> >     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+> >     - '[[ $CI_COMMIT_REF_SLUG = "master" ]] && DOCKER_TAG="latest" || DOCKER_TAG="$CI_COMMIT_REF_SLUG"'
+> >     - /kaniko/executor --context $CI_PROJECT_DIR
+> >                        --dockerfile $CI_PROJECT_DIR/Dockerfile
+> >                        --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+> >                        --destination $CI_REGISTRY_IMAGE:$DOCKER_TAG
+> >                        --build-arg CI_COMMIT_SHA=$CI_COMMIT_SHA
+> >                        --build-arg CI_COMMIT_REF_SLUG=$CI_COMMIT_REF_SLUG
+> >                        --build-arg CI_COMMIT_TAG=$CI_COMMIT_TAG
+> >                        --build-arg CI_JOB_URL=$CI_JOB_URL
+> >                        --build-arg CI_PROJECT_URL=$CI_PROJECT_URL
+> >
 > >
 > > [... rest of .gitlab-ci.yml]
 > > ~~~
