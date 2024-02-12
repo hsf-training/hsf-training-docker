@@ -4,7 +4,7 @@ title: Setup
 
 ## Docker installations
 
-To install Docker Community Edition on your Linux, Mac, or Windows machine follow the [instructions in the Docker docs](https://docs.docker.com/install/).
+To install Docker on your machine follow the official instructions for [Linux](https://docs.docker.com/engine/install/#server), [Mac](https://docs.docker.com/desktop/install/mac-install/), or [Windows](https://docs.docker.com/desktop/install/windows-install/).
 
 If you are using Linux, then please also follow these [post installation instructions](https://docs.docker.com/engine/install/linux-postinstall/).
 
@@ -37,7 +37,7 @@ Though it is best if you work through these lessons, the key point is that we wi
 * one containing code to skim the NanoAOD-like samples and convert them to histograms,
 * one  containing the code needed to do the final fit.
 
-You can either do this yourself, or if you'd like to start fresh (by following the above training) or use the following  'starter' repos that you can directly fork into your namespace and work directly from:
+You can either do this yourself by following the aforementioned lessons, or if you'd like to start fresh you can use the following  'starter' repos that you can directly fork into your namespace and work directly from:
 
 **Skimming code:** [https://github.com/hsf-training/hsf-training-cms-analysis-snapshot](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot)
 
@@ -45,12 +45,13 @@ You can either do this yourself, or if you'd like to start fresh (by following t
 
 A few things to keep in mind if starting from these 'starter repos':
 
-* **<font color="red">First and foremost:</font>** Please make sure you've forked the starter repos into your own namespace before cloning and making commits to them, otherwise you'll run into permissions issues when you try to push your commits!!
+* **<font color="red">First and foremost:</font>** To fork these repos, open the  [GitLab project creation page](https://gitlab.cern.ch/projects/new) and then select _Import project_ -> _Repository by URL_. Please make sure you've forked the starter repos into your own namespace before cloning and making commits to them, otherwise you'll run into permissions issues when you try to push your commits! Also remember to set the visibility level to _Public_.
 * Regarding authentication with ``kinit``:
   * If you are from CERN and use gitlab.cern.ch: Remember to add your CERN credentials as CI/CD variables to
     both repos for the `kinit` authentication in the `.gitlab-ci.yml` files to work.
-  * Else, you can remove the ``kinit`` line and use the public EOS dataset
-* For the fitting code repo, the [fit_simple](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats/blob/master/.gitlab-ci.yml#L5) gitlab-ci.yml file expects to receive the file `histograms.root` produced by the skimming code. In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://cernbox.cern.ch/index.php/s/LADW94G9fjY7hjF).
+    To do so, go to _Settings_ -> _CI/CD_ -> _Variables_ and create two new variables: `CERN_USER` should contain your CERN username, and `SERVICE_PASS` should contain your password.
+  * Else, you can remove the ``kinit`` line from `.gitlab-ci.yml` and use the public EOS dataset available at `root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced`.
+* For the fitting code repo, the [fit_simple](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats/blob/master/.gitlab-ci.yml#L5) step in `.gitlab-ci.yml` expects to receive the file `histograms.root` produced by the skimming code. In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://cernbox.cern.ch/index.php/s/LADW94G9fjY7hjF).
   * If you are from CERN, you'll need to copy this file to your personal eos user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`)
   * else: use the public eos link.
 
