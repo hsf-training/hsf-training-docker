@@ -71,8 +71,18 @@
       "contributions": [
         "content"
       ]
+    },
+    {
+      "login": "mdonadoni",
+      "name": "mdonadoni",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13397702?v=4",
+      "profile": "https://github.com/mdonadoni",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
