@@ -20,7 +20,7 @@ To bring it all together, we can also preserve our fitting framework in its own 
 ## Preserve the Fitting Repo Environment
 
 > ## Exercise (10 min)
-> Just as we did for the analysis repo, cd into your the repo containing your statistical fitting code and create a Dockerfile to preserve the environment. You can again start from the `rootproject/root:6.22.06-conda` base image.
+> Just as we did for the analysis repo, `cd` into your repo containing your statistical fitting code and create a Dockerfile to preserve the environment. You can again start from the `rootproject/root:6.22.06-conda` base image.
 >
 > **Note:** Since the fitting code just runs a python script, there's no need to pre-compile any executables in this Dockerfile. It's sufficient to add the source code to the base image and make the directory containing the code your default working directory.'
 >
@@ -42,7 +42,7 @@ To bring it all together, we can also preserve our fitting framework in its own 
 >
 > **Note:** I would suggest listing the `- build` stage before the other stages so it will run first. This way, even if the other stages fail for whatever reason, the image can still be built with the `- build` stage.
 >
-> Once you're happy with the .gitlab-ci.yml, commit and push the new file to the fitting repo.
+> Once you're happy with the `.gitlab-ci.yml`, commit and push the new file to the fitting repo.
 > > ## Solution
 > > ~~~yaml
 > > stages:
