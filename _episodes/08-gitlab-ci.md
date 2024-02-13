@@ -13,7 +13,7 @@ keypoints:
 <iframe width="427" height="251" src="https://www.youtube.com/embed/YmLmWm3RNwg?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
-In this section, we learn how to combine the forces of dockerhub and github to automatically keep your analysis environment up-to-date. 
+In this section, we learn how to combine the forces of dockerhub and github to automatically keep your analysis environment up-to-date.
 
 We will be doing this using the [CMS OpenData HTauTau Analysis Payload](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/). Specifically, we will be using two "snapshots" of this code which are the repositories described on the [setup page](https://hsf-training.github.io/hsf-training-docker/setup.html) of this training.  A walkthrough of how to setup those repositories can also be found [on this video](https://www.youtube.com/watch?v=krsBupoxoNI&list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj&index=7). The "snapshot" repositories are available on GitHub ([skimmer repository](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot) and [statistics repository](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats) ). If you don't already have this setup, take a detour now and watch that video and revisit the setup page.
 
@@ -136,7 +136,7 @@ docker pull <username>/<image name>:<tag>
 {: .source}
 
 > ## Tag your docker image
-> Notice that the command above had a ``<tag>`` specified. A tag uniquely identifies a docker image. When puched to 
+> Notice that the command above had a ``<tag>`` specified. A tag uniquely identifies a docker image. When puched to
 
 
 

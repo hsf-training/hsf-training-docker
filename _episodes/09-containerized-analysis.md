@@ -38,7 +38,7 @@ To bring it all together, we can also preserve our fitting framework in its own 
 {: .challenge}
 
 > ## Exercise (5 min)
-> Now, add the automatic image building using dockerhub as we added for the skimming repo. 
+> Now, add the automatic image building using dockerhub as we added for the skimming repo.
 >
 {: .challenge}
 
