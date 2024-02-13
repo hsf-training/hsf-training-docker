@@ -38,37 +38,15 @@ To bring it all together, we can also preserve our fitting framework in its own 
 {: .challenge}
 
 > ## Exercise (5 min)
-> Now, add the same image-building stage to the `.gitlab-ci.yml` file as we added for the skimming repo. You will also need to add a `- build` stage at the top in addition to any other stages.
+> Now, add the automatic image building using dockerhub as we added for the skimming repo. 
 >
-> **Note:** I would suggest listing the `- build` stage before the other stages so it will run first. This way, even if the other stages fail for whatever reason, the image can still be built with the `- build` stage.
->
-> Once you're happy with the `.gitlab-ci.yml`, commit and push the new file to the fitting repo.
-> > ## Solution
-> > ~~~yaml
-> > stages:
-> > - build
-> > - [... any other stages]
-> >
-> > build_image:
-> >   stage: build
-> >   variables:
-> >     TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
-> >   tags:
-> >     - docker-image-build
-> >   script:
-> >     - ignore
-> >
-> > [... rest of .gitlab-ci.yml]
-> > ~~~
-> > {: .source}
-> {: .solution}
 {: .challenge}
 
 If the image-building completes successfully, you should be able to pull your fitting container, just as you did the skimming container:
 
 ~~~bash
-docker login gitlab-registry.cern.ch
-docker pull gitlab-registry.cern.ch/[repo owner's username]/[fitting repo name]:[branch name]-[shortened commit sha]
+docker login
+docker pull <username>/<image name>:<tag>
 ~~~
 {: .source}
 
@@ -99,10 +77,10 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > > ### Part 1:  Skimming
 > > ~~~bash
 > > # Pull the image for the skimming repo
-> > docker pull gitlab-registry.cern.ch/[your_partners_username]/[skimming repo name]:[branch name]-[shortened commit SHA]
+> > docker pull [your_partners_username]/[skimming repo image name]:[tag]
 > >
 > > # Start up the container and volume-mount the skimming_output directory into it
-> > docker run --rm -it -v ${PWD}/skimming_output:/skimming_output gitlab-registry.cern.ch/[your_partners_username]/[skimming repo name]:[branch name]-[shortened commit SHA] /bin/bash
+> > docker run --rm -it -v ${PWD}/skimming_output:/skimming_output [your_partners_username]/[skimming repo image name]:[tag] /bin/bash
 > >
 > > # Run the skimming code
 > > bash skim_prebuilt.sh root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced/ /skimming_output
@@ -113,10 +91,10 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > > ### Part 2: Fitting
 > > ~~~bash
 > > # Pull the image for the fitting repo
-> > docker pull gitlab-registry.cern.ch/[your_partners_username]/[fitting repo name]:[branch name]-[shortened commit SHA]
+> > docker pull [your_partners_username]/[fitting repo iamge name]:[tag]
 > >
 > > # Start up the container and volume-mount the skimming_output and fitting_output directories into it
-> > docker run --rm -it -v ${PWD}/skimming_output:/skimming_output -v ${PWD}/fitting_output:/fitting_output gitlab-registry.cern.ch/[your_partners_username]/[fitting repo name]:[branch name]-[shortened commit SHA] /bin/bash
+> > docker run --rm -it -v ${PWD}/skimming_output:/skimming_output -v ${PWD}/fitting_output:/fitting_output [your_partners_username]/[fitting repo image name]:[tag] /bin/bash
 > >
 > > # Run the fitting code
 > > bash fit.sh /skimming_output/histograms.root /fitting_output
