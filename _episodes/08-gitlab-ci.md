@@ -5,7 +5,7 @@ exercises: 25
 questions:
 - "What do I need to do to enable this automated environment preservation on github?"
 objectives:
-- "Learn how to werite a Dockerfile to containerize your analysis code and environment."
+- "Learn how to write a Dockerfile to containerize your analysis code and environment."
 - "Understand how to use github + dockerhub to enable automatic environment preservation."
 keypoints:
 - "Combination of github and dockerhub allows you to automatically build the docker containers every time you push to a repository."
