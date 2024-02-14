@@ -66,7 +66,7 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > mkdir fitting_output
 > ~~~
 >
-> Find a partner and pull the image they've built for their skimming repo from the gitlab registry. Launch a container using your partner's image. Try to run the analysis code to produce the `histogram.root` file that will get input to the fitting repo, using the `skim_prebuilt.sh` script we created in the previous lesson for the first skimming step. You can follow the skimming instructions in [step 1](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2/blob/master/README.md#step-1-skimming) and [step 2](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2/blob/master/README.md#step-2-histograms) of the README.
+> Find a partner and pull the image they've built for their skimming repo. Launch a container using your partner's image. Try to run the analysis code to produce the `histogram.root` file that will get input to the fitting repo, using the `skim_prebuilt.sh` script we created in the previous lesson for the first skimming step. You can follow the skimming instructions in [step 3](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/03-skimming/index.html) and [step 4](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/04-histograms/index.html) of the CMS OpenData HTauTau Analysis Payload.
 >
 > **Note:** We'll need to pass the output from the skimming stage to the fitting stage. To enable this, you can volume mount the `skimming_output` directory into the container. Then, as long as you save the skimming output to the volume-mounted location in the container, it will also be available locally under `skimming_output`.
 >
