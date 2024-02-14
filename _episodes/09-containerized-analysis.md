@@ -91,7 +91,7 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > > ### Part 2: Fitting
 > > ~~~bash
 > > # Pull the image for the fitting repo
-> > docker pull [your_partners_username]/[fitting repo iamge name]:[tag]
+> > docker pull [your_partners_username]/[fitting repo image name]:[tag]
 > >
 > > # Start up the container and volume-mount the skimming_output and fitting_output directories into it
 > > docker run --rm -it -v ${PWD}/skimming_output:/skimming_output -v ${PWD}/fitting_output:/fitting_output [your_partners_username]/[fitting repo image name]:[tag] /bin/bash
