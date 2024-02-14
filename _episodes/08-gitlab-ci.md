@@ -136,7 +136,7 @@ docker pull <username>/<image name>:<tag>
 {: .source}
 
 > ## Tag your docker image
-> Notice that the command above had a ``<tag>`` specified. A tag uniquely identifies a docker image. When puched to
+> Notice that the command above had a ``<tag>`` specified. A tag uniquely identifies a docker image and is usually used to identify different versions of the same image. The tag name has to be written with ASCII symbols.
 
 
 
