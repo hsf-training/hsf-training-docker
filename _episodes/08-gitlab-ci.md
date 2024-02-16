@@ -1,21 +1,19 @@
 ---
-title: "Gitlab CI for Automated Environment Preservation"
+title: "Github and Dockerhub for Automated Environment Preservation"
 teaching: 20
 exercises: 25
 questions:
-- "How can gitlab CI and docker work together to automatically preserve my analysis environment?"
-- "What do I need to add to my gitlab repo(s) to enable this automated environment preservation?"
+- "What do I need to do to enable this automated environment preservation on github?"
 objectives:
 - "Learn how to write a Dockerfile to containerize your analysis code and environment."
-- "Understand what needs to be added to your `.gitlab-ci.yml` file to keep the containerized environment continuously up to date for your repo."
+- "Understand how to use github + dockerhub to enable automatic environment preservation."
 keypoints:
-- "gitlab CI allows you to re-build a container that encapsulates the environment each time new commits are pushed to the analysis repo."
-- "This functionality is enabled by adding a Dockerfile to your repo that specifies how to build the environment, and an image-building stage to the `.gitlab-ci.yml` file."
+- "Combination of github and dockerhub allows you to automatically build the docker containers every time you push to a repository."
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/YmLmWm3RNwg?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
-In this section, we learn how to combine the forces of docker and gitlab CI to automatically keep your analysis environment up-to-date. This is accomplished by adding an extra stage to the CI pipeline for each analysis repo, which builds a container image that includes all aspects of the environment needed to run the code.
+In this section, we learn how to combine the forces of dockerhub and github to automatically keep your analysis environment up-to-date.
 
 We will be doing this using the [CMS OpenData HTauTau Analysis Payload](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/). Specifically, we will be using two "snapshots" of this code which are the repositories described on the [setup page](https://hsf-training.github.io/hsf-training-docker/setup.html) of this training.  A walkthrough of how to setup those repositories can also be found [on this video](https://www.youtube.com/watch?v=krsBupoxoNI&list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj&index=7). The "snapshot" repositories are available on GitHub ([skimmer repository](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot) and [statistics repository](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats) ). If you don't already have this setup, take a detour now and watch that video and revisit the setup page.
 
@@ -103,7 +101,7 @@ As we've seen, all these components can be encoded in a Dockerfile. So the first
 > {: .source}
 {: .callout}
 
-## Add docker building to your gitlab CI
+## Automatic image building with github + dockerhub
 
 Now, you can proceed with updating your `.gitlab-ci.yml` to actually build the container during the CI/CD pipeline and store it in the gitlab registry. You can later pull it from the gitlab registry just as you would any other container, but in this case using your CERN credentials.
 
@@ -190,17 +188,20 @@ In the `script` of this job there are three components :
 
 If the job runs successfully, then in the same way as described for [gitlab.cern.ch](https://gitlab.cern.ch) in the previous section, you will be able to find the `Container Registry` on the left hand icon menu of your gitlab.com web browser and navigate to the image that was pushed to the registry.  Et voila, c'est fini, exactement comme au CERN!
 
-### Alternative: GitHub.com
-
 You can also build Docker images on [github.com](https://github.com) and push them to the GitHub Container Registry ([ghcr.io](https://ghcr.io)) with the help of [GitHub Actions](https://github.com/features/actions).
 The bonus episode [Building and deploying a Docker container to Github Packages](/hsf-training-docker/12-bonus/index.html) explains how to do so.
+
+> ## Tag your docker image
+> Notice that the command above had a ``<tag>`` specified. A tag uniquely identifies a docker image and is usually used to identify different versions of the same image. The tag name has to be written with ASCII symbols.
+
+
 
 ## An updated version of `skim.sh`
 
 > ## Exercise (10 mins)
 > Since we're now taking care of building the skimming executable during image building, let's make an updated version of `skim.sh` that excludes the step of building the `skim` executable.
 >
-> The updated script should just directly run the pre-existing `skim` executable on the input samples. You could call it eg. `skim_prebuilt.sh`. We'll be using this updated script in an exercise later on in which we'll be going through the full analysis in containers launched from the images we create with gitlab CI.
+> The updated script should just directly run the pre-existing `skim` executable on the input samples. You could call it eg. `skim_prebuilt.sh`. We'll be using this updated script in an exercise later on in which we'll be going through the full analysis in containers launched from the images.
 >
 > Once you're happy with the script, you can commit and push it to the repo.
 >
