@@ -10,8 +10,8 @@ objectives:
 - "List local images"
 - "Introduce image tags"
 keypoints:
-- "Pull images with `docker pull <image-id>`"
-- "List all images on the computer and other information with `docker images`"
+- "Pull images with `podman pull <image-id>`"
+- "List all images on the computer and other information with `podman images`"
 - "Image tags distinguish releases or version and are appended to the image name with a colon"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/JihkukeoNVs?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -22,30 +22,42 @@ Much like how GitHub allows for web hosting and searching for code, the [Docker 
 image registry allows the same for Docker images.
 Hosting and building of images is [free for public repositories][docker-hub-billing] and
 allows for downloading images as they are needed.
+
 Additionally, through integrations with GitHub and Bitbucket, Docker Hub repositories can
 be linked against Git repositories so that
 [automated builds of Dockerfiles on Docker Hub][docker-hub-builds] will be triggered by
-pushes to repositories.
+pushes to repositories. However, at this moment enabling such a feature requires a Pro (paid) account.
+There are other ways of doing this, such as using GitLab/GitHub CI/CD, but that's beyond the scope of this training module.
+
+> ## Docker Hub and Podman
+>
+> Both Docker and Podman use OCI (Open Container Initiative) compliant images, so you can use the same images with both tools.
+> It means Podman can pull and run images from Docker Hub.
+>
+> By default, Podman pull pulls an image from Docker Hub if a registry is not specified in the command line argument.
+{: .callout}
 
 # Pulling Images
 
-To begin with we're going to [pull][docker-docs-pull] down the Docker image we're going
+To begin with we're going to [pull][podman-docs-pull] down the image we're going
 to be working in for the tutorial (note: if you did all the docker pulls in the setup instructions, this image will already be on your machine, in which case docker should notice it's there and not attempt to re-pull it unless it's changed in the meantime):
 
 ~~~bash
-docker pull matthewfeickert/intro-to-docker
+podman pull matthewfeickert/intro-to-docker
 ~~~
 {: .source}
 
-> ## Permission errors
-> If you run into a permission error, use `sudo docker run ...` as a quick fix.
-> To fix this for the future (**recommended**), see [the docker docs](https://docs.docker.com/install/linux/linux-postinstall/).
+> ## Connection errors
+> If using Podman or Docker in a non-Linux machine you run into an error like `Error: unable to connect to Podman`,
+> make sure that the Podman or Docker desktop application is running.
+>
+> Remember that in such environments, Podman or Docker use a virtual machine to run the containers.
 {: .callout}
 
-and then [list the images][docker-docs-images] that we have available to us locally
+and then [list the images][podman-docs-images] that we have available to us locally
 
 ~~~bash
-docker images
+podman images
 ~~~
 {: .source}
 
@@ -53,7 +65,7 @@ If you have many images and want to get information on a particular one you can 
 filter, such as the repository name
 
 ~~~bash
-docker images matthewfeickert/intro-to-docker
+podman images matthewfeickert/intro-to-docker
 ~~~
 {: .source}
 
@@ -66,7 +78,7 @@ matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 mont
 or more explicitly
 
 ~~~bash
-docker images --filter=reference="matthewfeickert/intro-to-docker"
+podman images --filter=reference="matthewfeickert/intro-to-docker"
 ~~~
 {: .source}
 
@@ -80,11 +92,11 @@ You can see here that there is the `TAG` field associated with the
 `matthewfeickert/intro-to-docker` image.
 Tags are a way of further specifying different versions of the same image.
 As an example, let's pull the buster release tag of the
-[Debian image](https://hub.docker.com/_/debian) (again, if it was already pulled during setup, docker won't attempt to re-pull it unless it's changed since last pulled).
+[Debian image](https://hub.docker.com/_/debian) (again, if it was already pulled during setup, podman won't attempt to re-pull it unless it's changed since last pulled).
 
 ~~~bash
-docker pull debian:buster
-docker images debian
+podman pull debian:buster
+podman images debian
 ~~~
 {: .source}
 
@@ -100,23 +112,23 @@ debian              buster              00bf7fdd8baf        5 weeks ago         
 ~~~
 {: .output}
 
+Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-images] for more information on these commands.
+
 > ## Pulling Python
 >
-> Pull the image python3.7-slim for Python 3.7 and then list all `python` images along with
-> the `matthewfeickert/intro-to-docker` image
+> Pull the image python3.7-slim for Python 3.7 and then list all `python` images on your computer.
 >
 > > ## Solution
 > >
 > > ~~~bash
-> > docker pull python:3.7-slim
-> > docker images --filter=reference="matthewfeickert/intro-to-docker" --filter=reference="python"
+> > podman pull python:3.7-slim
+> > podman images --filter=reference="python"
 > > ~~~
 > > {: .source}
 > >
 > > ~~~
 > > REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
 > > python                            3.7                 e440e2151380        23 hours ago        918MB
-> > matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 months ago        1.49GB
 > > ~~~
 > > {: .output}
 > {: .solution}
@@ -125,7 +137,7 @@ debian              buster              00bf7fdd8baf        5 weeks ago         
 [docker-hub]: https://hub.docker.com/
 [docker-hub-billing]: https://hub.docker.com/billing-plans/
 [docker-hub-builds]: https://docs.docker.com/docker-hub/builds/
-[docker-docs-pull]: https://docs.docker.com/engine/reference/commandline/pull/
-[docker-docs-images]: https://docs.docker.com/engine/reference/commandline/images/
+[podman-docs-pull]: https://docs.podman.io/en/latest/markdown/podman-pull.1.html
+[podman-docs-images]: https://docs.podman.io/en/stable/markdown/podman-images.1.html
 
 {% include links.md %}

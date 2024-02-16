@@ -12,21 +12,21 @@ objectives:
 - "Understand container state"
 - "Stop and restart containers"
 keypoints:
-- "Run containers with `docker run <image-id>`"
-- "Monitor containers with `docker ps`"
+- "Run containers with `podman run <image-id>`"
+- "Monitor containers with `podman ps`"
 - "Exit interactive sessions using the `exit` command"
-- "Restart stopped containers with `docker start`"
+- "Restart stopped containers with `podman start`"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/UejGBfppmZY?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-To use a Docker image as a particular instance on a host machine you [run][docker-docs-run]
+To use a image as a particular instance on a host machine you [run][podman-docks-run]
 it as a container.
-You can run in either a [detached or foreground][docker-docs-run-detached] (interactive) mode.
+You can run in either a [detached or foreground][podman-docks-run-detached] (interactive) mode.
 
 Run the image we pulled as a container with an interactive bash terminal:
 
 ~~~bash
-docker run -it matthewfeickert/intro-to-docker:latest /bin/bash
+podman run -it matthewfeickert/intro-to-docker:latest /bin/bash
 ~~~
 {: .source}
 
@@ -65,10 +65,11 @@ cat /etc/os-release
 {: .source}
 
 ~~~
-PRETTY_NAME="Debian GNU/Linux 9 (stretch)"
+PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
 NAME="Debian GNU/Linux"
-VERSION_ID="9"
-VERSION="9 (stretch)"
+VERSION_ID="11"
+VERSION="11 (bullseye)"
+VERSION_CODENAME=bullseye
 ID=debian
 HOME_URL="https://www.debian.org/"
 SUPPORT_URL="https://www.debian.org/support"
@@ -79,10 +80,10 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 ## Monitoring Containers
 
 Open up a new terminal tab on the host machine and
-[list the containers that are currently running][docker-docs-ps]
+[list the containers that are currently running][podman-docks-ps]
 
 ~~~bash
-docker ps
+podman ps
 ~~~
 {: .source}
 
@@ -93,17 +94,17 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 {: .output}
 
 Notice that the name of your container is some randomly generated name.
-To make the name more helpful, [rename][docker-docs-rename] the running container
+To make the name more helpful, [rename][podman-docks-rename] the running container
 
 ~~~bash
-docker rename <CONTAINER ID> my-example
+podman rename <CONTAINER ID> my-example
 ~~~
 {: .source}
 
 and then verify it has been renamed
 
 ~~~bash
-docker ps
+podman ps
 ~~~
 {: .source}
 
@@ -118,7 +119,7 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 >You can also identify containers to rename by their current name
 >
 >~~~bash
->docker rename <NAME> my-example
+>podman rename <NAME> my-example
 >~~~
 >{: .source}
 {: .callout}
@@ -126,7 +127,7 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 Alternatively, you can also give the container a name at creation, using the `--name ` option:
 
 ~~~bash
-docker run -it --name my-fancy-name matthewfeickert/intro-to-docker:latest /bin/bash
+podman run -it --name my-fancy-name matthewfeickert/intro-to-docker:latest /bin/bash
 ~~~
 {: .source}
 
@@ -153,7 +154,7 @@ You are returned to your shell.
 If you list the containers you will notice that none are running
 
 ~~~bash
-docker ps
+podman ps
 ~~~
 {: .source}
 
@@ -165,7 +166,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 but you can see all containers that have been run and not removed with
 
 ~~~bash
-docker ps -a
+podman ps -a
 ~~~
 {: .source}
 
@@ -175,24 +176,24 @@ CONTAINER ID        IMAGE         COMMAND             CREATED            STATUS 
 ~~~
 {: .output}
 
-To restart your exited Docker container [start][docker-docs-start] it again and then
-[attach][docker-docs-attach] it interactively to your shell
+To restart your exited container [start][podman-docks-start] it again and then
+[attach][podman-docks-attach] it interactively to your shell
 
 ~~~bash
-docker start <CONTAINER ID>
-docker attach <CONTAINER ID>
+podman start <CONTAINER ID>
+podman attach <CONTAINER ID>
 ~~~
 {: .source}
 
 > ## `exec` command
-> The [attach][docker-docs-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with.
+> The [attach][podman-docks-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with.
 >
-> In case you'd like some more flexibility, the [exec][docker-docs-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc.
+> In case you'd like some more flexibility, the [exec][podman-docks-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc.
 >
 > For example, the `exec` equivalent to `attach`ing in our case would look like:
 > ~~~bash
-> docker start <CONTAINER ID>
-> docker exec -it <CONTAINER ID> /bin/bash
+> podman start <CONTAINER ID>
+> podman exec -it <CONTAINER ID> /bin/bash
 > ~~~
 {: .callout}
 
@@ -201,8 +202,8 @@ docker attach <CONTAINER ID>
 >You can also start and attach containers by their name
 >
 >~~~bash
->docker start <NAME>
->docker attach <NAME>
+>podman start <NAME>
+>podman attach <NAME>
 >~~~
 >{: .source}
 {: .callout}
@@ -221,28 +222,26 @@ test.txt
 ~~~
 {: .output}
 
-So this shows us that we can exit Docker containers for arbitrary lengths of time and then
+So this shows us that we can exit containers for arbitrary lengths of time and then
 return to our working environment inside of them as desired.
 
 >## Clean up a container
 >
->If you want a container to be [cleaned up][docker-docs-run-clean-up] &mdash; that is
+>If you want a container to be [cleaned up][podman-docks-run-clean-up] &mdash; that is
 >deleted &mdash; after you exit it then run with the `--rm` option flag
 >
 >~~~bash
->docker run --rm -it <IMAGE> /bin/bash
+>podman run --rm -it <IMAGE> /bin/bash
 >~~~
 >{: .source}
 {: .callout}
 
-[docker-docs-run]: https://docs.docker.com/engine/reference/run/
-[docker-docs-run-detached]: https://docs.docker.com/engine/reference/run/#detached-vs-foreground
-[docker-docs-run-clean-up]: https://docs.docker.com/engine/reference/run/#clean-up---rm
+[podman-docks-run]: https://docs.podman.io/en/stable/markdown/podman-run.1.html
 [docker-hub-python]: https://github.com/docker-library/python
-[docker-docs-ps]: https://docs.docker.com/engine/reference/commandline/ps/
-[docker-docs-rename]: https://docs.docker.com/engine/reference/commandline/rename/
-[docker-docs-start]: https://docs.docker.com/engine/reference/commandline/start/
-[docker-docs-attach]: https://docs.docker.com/engine/reference/commandline/attach/
-[docker-docs-exec]: https://docs.docker.com/engine/reference/commandline/exec/
+[podman-docks-ps]: https://docs.podman.io/en/stable/markdown/podman-ps.1.html
+[podman-docks-rename]: https://docs.docker.com/engine/reference/commandline/rename/
+[podman-docks-start]: https://docs.docker.com/engine/reference/commandline/start/
+[podman-docks-attach]: https://docs.docker.com/engine/reference/commandline/attach/
+[podman-docks-exec]: https://docs.docker.com/engine/reference/commandline/exec/
 
 {% include links.md %}
