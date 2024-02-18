@@ -20,7 +20,7 @@ keypoints:
 
 Much like how GitHub allows for web hosting and searching for code, the [Docker Hub][docker-hub]
 image registry allows the same for Docker images.
-Hosting and building of images is [free for public repositories][docker-hub-billing] and
+Hosting images is [free for public repositories][docker-hub-billing] and
 allows for downloading images as they are needed.
 
 Additionally, through integrations with GitHub and Bitbucket, Docker Hub repositories can
@@ -135,7 +135,7 @@ Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-ima
 {: .challenge}
 
 [docker-hub]: https://hub.docker.com/
-[docker-hub-billing]: https://hub.docker.com/billing-plans/
+[docker-hub-billing]: https://www.docker.com/pricing/
 [docker-hub-builds]: https://docs.docker.com/docker-hub/builds/
 [podman-docs-pull]: https://docs.podman.io/en/latest/markdown/podman-pull.1.html
 [podman-docs-images]: https://docs.podman.io/en/stable/markdown/podman-images.1.html
