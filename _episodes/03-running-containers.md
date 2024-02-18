@@ -77,6 +77,16 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 ~~~
 {: .output}
 
+> ## Working directory
+>
+>You may be wondering why you are at `/home/docker/data` inside the container.
+>This is the working directory that was set for the image.
+>
+> In the next chapters we will see how to build your own images
+> and set parameters as the working directory.
+>{: .source}
+{: .callout}
+
 ## Monitoring Containers
 
 Open up a new terminal tab on the host machine and
