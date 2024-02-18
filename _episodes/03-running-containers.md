@@ -21,7 +21,7 @@ keypoints:
 
 To use a image as a particular instance on a host machine you [run][podman-docks-run]
 it as a container.
-You can run in either a [detached or foreground][podman-docks-run-detached] (interactive) mode.
+You can run in either a detached or foreground (interactive) mode.
 
 Run the image we pulled as a container with an interactive bash terminal:
 
