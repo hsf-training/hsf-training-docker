@@ -40,6 +40,36 @@ To bring it all together, we can also preserve our fitting framework in its own 
 > ## Exercise (5 min)
 > Now, add the automatic image building using dockerhub as we added for the skimming repo.
 >
+> **Note:** I would suggest listing the `- build` stage before the other stages so it will run first. This way, even if the other stages fail for whatever reason, the image can still be built with the `- build` stage.
+>
+> Once you're happy with the `.gitlab-ci.yml`, commit and push the new file to the fitting repo.
+> > ## Solution
+> > ~~~yaml
+> > stages:
+> > - build
+> > - [... any other stages]
+> >
+> > build_image:
+> >   stage: build
+> >   variables:
+> >     IMAGE_DESTINATION: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+> >   image:
+> >     # The kaniko debug image is recommended because it has a shell, and a shell is required for an image to be used with GitLab CI/CD.
+> >     name: gcr.io/kaniko-project/executor:debug
+> >     entrypoint: [""]
+> >   script:
+> >     # Prepare Kaniko configuration file
+> >     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+> >     # Build and push the image from the Dockerfile at the root of the project.
+> >     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE_DESTINATION
+> >     # Print the full registry path of the pushed image
+> >     - echo "Image pushed successfully to ${IMAGE_DESTINATION}"
+> >
+> > [... rest of .gitlab-ci.yml]
+> > ~~~
+> > {: .source}
+> {: .solution}
+
 {: .challenge}
 
 If the image-building completes successfully, you should be able to pull your fitting container, just as you did the skimming container:
@@ -66,12 +96,13 @@ Now that we've preserved our full analysis environment in docker images, let's t
 > mkdir fitting_output
 > ~~~
 >
-> Find a partner and pull the image they've built for their skimming repo. Launch a container using your partner's image. Try to run the analysis code to produce the `histogram.root` file that will get input to the fitting repo, using the `skim_prebuilt.sh` script we created in the previous lesson for the first skimming step. You can follow the skimming instructions in [step 3](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/03-skimming/index.html) and [step 4](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/04-histograms/index.html) of the CMS OpenData HTauTau Analysis Payload.
+
+> Find a partner and pull the image they've built for their skimming repo from the gitlab registry. Launch a container using your partner's image. Try to run the analysis code to produce the `histogram.root` file that will get input to the fitting repo, using the `skim_prebuilt.sh` script we created in the previous lesson for the first skimming step. You can follow the skimming instructions in [step 1](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot#step-1-skimming) and [step 2](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot#step-2-histograms) of the README.
 >
 > **Note:** We'll need to pass the output from the skimming stage to the fitting stage. To enable this, you can volume mount the `skimming_output` directory into the container. Then, as long as you save the skimming output to the volume-mounted location in the container, it will also be available locally under `skimming_output`.
 >
 > ### Part 2: Fitting
-> Now, pull your partner's fitting image and use it to produce the final fit result. Remember to volume-mount the `skimming_output` and `fitting_output` so the container has access to both. At the end, the `fitting_output` directory on your local machine should contain the final fit results. You can follow the instructions in [step 4](https://gitlab.cern.ch/awesome-workshop/awesome-analysis-eventselection-stage2/blob/master/README.md#step-4-fit) of the README.
+> Now, pull your partner's fitting image and use it to produce the final fit result. Remember to volume-mount the `skimming_output` and `fitting_output` so the container has access to both. At the end, the `fitting_output` directory on your local machine should contain the final fit results. You can follow the instructions in [step 4](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot#step-4-fit) of the README.
 >
 > > ## Solution
 > > ### Part 1:  Skimming

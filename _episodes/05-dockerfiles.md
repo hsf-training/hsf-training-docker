@@ -21,7 +21,7 @@ Docker images are built through the Docker engine by reading the instructions fr
 These text based documents provide the instructions through an API similar to the Linux
 operating system commands to execute commands during the build.
 The [`Dockerfile` for the example image][example-Dockerfile] being used is an example of
-some simple extensions of the [official Python 3.6.8 Docker image][python-docker-image].
+some simple extensions of the [official Python 3.9 Docker image][python-docker-image] based on Debian Bullseye (`python:3.9-bullseye`).
 
 As a very simple example of extending the example image into a new image create a `Dockerfile`
 on your local machine
@@ -113,8 +113,8 @@ python3 -c "import sklearn as sk; print(sk)"
                 ||----w |
                 ||     ||
 
-scikit-learn       0.21.3
-<module 'sklearn' from '/usr/local/lib/python3.6/site-packages/sklearn/__init__.py'>
+scikit-learn        1.3.1
+<module 'sklearn' from '/usr/local/lib/python3.9/site-packages/sklearn/__init__.py'>
 ~~~
 {: .output}
 
@@ -241,9 +241,9 @@ way to bring them into the Docker build.
 
 
 [docker-docs-builder]: https://docs.docker.com/engine/reference/builder/
-[example-Dockerfile]: https://github.com/matthewfeickert/Intro-to-Docker/blob/master/Dockerfile
+[example-Dockerfile]: https://github.com/matthewfeickert/intro-to-docker/blob/feat/update-2021-bootcamp/docker/Dockerfile
 [python-docker-image]: https://hub.docker.com/_/python
-[cowsay]: https://packages.debian.org/jessie/cowsay
+[cowsay]: https://packages.debian.org/bullseye/cowsay
 [scikit-learn]: https://scikit-learn.org
 [docker-docs-build]: https://docs.docker.com/engine/reference/commandline/build/
 [docker-docs-ARG]: https://docs.docker.com/engine/reference/builder/#arg
