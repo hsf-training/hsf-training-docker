@@ -81,4 +81,18 @@ The full analysis itself can be found [here](https://github.com/hsf-training/hsf
 
 It is best if you work through these lessons before the tutorial on Containers, but not mandatory.
 
+* **<font color="red">First and foremost:</font>** To fork these repos, open the  [GitLab project creation page](https://gitlab.cern.ch/projects/new) and then select _Import project_ -> _Repository by URL_. Please make sure you've forked the starter repos into your own namespace before cloning and making commits to them, otherwise you'll run into permissions issues when you try to push your commits! Also remember to set the visibility level to _Public_.
+* Regarding authentication with ``kinit``:
+  * If you are from CERN and use gitlab.cern.ch: Remember to add your CERN credentials as CI/CD variables to
+    both repos for the `kinit` authentication in the `.gitlab-ci.yml` files to work.
+    To do so, go to _Settings_ -> _CI/CD_ -> _Variables_ and create two new variables:
+     * `CERN_USER` should contain your CERN username
+     * `SERVICE_PASS` should contain your password.
+  * Else, you can remove the ``kinit`` line from `.gitlab-ci.yml` and use the public EOS datasets:
+    * `root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced` for the skimming repo.
+    * `root://eospublic.cern.ch//eos/opendata/cms/upload/apb2023/histograms.root` for the fitting repo.
+* For the fitting code repo, the [fit_simple](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats/blob/master/.gitlab-ci.yml#L5) step in `.gitlab-ci.yml` expects to receive the file `histograms.root` produced by the skimming code. In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://eospublichttp.cern.ch//eos/opendata/cms/upload/apb2023/histograms.root). In any case you can:
+  * use the public EOS datasets mentioned above.
+  * If you are from CERN, you can copy the downloaded file to your personal eos user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`).
+
 {% include links.md %}
