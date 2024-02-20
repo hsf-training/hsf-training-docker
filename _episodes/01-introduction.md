@@ -35,7 +35,7 @@ As discrete processes containers take up only as much memory as necessary, makin
 very lightweight and fast to spin up to run:
 
 <figure>
-<img src="../fig/DockerVM.png" alt="missing" style="width:800px"/>
+<img src="../fig/DockerVM.png" alt="Container-based architecture vs virtual machines" style="width:800px"/>
   <figcaption>
     <i>Container-based architecture vs virtual machines</i>
   </figcaption>
@@ -44,7 +44,7 @@ very lightweight and fast to spin up to run:
 > ## Containers on Windows and macOS
 >
 > Running containers in systems other than Linux, like macOS and Windows, require a virtual machine on the background to emulate the Linux kernel.
-> Still, the containers are very lightweight and faster to spin up than deploy virtual machines per application.
+> Still, the containers are very lightweight and faster to spin up than to deploy one virtual machine for each application.
 >
 > Most containerization tools provide a seamless experience for the user, abstracting the virtual machine and making it transparent to the user.
 > Just be aware that there is an additional layer between the containers and the host machine.
@@ -52,7 +52,7 @@ very lightweight and fast to spin up to run:
 
 # Docker
 
-<img src="../fig/Docker_logo.png" width="200" alt="Docker logo" />
+<img src="../fig/Docker_logo.png" width="200" alt="Podman logo" />
 
 Docker is perhaps the most popular containerization tool these days, particularly in industry.
 It is a platform for developing, shipping, and running applications in containers.
@@ -98,7 +98,7 @@ Across the tutorial, we will use Podman as the containerization tool, but
 >
 > Apptainer (formerly known as Singularity) is another containerization technology. In particular is used widely in HPC, and it is gaining rapid adoption on High Energy and Nuclear Physics, so you may have need to familiarize yourself with it at some point.
 >
-> To learn more about Apptainer, see for example the [HSF Training Singularity Module](https://github.com/hsf-training/hsf-training-singularity-webpage).
+> To learn more about Apptainer, see the [HSF Training Module "Introduction to Apptainer/Singularity"](https://github.com/hsf-training/hsf-training-singularity-webpage) which includes also [more details about the difference between Apptainer and Docker](https://hsf-training.github.io/hsf-training-singularity-webpage/01-introduction/index.html).
 >
 {: .callout}
 
