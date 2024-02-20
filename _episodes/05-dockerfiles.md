@@ -174,7 +174,7 @@ podman tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 > >REPOSITORY                TAG         IMAGE ID      CREATED      SIZE
 > >localhost/extend-example  my-tag      c24a757fabe7  9 hours ago  2.2 GB
 > >localhost/extend-example  latest      c24a757fabe7  9 hours ago  2.2 GB
-
+>>
 > > ~~~
 > > {: .output}
 > {: .solution}

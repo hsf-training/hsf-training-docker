@@ -83,14 +83,14 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 >This is the working directory that was set for the image.
 >
 > In the next chapters we will see how to build your own images
-> and set parameters as the working directory.
+> and set parameters such as the working directory.
 >{: .source}
 {: .callout}
 
 ## Monitoring Containers
 
 Open up a new terminal tab on the host machine and
-[list the containers that are currently running][podman-docks-ps]
+[list the containers that are currently running][podman-docs-ps]
 
 ~~~bash
 podman ps
@@ -104,7 +104,7 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 {: .output}
 
 Notice that the name of your container is some randomly generated name.
-To make the name more helpful, [rename][podman-docks-rename] the running container
+To make the name more helpful, [rename][podman-docs-rename] the running container
 
 ~~~bash
 podman rename <CONTAINER ID> my-example
@@ -186,8 +186,8 @@ CONTAINER ID        IMAGE         COMMAND             CREATED            STATUS 
 ~~~
 {: .output}
 
-To restart your exited container [start][podman-docks-start] it again and then
-[attach][podman-docks-attach] it interactively to your shell
+To restart your exited container [start][podman-docs-start] it again and then
+[attach][podman-docs-attach] it interactively to your shell
 
 ~~~bash
 podman start <CONTAINER ID>
@@ -196,9 +196,9 @@ podman attach <CONTAINER ID>
 {: .source}
 
 > ## `exec` command
-> The [attach][podman-docks-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with.
+> The [attach][podman-docs-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with.
 >
-> In case you'd like some more flexibility, the [exec][podman-docks-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc.
+> In case you'd like some more flexibility, the [exec][podman-docs-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc.
 >
 > For example, the `exec` equivalent to `attach`ing in our case would look like:
 > ~~~bash
@@ -237,7 +237,7 @@ return to our working environment inside of them as desired.
 
 >## Clean up a container
 >
->If you want a container to be [cleaned up][podman-docks-run-clean-up] &mdash; that is
+>If you want a container to be [cleaned up][podman-docs-run-clean-up] &mdash; that is,
 >deleted &mdash; after you exit it then run with the `--rm` option flag
 >
 >~~~bash
@@ -246,12 +246,13 @@ return to our working environment inside of them as desired.
 >{: .source}
 {: .callout}
 
-[podman-docks-run]: https://docs.podman.io/en/stable/markdown/podman-run.1.html
+[podman-docs-run]: https://docs.podman.io/en/stable/markdown/podman-run.1.html
 [docker-hub-python]: https://github.com/docker-library/python
-[podman-docks-ps]: https://docs.podman.io/en/stable/markdown/podman-ps.1.html
-[podman-docks-rename]: https://docs.docker.com/engine/reference/commandline/rename/
-[podman-docks-start]: https://docs.docker.com/engine/reference/commandline/start/
-[podman-docks-attach]: https://docs.docker.com/engine/reference/commandline/attach/
-[podman-docks-exec]: https://docs.docker.com/engine/reference/commandline/exec/
+[podman-docs-ps]: https://docs.podman.io/en/stable/markdown/podman-ps.1.html
+[podman-docs-rename]: https://docs.docker.com/engine/reference/commandline/rename/
+[podman-docs-start]: https://docs.docker.com/engine/reference/commandline/start/
+[podman-docs-attach]: https://docs.docker.com/engine/reference/commandline/attach/
+[podman-docs-exec]: https://docs.docker.com/engine/reference/commandline/exec/
+[podman-docs-run-clean-up]: https://docs.podman.io/en/stable/markdown/podman-run.1.html#rm
 
 {% include links.md %}

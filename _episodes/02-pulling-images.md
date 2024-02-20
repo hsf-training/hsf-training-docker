@@ -26,7 +26,8 @@ allows for downloading images as they are needed.
 Additionally, through integrations with GitHub and Bitbucket, Docker Hub repositories can
 be linked against Git repositories so that
 [automated builds of Dockerfiles on Docker Hub][docker-hub-builds] will be triggered by
-pushes to repositories. However, at this moment enabling such a feature requires a Pro (paid) account.
+pushes to repositories. However, at this moment enabling such a feature requires a Pro (paid) account
+or joining the [Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/).
 There are other ways of doing this, such as using GitLab/GitHub CI/CD, but that's beyond the scope of this training module.
 
 > ## Docker Hub and Podman
@@ -40,7 +41,7 @@ There are other ways of doing this, such as using GitLab/GitHub CI/CD, but that'
 # Pulling Images
 
 To begin with we're going to [pull][podman-docs-pull] down the image we're going
-to be working in for the tutorial (note: if you did all the docker pulls in the setup instructions, this image will already be on your machine, in which case docker should notice it's there and not attempt to re-pull it unless it's changed in the meantime):
+to be working in for the tutorial (note: if you did all the docker pulls in the setup instructions, this image will already be on your machine, in which case podman should notice it's there and not attempt to re-pull it unless it's changed in the meantime):
 
 ~~~bash
 podman pull matthewfeickert/intro-to-docker

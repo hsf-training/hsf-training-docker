@@ -43,7 +43,7 @@ echo "This was written inside the Container" >> io_example.txt
 >chmod a+w io_example.txt  # add write permissions for all users
 >~~~
 >{: .source}
->And continue from the ``docker cp ...`` command above.
+>And continue from the ``podman cp ...`` command above.
 {: .callout}
 
 ~~~
