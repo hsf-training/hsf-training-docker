@@ -32,7 +32,7 @@ and then from the container check and modify it in some way
 pwd
 ls
 cat io_example.txt
-echo "This was written inside the Container" >> io_example.txt
+echo "This was written inside the container" >> io_example.txt
 ~~~
 {: .source}
 
@@ -69,7 +69,7 @@ cat io_example.txt
 
 ~~~
 This was written on local host
-This was written inside the Container
+This was written inside the container
 ~~~
 {: .output}
 

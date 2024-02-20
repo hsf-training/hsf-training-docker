@@ -35,7 +35,7 @@ There are other ways of doing this, such as using GitLab/GitHub CI/CD, but that'
 > Both Docker and Podman use OCI (Open Container Initiative) compliant images, so you can use the same images with both tools.
 > It means Podman can pull and run images from Docker Hub.
 >
-> By default, Podman pull pulls an image from Docker Hub if a registry is not specified in the command line argument.
+> By default, `podman pull` pulls an image from Docker Hub if a registry is not specified in the command line argument.
 {: .callout}
 
 # Pulling Images
@@ -117,26 +117,33 @@ Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-ima
 
 > ## Pulling Python
 >
-> Pull the image python3.7-slim for Python 3.7 and then list all `python` images on your computer.
+> Pull the image python:3.9-slim for Python 3.9 and then list all `python` images on your computer.
+>
+> See [the Python Official Images][docker-hub-python] to find the available tags and
+> read about the image variants. What `'slim'` means?
 >
 > > ## Solution
 > >
 > > ~~~bash
-> > podman pull python:3.7-slim
+> > podman pull python:3.9-slim
 > > podman images --filter=reference="python"
 > > ~~~
 > > {: .source}
 > >
 > > ~~~
 > > REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-> > python                            3.7                 e440e2151380        23 hours ago        918MB
+> > docker.io/library/python          3.9-slim            e440e2151380        2 weeks ago        131 MB
 > > ~~~
+> >
+> >* `python:<version>-slim`: This image does not contain the common packages contained in the default
+> >tag and only contains the minimal packages needed to run python
 > > {: .output}
 > {: .solution}
 {: .challenge}
 
 [docker-hub]: https://hub.docker.com/
 [docker-hub-billing]: https://www.docker.com/pricing/
+[docker-hub-python]: https://hub.docker.com/_/python
 [docker-hub-builds]: https://docs.docker.com/docker-hub/builds/
 [podman-docs-pull]: https://docs.podman.io/en/latest/markdown/podman-pull.1.html
 [podman-docs-images]: https://docs.podman.io/en/stable/markdown/podman-images.1.html

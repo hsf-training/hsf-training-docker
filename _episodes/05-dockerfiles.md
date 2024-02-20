@@ -16,16 +16,17 @@ keypoints:
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/8BhkS2rZQ6E?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Container images are the static files that contain the instructions to build create containers on machines.
-Container engines pull the images from repositories or local storage and then create containers from them.
+Container images are static files that contain a template to create containers on machines.
+Container engines like Podman or Docker pull the images from repositories or local storage and then create containers from them.
+Container engines can also build and save to a repository new container images, interactively or following a set of instructions, starting from scratch or modifying an existing image.
 
-A common way of defining the instructions to build a container image is through a [`Dockerfile`][docker-docs-builder].
+A common way of defining the instructions to build a container image is through a [Dockerfile][docker-docs-builder].
 These text based documents provide the instructions through an API similar to the Linux
 operating system commands to execute commands during the build.
 The [`Dockerfile` for the example image][example-Dockerfile] being used is an example of
 some simple extensions of the [official Python 3.9 Docker image][python-docker-image] based on Debian Bullseye (`python:3.9-bullseye`).
 
-Podman also uses `Dockerfile`s to build images, so the same instructions can be used for both tools.
+Like Docker, Podman also uses `Dockerfile`s to build images, so the same instructions can be used for both tools.
 We will continue with Podman throughout this lesson but the same commands can be used with Docker.
 
 As a very simple example of extending the example image into a new image create a `Dockerfile`
@@ -71,7 +72,8 @@ USER docker
 >Each `RUN` command in a Dockerfile creates a new layer to the image.
 >In general, each layer should try to do one job and the fewer layers in an image
 > the easier it is compress.
-> This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will take place in a single layer.
+>
+> This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will run in a pipeline and will take place in a single layer
 > When trying to upload and download images on demand the smaller the size the better.
 >
 > Another thing to keep in mind is that each `RUN` command occurs in its own shell, so any environment variables, etc. set in one `RUN` command will not persist to the next.
