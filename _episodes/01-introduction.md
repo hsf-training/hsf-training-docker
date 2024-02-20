@@ -81,7 +81,7 @@ There are other kids on the block which are in use and gaining popularity, such 
 <img src="../fig/podman_logo.svg" width="400" alt="Docker logo" />
 
 Podman is an open-source alternative to Docker with several advantages.
-For example, Podman is able to run containers as a non-root user out of the box, which is a big security advantage over Docker.
+For example, Podman is able to run containers as a non-root user out of the box, a big security advantage over Docker.
 The reason is Podman uses a [servless architecture](https://www.redhat.com/en/blog/painless-services-implementing-serverless-rootless-podman-and-systemd),
 which means that it doesn't require a [daemon](https://en.wikipedia.org/wiki/Daemon_(computing)) running as superuser
 to execute containers as [Docker does](https://docs.docker.com/get-started/overview/#docker-architecture).

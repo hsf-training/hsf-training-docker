@@ -2,7 +2,7 @@
 title: Setup
 ---
 
-## Installations
+## Installation
 
 The training module can be followed using either Docker or Podman. We recommend to use **Podman** as it
 does not require root privileges to use it out of the box. In addition, Docker has licensing restrictions that
@@ -13,7 +13,7 @@ with
 ```bash
 podman version
 ```
-And if not available, ask you system administrator to install it for you.
+If it's not available, ask you system administrator to install it for you.
 
 ### Install Podman on Linux
 
@@ -35,17 +35,23 @@ In the case of Podman, it provides an installer at https://podman.io/. Download 
 it and execute Podman Desktop.
 
 The first time that Podman Desktop is executed it will require to
-install Podman and a Podman machine to execute the containers. Follow the instructions at the Setup.
+install Podman and a Podman machine to execute the containers. Click "Set up" and follow the instructions.
 
 
 ### Install Podman on Windows
 
 Podman provides instructions to install it on Windows at the [GitHub repository](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md).
 
+## Post Installation
+
+Check that you can run Podman with the following command
+```bash
+podman run hello-world
+```
 
 > ## Installing Docker
 >
-> If you still prefer to use Docker (check with the IT department of your institution before using Docker!),
+> If you prefer to use Docker (check with the IT department of your institution before using Docker!),
 > follow the official instructions for [Linux](https://docs.docker.com/engine/install/#server), [Mac](https://docs.docker.com/desktop/install/mac-install/), or [Windows](https://docs.docker.com/desktop/install/windows-install/).
 >
 > If you are using Linux, then please also follow these [post installation instructions](https://docs.docker.com/engine/install/linux-postinstall/).
@@ -54,13 +60,6 @@ Podman provides instructions to install it on Windows at the [GitHub repository]
 >{: .source}
 {: .callout}
 
-
-## Post Installation
-
-Check that you can run Podman with the following command
-```bash
-podman run hello-world
-```
 
 ### Optional: Fetch images in advance
 
