@@ -88,7 +88,7 @@ USER docker
 >greater privileges.
 {: .callout}
 
-Then [`build`][docker-docs-build] an image from the `Dockerfile` with Podman and tag it with a
+Then [`build`][podman-docs-build] an image from the `Dockerfile` with Podman and tag it with a
 human-readable name
 
 ~~~bash
@@ -268,11 +268,7 @@ way to bring them into the container image build.
 [python-docker-image]: https://hub.docker.com/_/python
 [cowsay]: https://packages.debian.org/bullseye/cowsay
 [scikit-learn]: https://scikit-learn.org
-[docker-docs-build]: https://docs.docker.com/engine/reference/commandline/build/
-[docker-docs-ARG]: https://docs.docker.com/engine/reference/builder/#arg
-[docker-docs-FROM]: https://docs.docker.com/engine/reference/builder/#from
-[docker-docs-build-arg]: https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg
-[docker-docs-ENV]: https://docs.docker.com/engine/reference/builder/#env
+[podman-docs-build]: https://docs.podman.io/en/stable/markdown/podman-build.1.html
 [podman-docs-tag]: https://docs.podman.io/en/latest/markdown/podman-tag.1.html
 [docker-docs-COPY]: https://docs.docker.com/engine/reference/builder/#copy
 
