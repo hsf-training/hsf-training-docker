@@ -124,7 +124,13 @@ ls *.txt
 {: .source}
 
 >## Permission issues
->If you run into a `Permission denied` error, you can use ``sudo`` for a quick fix, if you have superuser access (but this is not recommended).
+>If you are using Linux with SELinux enabled, you might run into a `Permission denied` error.
+>Note that SELinux is enabled if the output of the command `getenforce status` is `Enforcing`.
+>To fix the permission issue, append `:z` (lowercase!) at the end of the mount option, like this:
+>```bash
+>docker run --rm -it -v $PWD:/home/docker/data:z ...
+>```
+>If this still does not fix the issue you can disable SELinux by running `sudo setenforce 0`, or you can try using `sudo` to execute docker commands, but both of these methods are not recommended.
 {: .callout}
 
 ~~~

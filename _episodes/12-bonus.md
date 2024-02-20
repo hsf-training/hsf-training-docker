@@ -8,8 +8,8 @@ questions:
 objectives:
 - To be able to build a Docker container and share it via GitHub packages
 keypoints:
--  Python packages can be installed in Docker images along with ubuntu packages.
--  It is possible to publish and share Docker images over github packages.
+- Python packages can be installed in Docker images along with ubuntu packages.
+- It is possible to publish and share Docker images over github packages.
 ---
 
 > ## Prerequisites
@@ -22,7 +22,7 @@ keypoints:
 
 Python packages can be installed using a Docker image. The following example illustrates how to write a Dockerfile for building an image containing python packages.
 
-```text
+```docker
 FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -60,13 +60,15 @@ To do so, one needs to use GitHub CI/CD. A step-by-step guide is presented here.
 * **Step 4**: Copy-paste the content above and add it to the Dockerfile. (In principle it is possible to build this image locally, but we will not do that here, as we wish to build it with GitHub CI/CD).
 * **Step 5**: In the `Docker-build-deploy.yml` file, add the following content:
 
-```text
+{% raw %}
+```yaml
 name: Create and publish a Docker image
 
 on:
-  pull_request:
   push:
-    branches: master
+    branches:
+      - main
+      - master
 
 env:
   REGISTRY: ghcr.io
@@ -75,16 +77,17 @@ env:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       packages: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Log in to the Container registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -92,18 +95,20 @@ jobs:
 
       - name: Docker Metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 ```
+{% endraw %}
+
 
 The above script is designed to build and publish a Docker image with [GitHub packages](https://github.com/features/packages).
 
