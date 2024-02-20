@@ -31,7 +31,7 @@ sudo apt-get -y install podman
 ### Install Podman on MacOS
 
 Running Podman or Docker on MacOS requires a virtual machine to run the containers.
-In the case of Podman, it provides an installer at https://podman.io/. Download the `.dmg` package for MacOS, extract
+In the case of Podman, it provides an installer at [https://podman.io/](https://podman.io/). Download the `.dmg` package for MacOS, extract
 it and execute Podman Desktop.
 
 The first time that Podman Desktop is executed it will require to
