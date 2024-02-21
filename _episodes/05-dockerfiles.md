@@ -112,7 +112,7 @@ python3 -c "import sklearn as sk; print(sk)"
 ~~~
 /usr/bin/cowsay
  ___________________
-< Hello from inside the Container >
+< Hello from inside the container >
  -------------------
         \   ^__^
          \  (oo)\_______
