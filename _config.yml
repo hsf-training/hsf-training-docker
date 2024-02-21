@@ -10,7 +10,7 @@
 carpentry: "hsf"
 
 # Overall title for pages.
-title: "Introduction to Docker"
+title: "Introduction to Docker and Podman"
 
 # Life cycle stage of the lesson
 # possible values: "pre-alpha", "alpha", "beta", "stable"

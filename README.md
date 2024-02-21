@@ -1,4 +1,4 @@
-# Introduction to Docker
+# Introduction to Docker and Podman
 [![Build Status](https://travis-ci.org/hsf-training/hsf-training-docker.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-docker)
 [![HSF Training Center](https://img.shields.io/badge/HSF%20Training%20Center-browse-ff69b4)](https://hepsoftwarefoundation.org/training/curriculum.html)
 
