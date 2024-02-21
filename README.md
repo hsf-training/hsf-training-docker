@@ -57,6 +57,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mdonadoni"><img src="https://avatars.githubusercontent.com/u/13397702?v=4?s=100" width="100px;" alt="mdonadoni"/><br /><sub><b>mdonadoni</b></sub></a><br /><a href="#maintenance-mdonadoni" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mambelli"><img src="https://avatars.githubusercontent.com/u/1558058?v=4?s=100" width="100px;" alt="Marco Mambelli"/><br /><sub><b>Marco Mambelli</b></sub></a><br /><a href="#maintenance-mambelli" title="Maintenance">🚧</a></td>
     </tr>
   </tbody>
 </table>
