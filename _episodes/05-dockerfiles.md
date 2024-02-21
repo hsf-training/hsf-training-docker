@@ -10,7 +10,7 @@ objectives:
 - "Build a Docker image from a Dockerfile"
 keypoints:
 - "Dockerfiles are written as text file commands to the Docker engine"
-- "Docker images are built with `docker build`"
+- "Docker images are built with `podman build`"
 - "Docker images can have multiple tags associated to them"
 - "Docker images can use `COPY` to copy files into them during build"
 ---

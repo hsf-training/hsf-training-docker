@@ -83,7 +83,7 @@ podman rmi <IMAGE ID>
 > >
 > >REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 > >python              2.7-slim            d75b4eed9ada        14 hours ago        886MB
-> >python              3.7-slim            e440e2151380        23 hours ago        918MB
+> >python              3.9-slim            e440e2151380        23 hours ago        918MB
 > >
 > >Untagged: python@sha256:<the relevant SHA hash>
 > >Deleted: sha256:<layer SHA hash>
@@ -98,7 +98,7 @@ podman rmi <IMAGE ID>
 > >Deleted: sha256:<layer SHA hash>
 > >
 > >REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-> >python              3.7-slim            e440e2151380        23 hours ago        918MB
+> >python              3.9-slim            e440e2151380        23 hours ago        918MB
 > > ~~~
 > > {: .output}
 > {: .solution}
