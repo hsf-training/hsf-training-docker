@@ -90,7 +90,7 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 ## Monitoring Containers
 
 Open up a new terminal tab on the host machine and
-[list the containers that are currently running][podman-docs-ps]
+[list the containers that are currently running][podman-docs-ps]:
 
 ~~~bash
 podman ps
