@@ -151,7 +151,7 @@ ls *.txt
 >```bash
 >podman run --rm -it -v $PWD:/home/docker/data:z ...
 >```
->If this still does not fix the issue you can disable SELinux by running `sudo setenforce 0`, or you can try using `sudo` to execute docker/podman commands, but both of these methods are not recommended.
+>If this still does not fix the issue you can disable SELinux by running `sudo setenforce 0`, or you can try using `sudo` to execute docker/podman commands, but neither of these methods is recommended.
 {: .callout}
 
 ~~~
