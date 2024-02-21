@@ -119,8 +119,8 @@ Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-ima
 >
 > Pull the image python:3.9-slim for Python 3.9 and then list all `python` images on your computer.
 >
-> See [the Python Official Images][docker-hub-python] to find the available tags and
-> read about the image variants. What `'slim'` means?
+> Browse [the official Python images][docker-hub-python] to find available tags and
+> read about image variants. What does `-slim` mean?
 >
 > > ## Solution
 > >
