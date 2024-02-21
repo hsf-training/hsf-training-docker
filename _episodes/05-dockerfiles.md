@@ -103,7 +103,7 @@ You can now run the image as a container and verify for yourself that your addit
 ~~~bash
 podman run --rm -it extend-example:latest /bin/bash
 which cowsay
-cowsay "Hello from inside the Container"
+cowsay "Hello from inside the container"
 pip list | grep scikit
 python3 -c "import sklearn as sk; print(sk)"
 ~~~
