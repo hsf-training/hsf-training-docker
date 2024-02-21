@@ -19,7 +19,7 @@ keypoints:
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/UejGBfppmZY?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-To use a image as a particular instance on a host machine you [run][podman-docks-run]
+To use an image as a particular instance on a host machine, you [run][podman-docs-run]
 it as a container.
 You can run in either a detached or foreground (interactive) mode.
 
