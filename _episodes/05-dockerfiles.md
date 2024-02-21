@@ -10,18 +10,24 @@ objectives:
 - "Build a Docker image from a Dockerfile"
 keypoints:
 - "Dockerfiles are written as text file commands to the Docker engine"
-- "Docker images are built with `docker build`"
+- "Docker images are built with `podman build`"
 - "Docker images can have multiple tags associated to them"
 - "Docker images can use `COPY` to copy files into them during build"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/8BhkS2rZQ6E?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Docker images are built through the Docker engine by reading the instructions from a
-[`Dockerfile`][docker-docs-builder].
+Container images are static files that contain a template to create containers on machines.
+Container engines like Podman or Docker pull the images from repositories or local storage and then create containers from them.
+Container engines can also build and save to a repository new container images, interactively or following a set of instructions, starting from scratch or modifying an existing image.
+
+A common way of defining the instructions to build a container image is through a [Dockerfile][docker-docs-builder].
 These text based documents provide the instructions through an API similar to the Linux
 operating system commands to execute commands during the build.
 The [`Dockerfile` for the example image][example-Dockerfile] being used is an example of
 some simple extensions of the [official Python 3.9 Docker image][python-docker-image] based on Debian Bullseye (`python:3.9-bullseye`).
+
+Like Docker, Podman also uses `Dockerfile`s to build images, so the same instructions can be used for both tools.
+We will continue with Podman throughout this lesson but the same commands can be used with Docker.
 
 As a very simple example of extending the example image into a new image create a `Dockerfile`
 on your local machine
@@ -44,9 +50,9 @@ FROM matthewfeickert/intro-to-docker:latest
 USER root
 
 # Run some bash commands to install packages
-RUN apt-get -qq -y update && \
-    apt-get -qq -y upgrade && \
-    apt-get -qq -y install cowsay && \
+RUN apt-get -y update && \
+    apt-get -y upgrade && \
+    apt-get -y install cowsay && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt-get/lists/* && \
@@ -63,10 +69,11 @@ USER docker
 
 > ## Dockerfile layers (or: why all these '&&'s??)
 >
->Each `RUN` command in a Dockerfile creates a new layer to the Docker image.
+>Each `RUN` command in a Dockerfile creates a new layer to the image.
 >In general, each layer should try to do one job and the fewer layers in an image
 > the easier it is compress.
-> This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will take place in a single layer.
+>
+> This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will run in a pipeline and will take place in a single layer
 > When trying to upload and download images on demand the smaller the size the better.
 >
 > Another thing to keep in mind is that each `RUN` command occurs in its own shell, so any environment variables, etc. set in one `RUN` command will not persist to the next.
@@ -83,20 +90,20 @@ USER docker
 >greater privileges.
 {: .callout}
 
-Then [`build`][docker-docs-build] an image from the `Dockerfile` and tag it with a human
-readable name
+Then [`build`][podman-docs-build] an image from the `Dockerfile` with Podman and tag it with a
+human-readable name
 
 ~~~bash
-docker build -f Dockerfile -t extend-example:latest .
+podman build -f Dockerfile -t extend-example:latest .
 ~~~
 {: .source}
 
 You can now run the image as a container and verify for yourself that your additions exist
 
 ~~~bash
-docker run --rm -it extend-example:latest /bin/bash
+podman run --rm -it extend-example:latest /bin/bash
 which cowsay
-cowsay "Hello from Docker"
+cowsay "Hello from inside the container"
 pip list | grep scikit
 python3 -c "import sklearn as sk; print(sk)"
 ~~~
@@ -105,7 +112,7 @@ python3 -c "import sklearn as sk; print(sk)"
 ~~~
 /usr/bin/cowsay
  ___________________
-< Hello from Docker >
+< Hello from inside the container >
  -------------------
         \   ^__^
          \  (oo)\_______
@@ -118,40 +125,58 @@ scikit-learn        1.3.1
 ~~~
 {: .output}
 
+You can list all images available on your local machine with `podman images`:
+~~~bash
+podman images
+~~~
+{: .source}
+
+~~~
+REPOSITORY                                 TAG            IMAGE ID      CREATED       SIZE
+localhost/extend-example                   latest         c24a757fabe7  8 hours ago   2.2 GB
+docker.io/matthewfeickert/intro-to-docker  latest         64708e04f3a9  2 years ago   1.62 GB
+...
+~~~
+{: .output}
+
+`docker.io` indicates that the image was pulled from the Docker Hub,
+while `localhost` indicates that the image was built locally.
+
 ## Tags
 
 In the examples so far the built image has been tagged with a single tag (e.g. `latest`).
 However, tags are simply arbitrary labels meant to help identify images and images can
 have multiple tags.
-New tags can be specified in the `docker build` command by giving the `-t` flag multiple
+New tags can be specified in the `podman build` (or `docker build`) command by giving the `-t` flag multiple
 times or they can be specified after an image is built by using
-[`docker tag`][docker-docs-tag].
+[`podman tag`][podman-docs-tag].
 
 ~~~bash
-docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
+podman tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 ~~~
 {: .source}
 
 > ## Add your own tag
 >
-> Using `docker tag` add a new tag to the image you built.
+> Using `podman tag` add a new tag to the image you built.
 >
 > > ## Solution
 > >
 > > ~~~
-> >docker images extend-example
-> >docker tag extend-example:latest extend-example:my-tag
-> >docker images extend-example
+> >podman images extend-example
+> >podman tag extend-example:latest extend-example:my-tag
+> >podman images extend-example
 > > ~~~
 > > {: .source}
 > >
 > > ~~~
-> >REPOSITORY          TAG                 IMAGE ID            CREATED            SIZE
-> >extend-example      latest              b571a34f63b9        t seconds ago      1.59GB
+> >REPOSITORY                TAG         IMAGE ID      CREATED      SIZE
+> >localhost/extend-example  latest      c24a757fabe7  9 hours ago  2.2 GB
 > >
-> >REPOSITORY          TAG                 IMAGE ID            CREATED            SIZE
-> >extend-example      latest              b571a34f63b9        t seconds ago      1.59GB
-> >extend-example      my-tag              b571a34f63b9        t seconds ago      1.59GB
+> >REPOSITORY                TAG         IMAGE ID      CREATED      SIZE
+> >localhost/extend-example  my-tag      c24a757fabe7  9 hours ago  2.2 GB
+> >localhost/extend-example  latest      c24a757fabe7  9 hours ago  2.2 GB
+>>
 > > ~~~
 > > {: .output}
 > {: .solution}
@@ -160,18 +185,18 @@ docker tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 > ## Tags are labels
 >
 >Note how the image ID didn't change for the two tags: they are the same object.
->Tags are simply convenient human readable labels.
+>Tags are simply convenient human-readable labels.
 {: .callout}
 
 ## `COPY`
 
-Docker also gives you the ability to copy external files into a Docker image during the
+Podman also gives you the ability to copy external files into a container image during the
 build with the [`COPY`][docker-docs-COPY] Dockerfile command.
-Which allows copying a target file from a host file system into the Docker image
+Which allows copying a target file from a host file system into the image
 file system
 
 ~~~yaml
-COPY <path on host> <path in Docker image>
+COPY <path on host> <path in container image>
 ~~~
 {: .source}
 
@@ -200,7 +225,7 @@ pip install --no-cache-dir -q scikit-learn
 ~~~
 {: .output}
 
-then this could be copied into the Docker image of the previous example during the build
+then this could be copied into the container image of the previous example during the build
 and then used (and then removed as it is no longer needed).
 
 Create a new file called `Dockerfile.copy`:
@@ -232,12 +257,12 @@ USER docker
 {: .source}
 
 ~~~bash
-docker build -f Dockerfile.copy -t copy-example:latest .
+podman build -f Dockerfile.copy -t copy-example:latest .
 ~~~
 {: .source}
 
 For very complex scripts or files that are on some remote, `COPY` offers a straightforward
-way to bring them into the Docker build.
+way to bring them into the container image build.
 
 
 [docker-docs-builder]: https://docs.docker.com/engine/reference/builder/
@@ -245,12 +270,8 @@ way to bring them into the Docker build.
 [python-docker-image]: https://hub.docker.com/_/python
 [cowsay]: https://packages.debian.org/bullseye/cowsay
 [scikit-learn]: https://scikit-learn.org
-[docker-docs-build]: https://docs.docker.com/engine/reference/commandline/build/
-[docker-docs-ARG]: https://docs.docker.com/engine/reference/builder/#arg
-[docker-docs-FROM]: https://docs.docker.com/engine/reference/builder/#from
-[docker-docs-build-arg]: https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg
-[docker-docs-ENV]: https://docs.docker.com/engine/reference/builder/#env
-[docker-docs-tag]: https://docs.docker.com/engine/reference/commandline/tag/
+[podman-docs-build]: https://docs.podman.io/en/stable/markdown/podman-build.1.html
+[podman-docs-tag]: https://docs.podman.io/en/latest/markdown/podman-tag.1.html
 [docker-docs-COPY]: https://docs.docker.com/engine/reference/builder/#copy
 
 {% include links.md %}
