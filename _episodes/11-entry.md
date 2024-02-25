@@ -1,7 +1,7 @@
 ---
-title: "Bonus: Using CMD and ENTRYPOINT in Dockerfiles"
-teaching: 0
-exercises: 0
+title: "Using CMD and ENTRYPOINT in Dockerfiles"
+teaching: 15
+exercises: 10
 questions:
 - "How are default commands set in Dockerfiles?"
 objectives:
@@ -13,17 +13,17 @@ keypoints:
 - "`ENTRYPOINT` allows you to configure commands that will always run for an executing container"
 ---
 
-So far every time we've run the Docker containers we've typed
+So far every time we've run the containers we've typed
 
 ~~~bash
-docker run --rm -it <IMAGE>:<TAG> <command>
+podman run --rm -it <IMAGE>:<TAG> <command>
 ~~~
 {: .source}
 
 like
 
 ~~~bash
-docker run --rm -it python:3.7-slim /bin/bash
+podman run --rm -it python:3.9-slim /bin/bash
 ~~~
 {: .source}
 
@@ -42,13 +42,13 @@ SHELL=/bin/bash
 However, if no `/bin/bash` is given then you are placed inside the Python 3.7 REPL.
 
 ~~~bash
-docker run --rm -it python:3.7-slim
+podman run --rm -it python:3.9-slim
 ~~~
 {: .source}
 
 ~~~
-Python 3.7.4 (default, Jul 13 2019, 14:04:11)
-[GCC 8.3.0] on linux
+Python 3.9.18 (main, Feb 13 2024, 10:56:47)
+[GCC 12.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ~~~
@@ -56,7 +56,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 These are very different behaviors, so let's understand what is happening.
 
-The Python 3.7 Docker image has a default command that runs when the container is executed,
+The Python 3.9 image has a default command that runs when the container is executed,
 which is specified in the Dockerfile with [`CMD`][docker-docs-CMD].
 
 Create a file named `Dockerfile.defaults`
@@ -69,7 +69,7 @@ touch Dockerfile.defaults
 ~~~yaml
 # Dockerfile.defaults
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.7-slim
+ARG BASE_IMAGE=python:3.9-slim
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
@@ -90,17 +90,17 @@ CMD ["/bin/bash"]
 ~~~
 {: .source}
 
-Now build the dockerfile, specifying its name with the `-f` argument since docker will otherwise look for a file named `Dockerfile` by default.
+Now build the dockerfile, specifying its name with the `-f` argument since the engine will otherwise look for a file named `Dockerfile` by default.
 
 ~~~
-docker build -f Dockerfile.defaults -t defaults-example:latest .
+podman build -f Dockerfile.defaults -t defaults-example:latest .
 ~~~
 {: .source}
 
 Now running
 
 ~~~
-docker run --rm -it defaults-example:latest
+podman run --rm -it defaults-example:latest
 ~~~
 {: .source}
 
@@ -108,14 +108,15 @@ again drops you into a Bash shell as specified by `CMD`.
 As has already been seen, `CMD` can be overridden by giving a command after the image
 
 ~~~
-docker run --rm -it defaults-example:latest python3
+podman run --rm -it defaults-example:latest python3
 ~~~
 {: .source}
 
 The [`ENTRYPOINT`][docker-docs-ENTRYPOINT] builder command allows to define a command or
-commands that are **always** run at the "entry" to the Docker container.
+commands that are **always** run at the "entry" to the container.
 If an `ENTRYPOINT` has been defined then `CMD` provides optional inputs to the `ENTRYPOINT`.
 
+Create a file named `entrypoint.sh`
 ~~~bash
 # entrypoint.sh
 #!/usr/bin/env bash
@@ -126,7 +127,7 @@ function main() {
     if [[ $# -eq 0 ]]; then
         printf "\nHello, World!\n"
     else
-        printf "\nHello, %s!\n" "${1}"
+        printf "\nHello %s\n" "${1}"
     fi
 }
 
@@ -136,10 +137,11 @@ main "$@"
 ~~~
 {: .bash}
 
+And now modify the `Dockerfile.defaults` to use the `entrypoint.sh` script
 ~~~
 # Dockerfile.defaults
 # Make the base image configurable
-ARG BASE_IMAGE=python:3.7-slim
+ARG BASE_IMAGE=python:3.9-slim
 FROM ${BASE_IMAGE}
 USER root
 RUN apt-get -qq -y update && \
@@ -158,34 +160,27 @@ USER docker
 
 COPY entrypoint.sh $HOME/entrypoint.sh
 ENTRYPOINT ["/bin/bash", "/home/docker/entrypoint.sh"]
-CMD ["Docker"]
+CMD ["there"]
+~~~
+{: .source}
+Note how `CMD` provides an optional input to `entrypoint.sh`.
+
+~~~
+podman build -f Dockerfile.defaults -t defaults-example:latest --compress .
 ~~~
 {: .source}
 
+So now try
 ~~~
-docker build -f Dockerfile.defaults -t defaults-example:latest --compress .
-~~~
-{: .source}
-
-So now
-
-~~~
-docker run --rm -it defaults-example:latest
+podman run --rm -it defaults-example:latest
 ~~~
 {: .source}
-
-~~~
-
-Hello, Docker!
-docker@2a99ffabb512:~/data$
-~~~
-{: .output}
 
 > ## Applied `ENTRYPOINT` and `CMD`
 >
 > What will be the output of
 >~~~
->docker run --rm -it defaults-example:latest $USER
+>podman run --rm -it defaults-example:latest $USER
 >~~~
 >{: .source}
 > and why?
@@ -194,7 +189,7 @@ docker@2a99ffabb512:~/data$
 > >
 > >~~~
 > >
-> >Hello, <your user name>!
+> >Hello <your user name>
 > >docker@2a99ffabb512:~/data$
 > >~~~
 > >{: .output}
