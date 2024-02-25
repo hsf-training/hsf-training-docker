@@ -5,8 +5,8 @@ exercises: 5
 questions:
 - "How do containers interact with my local file system?"
 objectives:
-- "Copy files to and from the docker container"
-- "Mount directories to be accessed and manipulated by the docker container"
+- "Copy files to and from the container"
+- "Mount directories to be accessed and manipulated by the container"
 keypoints:
 - "Copy files with `podman cp`"
 - "Mount volumes with `podman run -v <path on host>:<path in container> <image>`"

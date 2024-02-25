@@ -4,15 +4,15 @@ teaching: 30
 exercises: 10
 questions:
 - "How are Dockerfiles written?"
-- "How are Docker images built?"
+- "How are images built?"
 objectives:
 - "Write simple Dockerfiles"
-- "Build a Docker image from a Dockerfile"
+- "Build a container image from a Dockerfile"
 keypoints:
-- "Dockerfiles are written as text file commands to the Docker engine"
-- "Docker images are built with `podman build`"
-- "Docker images can have multiple tags associated to them"
-- "Docker images can use `COPY` to copy files into them during build"
+- "Dockerfiles are written as text file commands to the container engine"
+- "Images are built with `podman build`"
+- "Images can have multiple tags associated to them"
+- "Images can use `COPY` to copy files into them during build"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/8BhkS2rZQ6E?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
