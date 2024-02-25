@@ -1,6 +1,6 @@
 ---
 title: "Writing Dockerfiles and Building Images"
-teaching: 20
+teaching: 30
 exercises: 10
 questions:
 - "How are Dockerfiles written?"
