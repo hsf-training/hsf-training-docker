@@ -14,7 +14,7 @@ keypoints:
 - "Images can have multiple tags associated to them"
 - "Images can use `COPY` to copy files into them during build"
 ---
-<iframe width="427" height="251" src="https://www.youtube.com/embed/8BhkS2rZQ6E?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="427" height="251" src="https://www.youtube.com/embed/NSVXBgYSkBY?si=pAZsMxfkZ2imcL52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Container images are static files that contain a template to create containers on machines.
 Container engines like Podman or Docker pull the images from repositories or local storage and then create containers from them.

@@ -12,7 +12,7 @@ keypoints:
 - "Remove images with `podman rmi <IMAGE ID>`"
 - "Perform faster cleanup with `podman container prune`, `podman image prune`, and `podman system prune`"
 ---
-<iframe width="427" height="251" src="https://www.youtube.com/embed/Gsp6EapBcoo?list=PLKZ9c4ONm-VnqD5oN2_8tXO0Yb1H_s0sj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="427" height="251" src="https://www.youtube.com/embed/yEnNQAS_LcE?si=jNNapizuEjUoD5lS" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 You can cleanup/remove a container with [`podman rm`][podman-docs-rm]
 ~~~bash
