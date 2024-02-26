@@ -48,6 +48,20 @@ podman pull matthewfeickert/intro-to-docker
 ~~~
 {: .source}
 
+> ## No search registry defined
+> Some installations of Podman may end with an error like `Error: unable to pull matthewfeickert/intro-to-docker:latest: unable to find registry in the system`.
+> This is because the default registry is not defined. You can fix this by adding the `docker.io` registry at the command:
+> ~~~bash
+> podman pull docker.io/matthewfeickert/intro-to-docker
+> ~~~
+>
+> Or, to pull images by default from Docker Hub, adding the following line to the `/etc/containers/registries.conf` file:
+> ~~~bash
+> unqualified-search-registries=["docker.io"]
+> ~~~
+>
+{: .callout}
+
 > ## Connection errors
 > If using Podman or Docker in a non-Linux machine you run into an error like `Error: unable to connect to Podman`,
 > make sure that the Podman or Docker desktop application is running.
