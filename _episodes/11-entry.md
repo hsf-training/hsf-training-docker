@@ -208,7 +208,7 @@ podman run --rm -it defaults-example:latest
 > When ENTRYPOINT is in exec form, CMD or the invocatipon arguments are passed as additional arguments (as single string,
 > with additional "/bin/sh" "-c" arguments if CMD is in shell form).
 > When ENTRYPOINT is in shell form, CMD and invocation arguments are ignored.
-> 
+>
 > An interactive session, `run -it`, is possible only if the last command (ENTRYPOINT if present, arguments or CMD) is interactive, i.e. not terminating.
 {: .callout}
 
