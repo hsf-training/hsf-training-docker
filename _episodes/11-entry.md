@@ -39,7 +39,7 @@ SHELL=/bin/bash
 ~~~
 {: .output}
 
-However, if no `/bin/bash` is given then you are placed inside the Python 3.7 REPL.
+However, if no `/bin/bash` is given then you are placed inside the Python 3.9 REPL.
 
 ~~~bash
 podman run --rm -it python:3.9-slim
@@ -196,6 +196,44 @@ podman run --rm -it defaults-example:latest
 > `$USER` is evaluated and then overrides the default `CMD` to be passed to `entrypoint.sh`
 > {: .solution}
 {: .challenge}
+
+> ## All about `ENTRYPOINT` and `CMD`
+>
+> ENTRYPOINT and CMD can be both in "exec" or "shell" form, although we recommend to use exec form.
+> Exec form must be an array of comma separated quoted arguments and it us executed via the Linux `execv()`. E.g. `CMD ["/usr/bin/ls", "-al"]`
+> Anything else, also if you forget just the quotes, will be considered shell form, it is passed by Docker/Podman to `/bin/sh -c`
+> (as written, with quotes, parentheses, ...), and can use shell features like PATH and expansion. E.g. `CMD ls -al`
+>
+> At execution, ENTRYPOINT can be overridden with the `--entrypoint` option, CMD with any argument of the invocation.
+> When ENTRYPOINT is in exec form, CMD or the invocatipon arguments are passed as additional arguments (as single string,
+> with additional "/bin/sh" "-c" arguments if CMD is in shell form).
+> When ENTRYPOINT is in shell form, CMD and invocation arguments are ignored.
+>
+> An interactive session, `run -it`, is possible only if the last command (ENTRYPOINT if present, arguments or CMD) is interactive, i.e. not terminating.
+{: .callout}
+
+The use case seen above is common for application containers: ENTRYPOINT (in exec form) is used
+for the command and CMD for is ued the default arguments that can be easily overridden at invocation.
+
+Another common use case is to
+run an initialization script before anything else in the container, e.g. to download files or set variables only available at run-time, or to
+[get secrets from a key-store](https://aws.amazon.com/blogs/opensource/demystifying-entrypoint-cmd-docker/).
+For that you can use an `entrypoint.sh` like:
+
+~~~
+#!/bin/sh
+echo "You are running on $(hostname)"
+# download tokens and recrets
+export MY_TOKEN=./token_file.jwt
+bash -c "$*"
+~~~
+{: .source}
+
+The last line is the key to treat the arguments in CMD or the command line as commands.
+Remember to set `entrypoint.sh` as executable and to use the exec form for ENTRYPOINT (`ENTRYPOINT ["./entrypoint.sh"]`)
+Note that if the file to download or value of the variable are known when building the image, you can use the RUN command in the Dockerfile
+instead, which is more efficient than the entrypoint script.
+
 
 [docker-docs-CMD]: https://docs.docker.com/engine/reference/builder/#cmd
 [docker-docs-ENTRYPOINT]: https://docs.docker.com/engine/reference/builder/#entrypoint
