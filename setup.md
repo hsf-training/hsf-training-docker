@@ -13,7 +13,7 @@ with
 ```bash
 podman version
 ```
-If it's not available, ask you system administrator to install it for you.
+If it's not available, ask your system administrator to install it for you.
 
 ### Install Podman on Linux
 
@@ -34,7 +34,7 @@ Running Podman or Docker on MacOS requires a virtual machine to run the containe
 In the case of Podman, it provides an installer at [https://podman.io/](https://podman.io/). Download the `.dmg` package for MacOS, extract
 it and execute Podman Desktop.
 
-The first time that Podman Desktop is executed it will require to
+The first time that Podman Desktop is executed it will be required to
 install Podman and a Podman machine to execute the containers. Click "Set up" and follow the instructions.
 
 
@@ -76,7 +76,7 @@ podman pull rootproject/root:6.22.06-conda
 ## Analysis Code
 
 Later in this tutorial, you will be asked to work with a simple analysis that utilizes the CMS OpenData to search for Higgs to 2 tau leptons.
-The full analysis itself can be found [here](https://github.com/hsf-training/hsf-training-cms-analysis) - and there is a dedicated set of [training lessons](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/index.html) ([videos available](https://www.youtube.com/watch?v=gplMywJAFDI&list=PLKZ9c4ONm-Vk0wnDKaaovoEkOk3PVdL0V)).
+The full analysis itself can be found [here](https://github.com/hsf-training/hsf-training-cms-analysis)&mdash;and there is a dedicated set of [training lessons](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/index.html) ([videos available](https://www.youtube.com/watch?v=gplMywJAFDI&list=PLKZ9c4ONm-Vk0wnDKaaovoEkOk3PVdL0V)).
 
 It is best if you work through these lessons before the tutorial on Containers, but not mandatory.
 
