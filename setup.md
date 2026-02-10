@@ -76,7 +76,7 @@ podman pull rootproject/root:6.22.06-conda
 ## Analysis Code
 
 Later in this tutorial, you will be asked to work with a simple analysis that utilizes the CMS OpenData to search for Higgs to 2 tau leptons.
-The full analysis itself can be found [here](https://github.com/hsf-training/hsf-training-cms-analysis)&mdash;and there is a dedicated set of [training lessons](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/index.html) ([videos available](https://www.youtube.com/watch?v=gplMywJAFDI&list=PLKZ9c4ONm-Vk0wnDKaaovoEkOk3PVdL0V)).
+The full analysis itself can be found [here](https://github.com/hsf-training/hsf-training-cms-analysis) &mdash; and there is a dedicated set of [training lessons](https://hsf-training.github.io/hsf-training-cms-analysis-webpage/index.html) ([videos available](https://www.youtube.com/watch?v=gplMywJAFDI&list=PLKZ9c4ONm-Vk0wnDKaaovoEkOk3PVdL0V)).
 
 It is best if you work through these lessons before the tutorial on Containers, but not mandatory.
 
