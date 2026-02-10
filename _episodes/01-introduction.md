@@ -52,7 +52,7 @@ very lightweight and fast to spin up to run:
 
 # Docker
 
-<img src="../fig/Docker_logo.png" width="200" alt="Podman logo" />
+<img src="../fig/Docker_logo.png" width="200" alt="Docker logo" />
 
 Docker is perhaps the most popular containerization tool these days, particularly in industry.
 It is a platform for developing, shipping, and running applications in containers.
@@ -78,7 +78,7 @@ There are other kids on the block which are in use and gaining popularity, such 
 
 # Why Podman?
 
-<img src="../fig/podman_logo.svg" width="400" alt="Docker logo" />
+<img src="../fig/podman_logo.svg" width="400" alt="Podman logo" />
 
 Podman is an open-source alternative to Docker with several advantages.
 For example, Podman is able to run containers as a non-root user out of the box, a big security advantage over Docker.
