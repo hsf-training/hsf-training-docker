@@ -66,11 +66,11 @@ podman run hello-world
 Once you've got Podman up and running, do the following docker image pulls in advance to save time during the tutorial:
 
 ~~~bash
-podman pull matthewfeickert/intro-to-docker
-podman pull debian:buster-slim
-podman pull python:2.7-slim
-podman pull python:3.7-slim
-podman pull rootproject/root:6.22.06-conda
+podman pull docker.io/matthewfeickert/intro-to-docker
+podman pull docker.io/debian:buster-slim
+podman pull docker.io/python:2.7-slim
+podman pull docker.io/python:3.7-slim
+podman pull docker.io/rootproject/root:6.22.06-conda
 ~~~
 
 ## Analysis Code
