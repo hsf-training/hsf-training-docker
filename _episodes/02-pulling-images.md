@@ -106,24 +106,26 @@ matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 mont
 You can see here that there is the `TAG` field associated with the
 `matthewfeickert/intro-to-docker` image.
 Tags are a way of further specifying different versions of the same image.
-As an example, let's pull the buster release tag of the
+As an example, let's pull the buster-slim release tag of the
 [Debian image](https://hub.docker.com/_/debian) (again, if it was already pulled during setup, podman won't attempt to re-pull it unless it's changed since last pulled).
 
 ~~~bash
-podman pull debian:buster
+podman pull debian:buster-slim
 podman images debian
 ~~~
 {: .source}
 
 ~~~
-buster: Pulling from library/debian
-<some numbers>: Pull complete
-Digest: sha256:<the relevant SHA hash>
-Status: Downloaded newer image for debian:buster
-docker.io/library/debian:buster
+Resolved "debian" as an alias (/etc/containers/registries.conf.d/shortnames.conf)
+Trying to pull docker.io/library/debian:buster-slim...
+Getting image source signatures
+Copying blob b338562f40a7 done   |
+Copying config e1a7bb630c done   |
+Writing manifest to image destination
+e1a7bb630c8baa947c5430a7f0965ef6afe71e88e90547aced2e601a89b68399
 
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-debian              buster              00bf7fdd8baf        5 weeks ago         114MB
+REPOSITORY                TAG          IMAGE ID      CREATED        SIZE
+docker.io/library/debian  buster-slim  e1a7bb630c8b  20 months ago  73.3 MB
 ~~~
 {: .output}
 
