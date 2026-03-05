@@ -31,7 +31,7 @@ isolated unit called a container.
 
 Importantly, containers share the host machine's OS system kernel and so don't require an
 OS per application.
-As discrete processes containers take up only as much memory as necessary, making them
+As discrete processes, containers take up only as much memory as necessary, making them
 very lightweight and fast to spin up to run:
 
 <figure>
@@ -63,7 +63,7 @@ The [official Docker documentation and tutorial][docker-tutorial] can be found o
 Docker website.
 It is quite thorough and useful, and an excellent guide that should be routinely visited when working with Docker.
 A note up front, Docker has very similar syntax to Git and Linux, so if you are familiar
-with the command line tools for them then most of Docker should seem somewhat natural
+with the command line tools for them, then most of Docker should seem somewhat natural
 (though you should still read the docs!).
 
 
@@ -74,7 +74,7 @@ application or an environment.
 are images with a state.
 
 Docker is the most popular containerization tool these days, but it's not the only one.
-There are other kids on the block which are in use and gaining popularity, such as Podman.
+There are other kids on the block that are in use and gaining popularity, such as Podman.
 
 # Why Podman?
 
@@ -84,7 +84,7 @@ Podman is an open-source alternative to Docker with several advantages.
 For example, Podman is able to run containers as a non-root user out of the box, a big security advantage over Docker.
 The reason is Podman uses a [serverless architecture](https://www.redhat.com/en/blog/painless-services-implementing-serverless-rootless-podman-and-systemd),
 which means that it doesn't require a [daemon](https://en.wikipedia.org/wiki/Daemon_(computing)) running as superuser
-to execute containers as [Docker does](https://docs.docker.com/get-started/overview/#docker-architecture).
+to execute containers, as [Docker does](https://docs.docker.com/get-started/overview/#docker-architecture).
 
 In addition, Docker Desktop has [licensing restrictions](https://www.docker.com/pricing/) that may prevent you
 from using it in some institutions. If that is your case, Podman is an excellent alternative.
@@ -97,9 +97,9 @@ Across the tutorial, we will use Podman as the containerization tool, but
 
 > ## Apptainer
 >
-> Apptainer (formerly known as Singularity) is another containerization technology. In particular is used widely in HPC, and it is gaining rapid adoption on High Energy and Nuclear Physics, so you may have need to familiarize yourself with it at some point.
+> Apptainer (formerly known as Singularity) is another containerization technology. It is widely used in HPC, and it is gaining rapid adoption in High Energy and Nuclear Physics, so you may need to familiarize yourself with it at some point.
 >
-> To learn more about Apptainer, see the [HSF Training Module "Introduction to Apptainer/Singularity"](https://github.com/hsf-training/hsf-training-singularity-webpage) which includes also [more details about the difference between Apptainer and Docker](https://hsf-training.github.io/hsf-training-singularity-webpage/01-introduction/index.html).
+> To learn more about Apptainer, see the [HSF Training Module "Introduction to Apptainer/Singularity"](https://github.com/hsf-training/hsf-training-singularity-webpage), which also includes [more details about the difference between Apptainer and Docker](https://hsf-training.github.io/hsf-training-singularity-webpage/01-introduction/index.html).
 >
 {: .callout}
 
