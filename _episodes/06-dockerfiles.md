@@ -23,8 +23,6 @@ Container engines can also build and save to a repository new container images, 
 A common way of defining the instructions to build a container image is through a [Dockerfile][docker-docs-builder].
 These text based documents provide the instructions through an API similar to the Linux
 operating system commands to execute commands during the build.
-The [`Dockerfile` for the example image][example-Dockerfile] being used is an example of
-some simple extensions of the [official Python 3.9 Docker image][python-docker-image] based on Debian Bullseye (`python:3.9-bullseye`).
 
 Like Docker, Podman also uses `Dockerfile`s to build images, so the same instructions can be used for both tools.
 We will continue with Podman throughout this lesson but the same commands can be used with Docker.
@@ -44,20 +42,24 @@ and then write in it the Docker engine instructions to add [`cowsay`][cowsay] an
 # Dockerfile
 
 # Specify the base image that we're building the image on top of
-FROM matthewfeickert/intro-to-docker:latest
+FROM almalinux:9
 
 # Build the image as root user
 USER root
 
 # Run some bash commands to install packages
-RUN apt-get -y update && \
-    apt-get -y upgrade && \
-    apt-get -y install cowsay && \
-    apt-get -y autoclean && \
-    apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/* && \
-    ln -s /usr/games/cowsay /usr/bin/cowsay
+RUN dnf -y update && \
+    dnf -y upgrade && \
+    dnf -y install epel-release && \
+    dnf -y install pip && \
+    dnf -y install cowsay && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf
+
 RUN pip install --no-cache-dir -q scikit-learn
+
+# Create a new user
+RUN useradd -ms /bin/bash docker
 
 # This sets the default working directory when a container is launched from the image
 WORKDIR /home/docker
@@ -102,7 +104,6 @@ You can now run the image as a container and verify for yourself that your addit
 
 ~~~bash
 podman run --rm -it extend-example:latest /bin/bash
-which cowsay
 cowsay "Hello from inside the container"
 pip list | grep scikit
 python3 -c "import sklearn as sk; print(sk)"
@@ -110,18 +111,17 @@ python3 -c "import sklearn as sk; print(sk)"
 {: .source}
 
 ~~~
-/usr/bin/cowsay
- ___________________
+ _________________________________
 < Hello from inside the container >
- -------------------
+ ---------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
                 ||----w |
                 ||     ||
-
-scikit-learn        1.3.1
-<module 'sklearn' from '/usr/local/lib/python3.9/site-packages/sklearn/__init__.py'>
+                
+scikit-learn    1.6.1
+<module 'sklearn' from '/usr/local/lib64/python3.9/site-packages/sklearn/__init__.py'>
 ~~~
 {: .output}
 
@@ -132,9 +132,9 @@ podman images
 {: .source}
 
 ~~~
-REPOSITORY                                 TAG            IMAGE ID      CREATED       SIZE
-localhost/extend-example                   latest         c24a757fabe7  8 hours ago   2.2 GB
-docker.io/matthewfeickert/intro-to-docker  latest         64708e04f3a9  2 years ago   1.62 GB
+REPOSITORY                   TAG         IMAGE ID      CREATED        SIZE
+localhost/extend-example     latest      c8b76717b954  2 minutes ago  550 MB
+docker.io/library/almalinux  9           b894a52b4112  5 weeks ago    196 MB
 ...
 ~~~
 {: .output}
@@ -170,12 +170,12 @@ podman tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 > > {: .source}
 > >
 > > ~~~
-> >REPOSITORY                TAG         IMAGE ID      CREATED      SIZE
-> >localhost/extend-example  latest      c24a757fabe7  9 hours ago  2.2 GB
+> REPOSITORY                TAG         IMAGE ID      CREATED        SIZE
+> localhost/extend-example  latest      c8b76717b954  5 minutes ago  550 MB
 > >
-> >REPOSITORY                TAG         IMAGE ID      CREATED      SIZE
-> >localhost/extend-example  my-tag      c24a757fabe7  9 hours ago  2.2 GB
-> >localhost/extend-example  latest      c24a757fabe7  9 hours ago  2.2 GB
+> REPOSITORY                TAG         IMAGE ID      CREATED        SIZE
+> localhost/extend-example  my-tag      c8b76717b954  5 minutes ago  550 MB
+> localhost/extend-example  latest      c8b76717b954  5 minutes ago  550 MB
 >>
 > > ~~~
 > > {: .output}
@@ -239,19 +239,33 @@ and fill it with a modified version of the above Dockerfile, where we now copy `
 
 ~~~yaml
 # Dockerfile.copy
-FROM matthewfeickert/intro-to-docker:latest
+
+# Specify the base image that we're building the image on top of
+FROM almalinux:9
+
+# Build the image as root user
 USER root
-RUN apt-get -qq -y update && \
-    apt-get -qq -y upgrade && \
-    apt-get -qq -y install cowsay && \
-    apt-get -y autoclean && \
-    apt-get -y autoremove && \
-    rm -rf /var/lib/apt-get/lists/* && \
-    ln -s /usr/games/cowsay /usr/bin/cowsay
+
+# Run some bash commands to install packages
+RUN dnf -y update && \
+    dnf -y upgrade && \
+    dnf -y install epel-release && \
+    dnf -y install pip && \
+    dnf -y install cowsay && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf
+
 COPY install_python_deps.sh install_python_deps.sh
 RUN bash install_python_deps.sh && \
     rm install_python_deps.sh
-WORKDIR /home/data
+
+# Create a new user
+RUN useradd -ms /bin/bash docker
+
+# This sets the default working directory when a container is launched from the image
+WORKDIR /home/docker
+
+# Run as docker user by default when the container starts up
 USER docker
 ~~~
 {: .source}

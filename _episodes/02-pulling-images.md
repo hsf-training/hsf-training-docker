@@ -44,15 +44,15 @@ To begin with we're going to [pull][podman-docs-pull] down the image we're going
 to be working in for the tutorial (note: if you did all the docker pulls in the setup instructions, this image will already be on your machine, in which case podman should notice it's there and not attempt to re-pull it unless it's changed in the meantime):
 
 ~~~bash
-podman pull matthewfeickert/intro-to-docker
+podman pull almalinux:9
 ~~~
 {: .source}
 
 > ## No search registry defined
-> Some installations of Podman may end with an error like `Error: unable to pull matthewfeickert/intro-to-docker:latest: unable to find registry in the system`.
+> Some installations of Podman may end with an error like `Error: unable to pull almalinux:9: unable to find registry in the system`.
 > This is because the default registry is not defined. You can fix this by adding the `docker.io` registry at the command:
 > ~~~bash
-> podman pull docker.io/matthewfeickert/intro-to-docker
+> podman pull docker.io/almalinux:9
 > ~~~
 >
 > Or, to pull images by default from Docker Hub, adding the following line to the `/etc/containers/registries.conf` file:
@@ -80,31 +80,31 @@ If you have many images and want to get information on a particular one you can 
 filter, such as the repository name
 
 ~~~bash
-podman images matthewfeickert/intro-to-docker
+podman images almalinux:9
 ~~~
 {: .source}
 
 ~~~
-REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 months ago        1.49GB
+REPOSITORY                   TAG         IMAGE ID      CREATED      SIZE
+docker.io/library/almalinux  9           b894a52b4112  5 weeks ago  196 MB
 ~~~
 {: .output}
 
 or more explicitly
 
 ~~~bash
-podman images --filter=reference="matthewfeickert/intro-to-docker"
+podman images --filter=reference="almalinux:9"
 ~~~
 {: .source}
 
 ~~~
-REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-matthewfeickert/intro-to-docker   latest              cf6508749ee0        3 months ago        1.49GB
+REPOSITORY                   TAG         IMAGE ID      CREATED      SIZE
+docker.io/library/almalinux  9           b894a52b4112  5 weeks ago  196 MB
 ~~~
 {: .output}
 
 You can see here that there is the `TAG` field associated with the
-`matthewfeickert/intro-to-docker` image.
+`almalinux` image.
 Tags are a way of further specifying different versions of the same image.
 As an example, let's pull the buster-slim release tag of the
 [Debian image](https://hub.docker.com/_/debian) (again, if it was already pulled during setup, podman won't attempt to re-pull it unless it's changed since last pulled).

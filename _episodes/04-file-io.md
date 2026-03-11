@@ -22,7 +22,7 @@ for creating a new file called io_example.txt and then copying it to the contain
 ~~~bash
 touch io_example.txt
 echo "This was written on local host" > io_example.txt
-podman cp io_example.txt <NAME>:/home/docker/data/
+podman cp io_example.txt <NAME>:/
 ~~~
 {: .source}
 
@@ -47,8 +47,8 @@ echo "This was written inside the container" >> io_example.txt
 {: .callout}
 
 ~~~
-/home/docker/data
-io_example.txt
+/
+afs  bin  dev  etc  home  io_example.txt  lib  lib64  media  mnt  opt  proc  root  run	sbin  srv  sys	test.txt  tmp  usr  var
 This was written on local host
 ~~~
 {: .output}
@@ -56,7 +56,7 @@ This was written on local host
 and then on the local host copy the file out of the container
 
 ~~~bash
-podman cp <NAME>:/home/docker/data/io_example.txt .
+podman cp <NAME>:/io_example.txt .
 ~~~
 {: .source}
 
@@ -89,7 +89,7 @@ For example, to mount your current working directory (``$PWD``) on your local ma
 directory in the example container
 
 ~~~bash
-podman run --rm -it -v $PWD:/home/docker/data matthewfeickert/intro-to-docker
+podman run --rm -it -v $PWD:/data almalinux:9
 ~~~
 {: .source}
 
@@ -119,6 +119,7 @@ From inside the container you can `ls` to see the contents of your directory on 
 machine
 
 ~~~bash
+cd data
 ls
 ~~~
 {: .source}
@@ -131,7 +132,7 @@ pwd
 {: .source}
 
 ~~~
-/home/docker/data
+/data
 ~~~
 {: .output}
 
@@ -149,7 +150,7 @@ ls *.txt
 >Note that SELinux is enabled if the output of the command `getenforce status` is `Enforcing`.
 >To fix the permission issue, append `:z` (lowercase!) at the end of the mount option, like this:
 >```bash
->podman run --rm -it -v $PWD:/home/docker/data:z ...
+>podman run --rm -it -v $PWD:/data:z ...
 >```
 >If this still does not fix the issue you can disable SELinux by running `sudo setenforce 0`, or you can try using `sudo` to execute docker/podman commands, but neither of these methods is recommended.
 {: .callout}
