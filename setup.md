@@ -66,7 +66,6 @@ podman pull docker.io/almalinux:9
 podman pull docker.io/debian:buster-slim
 podman pull docker.io/python:2.7-slim
 podman pull docker.io/python:3.7-slim
-podman pull docker.io/rootproject/root:6.22.06-conda
 ~~~
 
 ## Analysis Code
