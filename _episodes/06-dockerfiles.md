@@ -302,7 +302,7 @@ ADD --unpack=true <src> <dest>
 As an example, let's compile a simple [`main.c`][c-file] file from a remote url:
 ~~~dockerfile
 # Dockerfile.add
-FROM almalinux
+FROM almalinux:9
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
 RUN dnf -y update && \
     dnf -y upgrade && \
@@ -342,7 +342,7 @@ Let's improve on the `Dockerfile.add` example by only copying over the compiled 
 
 ~~~dockerfile
 # Dockerfile.multistage
-FROM almalinux AS build
+FROM almalinux:9 AS build
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
 RUN dnf -y update && \
     dnf -y upgrade && \
@@ -351,7 +351,7 @@ RUN dnf -y update && \
     rm -rf /var/cache/dnf
 RUN clang main.c -o main
 
-FROM almalinux
+FROM almalinux:9
 COPY --from=build main .
 ~~~
 {: .source}
