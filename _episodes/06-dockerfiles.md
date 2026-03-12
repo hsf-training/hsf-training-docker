@@ -13,6 +13,7 @@ keypoints:
 - "Images are built with `podman build`"
 - "Images can have multiple tags associated to them"
 - "Images can use `COPY` to copy files into them during build"
+- "Images can use `ADD` to copy remote files and extract compressed files"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/NSVXBgYSkBY?si=pAZsMxfkZ2imcL52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -279,6 +280,55 @@ For very complex scripts or files that are on some remote, `COPY` offers a strai
 way to bring them into the container image build.
 
 
+## `ADD`
+
+The `ADD` command is very similar to the `COPY` command, except that the `ADD` command supports two additional features:
+1. Automatic de-compression of compressed files.
+2. Automatic fetching of remote URLs (starting with `http://` or `https://`) and cloning of git repositories (starting with `git@`).
+
+When these features are not required, [`COPY` is preferred][add-or-copy].
+
+Note that
+- local compressed files are unpacked by default
+- remote compressed files are not unpacking by default
+
+This behaviour can be changed by adding a `--unpack=true` or `--unpack=false` flag immediately after the `ADD` command.
+~~~yaml
+ADD --unpack=true <src> <dest>
+~~~
+{: .source}
+
+As an example, let's compile a simple [`main.c`][c-file] file from a remote url
+~~~yaml
+FROM almalinux
+ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
+RUN dnf -y update && \
+    dnf -y upgrade && \
+    dnf -y install clang && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf
+RUN clang main.c -o main
+~~~
+{: .source}
+
+~~~bash
+podman build -f Dockerfile.add -t add-example
+~~~
+{: .source}
+
+then, you can run the compiled executable with
+~~~bash
+podman run --rm add-example ./main
+~~~
+{: .source}
+
+~~~
+hello world
+~~~
+{: .output}
+
+
+
 [docker-docs-builder]: https://docs.docker.com/engine/reference/builder/
 [example-Dockerfile]: https://github.com/matthewfeickert/intro-to-docker/blob/feat/update-2021-bootcamp/docker/Dockerfile
 [python-docker-image]: https://hub.docker.com/_/python
@@ -287,5 +337,8 @@ way to bring them into the container image build.
 [podman-docs-build]: https://docs.podman.io/en/stable/markdown/podman-build.1.html
 [podman-docs-tag]: https://docs.podman.io/en/latest/markdown/podman-tag.1.html
 [docker-docs-COPY]: https://docs.docker.com/engine/reference/builder/#copy
+[add-or-copy]: https://docs.docker.com/build/building/best-practices/#add-or-copy
+[c-file]: https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c
+
 
 {% include links.md %}
