@@ -1,7 +1,7 @@
 ---
 title: "Writing Dockerfiles and Building Images"
 teaching: 30
-exercises: 10
+exercises: 20
 questions:
 - "How are Dockerfiles written?"
 - "How are images built?"
@@ -14,6 +14,7 @@ keypoints:
 - "Images can have multiple tags associated to them"
 - "Images can use `COPY` to copy files into them during build"
 - "Images can use `ADD` to copy remote files and extract compressed files"
+- "Images can use multistage builds to reduce their final size"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/NSVXBgYSkBY?si=pAZsMxfkZ2imcL52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -327,6 +328,75 @@ hello world
 ~~~
 {: .output}
 
+## Multi-Stage Builds
+The tools you use to build your image are often not necessary for a user of the image.
+
+To dramatically reduce the final image size, we can separate the build process into multiple stages by using multiple `FROM` statements.
+Each `FROM` statement specifies an independent image up until the next `FROM` statement.
+By default, nothing is copied between images, and only the image specified by the final `FROM` statement is saved with the tag that you provide.
+
+Files can be copied between stages using the [`COPY --from=<stage>`][copy-from] syntax.
+
+Let's improve on the `Dockerfile.add` example by only copying over the compiled executable:
+
+~~~yaml
+# Dockerfile.multistage
+FROM almalinux AS build
+ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
+RUN dnf -y update && \
+    dnf -y upgrade && \
+    dnf -y install clang && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf
+RUN clang main.c -o main
+
+FROM almalinux
+COPY --from=build main .
+~~~
+{: .source}
+
+> ## Build compatibility
+>
+> Docker [recommends][from-alpine] using the simple and small Alpine linux image when possible.
+> However, programs compiled with one image may not run on another, so in this example I'm using almalinux for both the build stage and the final stage.
+{: .callout}
+
+
+~~~bash
+podman build -f Dockerfile.multistage -t multistage-example
+~~~
+{: .source}
+
+Podman will cache the build stage for further use, so this multi-staged method has the added benefit that making changes to the second stage won't require rebuilding of the first stage.
+
+The `FROM <image> as <name>` syntax lets us reference the build stage by its `<name>` with the `COPY --from=<name>` command. Without this we would have to reference the build stages in the order they appear (`COPY --from=<0,1,2,...>`).
+
+Now, lets look at the sizes of the `Dockerfile.multistage` image versus the `Dockerfile.add` image:
+
+~~~bash
+podman images --filter reference=multistage* --filter reference=add*
+~~~
+{: .source}
+
+~~~
+REPOSITORY                    TAG         IMAGE ID      CREATED        SIZE
+localhost/multistage-example  latest      ac9640ee042b  4 minutes ago  190 MB
+localhost/add-example         latest      6d2f891efd09  4 minutes ago  777 MB
+~~~
+{: .output}
+
+Our multistage build saves 570 MB and is 1/4 the size of the single stage build, while still producing the same results for someone using the image.
+
+~~~bash
+podman run --rm multistage-example ./main
+~~~
+{: .source}
+
+~~~
+hello world
+~~~
+{: .output}
+
 
 
 [docker-docs-builder]: https://docs.docker.com/engine/reference/builder/
@@ -339,6 +409,8 @@ hello world
 [docker-docs-COPY]: https://docs.docker.com/engine/reference/builder/#copy
 [add-or-copy]: https://docs.docker.com/build/building/best-practices/#add-or-copy
 [c-file]: https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c
+[copy-from]: https://docs.docker.com/reference/dockerfile/#copy---from
+[from-alpine]: https://docs.docker.com/build/building/best-practices/#from
 
 
 {% include links.md %}
