@@ -301,6 +301,7 @@ ADD --unpack=true <src> <dest>
 
 As an example, let's compile a simple [`main.c`][c-file] file from a remote url:
 ~~~dockerfile
+# Dockerfile.add
 FROM almalinux
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
 RUN dnf -y update && \
