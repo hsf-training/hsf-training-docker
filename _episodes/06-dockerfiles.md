@@ -40,7 +40,7 @@ touch Dockerfile
 and then write in it the Docker engine instructions to add [`cowsay`][cowsay] and
 [`scikit-learn`][scikit-learn] to the environment
 
-~~~yaml
+~~~dockerfile
 # Dockerfile
 
 # Specify the base image that we're building the image on top of
@@ -197,7 +197,7 @@ build with the [`COPY`][docker-docs-COPY] Dockerfile command.
 Which allows copying a target file from a host file system into the image
 file system
 
-~~~yaml
+~~~dockerfile
 COPY <path on host> <path in container image>
 ~~~
 {: .source}
@@ -239,7 +239,7 @@ touch Dockerfile.copy
 
 and fill it with a modified version of the above Dockerfile, where we now copy `install_python_deps.sh` from the local working directory into the container and use it to install the specified python dependencies:
 
-~~~yaml
+~~~dockerfile
 # Dockerfile.copy
 
 # Specify the base image that we're building the image on top of
@@ -294,13 +294,13 @@ Note that
 - remote compressed files are not unpacked by default
 
 This behaviour can be changed by adding a `--unpack=true` or `--unpack=false` flag immediately after the `ADD` command:
-~~~yaml
+~~~dockerfile
 ADD --unpack=true <src> <dest>
 ~~~
 {: .source}
 
 As an example, let's compile a simple [`main.c`][c-file] file from a remote url:
-~~~yaml
+~~~dockerfile
 FROM almalinux
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
 RUN dnf -y update && \
@@ -339,7 +339,7 @@ Files can be copied between stages using the [`COPY --from=<stage>`][copy-from] 
 
 Let's improve on the `Dockerfile.add` example by only copying over the compiled executable:
 
-~~~yaml
+~~~dockerfile
 # Dockerfile.multistage
 FROM almalinux AS build
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .

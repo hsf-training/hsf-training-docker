@@ -22,7 +22,7 @@ keypoints:
 
 Python packages can be installed using a Docker image. The following example illustrates how to write a Dockerfile for building an image containing python packages.
 
-```docker
+```dockerfile
 FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive

@@ -66,7 +66,7 @@ touch Dockerfile.defaults
 ~~~
 {: .source}
 
-~~~yaml
+~~~dockerfile
 # Dockerfile.defaults
 # Make the base image configurable
 ARG BASE_IMAGE=python:3.9-slim
