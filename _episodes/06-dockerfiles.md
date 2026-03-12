@@ -14,7 +14,7 @@ keypoints:
 - "Images can have multiple tags associated to them"
 - "Images can use `COPY` to copy files into them during build"
 - "Images can use `ADD` to copy remote files and extract compressed files"
-- "Images can use multistage builds to reduce their final size"
+- "Images can use multi-stage builds to reduce their final size"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/NSVXBgYSkBY?si=pAZsMxfkZ2imcL52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -291,15 +291,15 @@ When these features are not required, [`COPY` is preferred][add-or-copy].
 
 Note that
 - local compressed files are unpacked by default
-- remote compressed files are not unpacking by default
+- remote compressed files are not unpacked by default
 
-This behaviour can be changed by adding a `--unpack=true` or `--unpack=false` flag immediately after the `ADD` command.
+This behaviour can be changed by adding a `--unpack=true` or `--unpack=false` flag immediately after the `ADD` command:
 ~~~yaml
 ADD --unpack=true <src> <dest>
 ~~~
 {: .source}
 
-As an example, let's compile a simple [`main.c`][c-file] file from a remote url
+As an example, let's compile a simple [`main.c`][c-file] file from a remote url:
 ~~~yaml
 FROM almalinux
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
@@ -369,7 +369,7 @@ podman build -f Dockerfile.multistage -t multistage-example
 
 Podman will cache the build stage for further use, so this multi-staged method has the added benefit that making changes to the second stage won't require rebuilding of the first stage.
 
-The `FROM <image> as <name>` syntax lets us reference the build stage by its `<name>` with the `COPY --from=<name>` command. Without this we would have to reference the build stages in the order they appear (`COPY --from=<0,1,2,...>`).
+The `FROM <image> AS <name>` syntax lets us reference the build stage by its `<name>` with the `COPY --from=<name>` command. Without this we would have to reference the build stages in the order they appear (`COPY --from=<0,1,2,...>`).
 
 Now, lets look at the sizes of the `Dockerfile.multistage` image versus the `Dockerfile.add` image:
 
@@ -385,7 +385,7 @@ localhost/add-example         latest      6d2f891efd09  4 minutes ago  777 MB
 ~~~
 {: .output}
 
-Our multistage build saves 570 MB and is 1/4 the size of the single stage build, while still producing the same results for someone using the image.
+Our multi-stage build saves 570 MB and is 1/4 the size of the single stage build, while still producing the same results for someone using the image:
 
 ~~~bash
 podman run --rm multistage-example ./main
