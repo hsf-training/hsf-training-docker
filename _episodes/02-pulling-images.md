@@ -12,7 +12,7 @@ objectives:
 keypoints:
 - "Pull images with `podman pull <image-id>`"
 - "List all images on the computer and other information with `podman images`"
-- "Image tags distinguish releases or version and are appended to the image name with a colon"
+- "Image tags distinguish releases or versions and are appended to the image name with a colon"
 ---
 <iframe width="427" height="251" src="https://www.youtube.com/embed/Wkqt0eJihIA?si=qFVGhTygicu43JUm" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -26,7 +26,7 @@ allows for downloading images as they are needed.
 Additionally, through integrations with GitHub and Bitbucket, Docker Hub repositories can
 be linked against Git repositories so that
 [automated builds of Dockerfiles on Docker Hub][docker-hub-builds] will be triggered by
-pushes to repositories. However, at this moment enabling such a feature requires a Pro (paid) account
+pushes to repositories. However, at this moment, enabling such a feature requires a Pro (paid) account
 or joining the [Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/).
 There are other ways of doing this, such as using GitLab/GitHub CI/CD, but that's beyond the scope of this training module.
 
@@ -40,7 +40,7 @@ There are other ways of doing this, such as using GitLab/GitHub CI/CD, but that'
 
 # Pulling Images
 
-To begin with we're going to [pull][podman-docs-pull] down the image we're going
+To begin with, we're going to [pull][podman-docs-pull] down the image we're going
 to be working in for the tutorial (note: if you did all the docker pulls in the setup instructions, this image will already be on your machine, in which case podman should notice it's there and not attempt to re-pull it unless it's changed in the meantime):
 
 ~~~bash
@@ -50,12 +50,12 @@ podman pull almalinux:9
 
 > ## No search registry defined
 > Some installations of Podman may end with an error like `Error: unable to pull almalinux:9: unable to find registry in the system`.
-> This is because the default registry is not defined. You can fix this by adding the `docker.io` registry at the command:
+> This is because the default registry is not defined. You can fix this by adding the `docker.io` registry to the command:
 > ~~~bash
 > podman pull docker.io/almalinux:9
 > ~~~
 >
-> Or, to pull images by default from Docker Hub, adding the following line to the `/etc/containers/registries.conf` file:
+> Or, to pull images by default from Docker Hub, by adding the following line to the `/etc/containers/registries.conf` file:
 > ~~~bash
 > unqualified-search-registries=["docker.io"]
 > ~~~
@@ -63,7 +63,7 @@ podman pull almalinux:9
 {: .callout}
 
 > ## Connection errors
-> If using Podman or Docker in a non-Linux machine you run into an error like `Error: unable to connect to Podman`,
+> If using Podman or Docker on a non-Linux machine, you run into an error like `Error: unable to connect to Podman`,
 > make sure that the Podman or Docker desktop application is running.
 >
 > Remember that in such environments, Podman or Docker use a virtual machine to run the containers.
@@ -76,7 +76,7 @@ podman images
 ~~~
 {: .source}
 
-If you have many images and want to get information on a particular one you can apply a
+If you have many images and want to get information on a particular one, you can apply a
 filter, such as the repository name
 
 ~~~bash
@@ -133,7 +133,7 @@ Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-ima
 
 > ## Pulling Python
 >
-> Pull the image python:3.9-slim for Python 3.9 and then list all `python` images on your computer.
+> Pull the image python:3.9-slim for Python 3.9, and then list all `python` images on your computer.
 >
 > Browse [the official Python images][docker-hub-python] to find available tags and
 > read about image variants. What does `-slim` mean?
@@ -152,7 +152,7 @@ Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-ima
 > > ~~~
 > >
 > >* `python:<version>-slim`: This image does not contain the common packages contained in the default
-> >tag and only contains the minimal packages needed to run python
+> >tag and only contains the minimal packages needed to run Python
 > > {: .output}
 > {: .solution}
 {: .challenge}
