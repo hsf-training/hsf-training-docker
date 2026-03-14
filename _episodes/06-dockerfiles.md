@@ -23,13 +23,13 @@ Container engines like Podman or Docker pull the images from repositories or loc
 Container engines can also build and save to a repository new container images, interactively or following a set of instructions, starting from scratch or modifying an existing image.
 
 A common way of defining the instructions to build a container image is through a [Dockerfile][docker-docs-builder].
-These text based documents provide the instructions through an API similar to the Linux
+These text-based documents provide the instructions through an API similar to the Linux
 operating system commands to execute commands during the build.
 
 Like Docker, Podman also uses `Dockerfile`s to build images, so the same instructions can be used for both tools.
-We will continue with Podman throughout this lesson but the same commands can be used with Docker.
+We will continue with Podman throughout this lesson, but the same commands can be used with Docker.
 
-As a very simple example of extending the example image into a new image create a `Dockerfile`
+As a very simple example of extending the example image, into a new image create a `Dockerfile`
 on your local machine
 
 ~~~bash
@@ -74,13 +74,13 @@ USER docker
 > ## Dockerfile layers (or: why all these '&&'s??)
 >
 >Each `RUN` command in a Dockerfile creates a new layer to the image.
->In general, each layer should try to do one job and the fewer layers in an image
-> the easier it is compress.
+>In general, each layer should try to do one job, and the fewer layers in an image,
+> the easier it is to compress.
 >
 > This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will run in a pipeline and will take place in a single layer
-> When trying to upload and download images on demand the smaller the size the better.
+> When trying to upload and download images on demand, the smaller the size, the better.
 >
-> Another thing to keep in mind is that each `RUN` command occurs in its own shell, so any environment variables, etc. set in one `RUN` command will not persist to the next.
+> Another thing to keep in mind is that each `RUN` command occurs in its own shell, so any environment variables, etc., set in one `RUN` command will not persist to the next.
 {: .callout}
 
 > ## Garbage cleanup
@@ -89,12 +89,12 @@ USER docker
 
 > ## Don't run as `root`
 >
->By default Docker containers will run as `root`. This is a bad idea and a security concern.
->Instead, setup a default user (like `docker` in the example) and if needed give the user
+>By default, Docker containers will run as `root`. This is a bad idea and a security concern.
+>Instead, set up a default user (like `docker` in the example) and, if needed, give the user
 >greater privileges.
 {: .callout}
 
-Then [`build`][podman-docs-build] an image from the `Dockerfile` with Podman and tag it with a
+Then, [`build`][podman-docs-build] an image from the `Dockerfile` with Podman and tag it with a
 human-readable name
 
 ~~~bash
@@ -146,8 +146,8 @@ while `localhost` indicates that the image was built locally.
 
 ## Tags
 
-In the examples so far the built image has been tagged with a single tag (e.g. `latest`).
-However, tags are simply arbitrary labels meant to help identify images and images can
+In the examples so far, the built image has been tagged with a single tag (e.g., `latest`).
+However, tags are simply arbitrary labels meant to help identify images, and images can
 have multiple tags.
 New tags can be specified in the `podman build` (or `docker build`) command by giving the `-t` flag multiple
 times or they can be specified after an image is built by using
@@ -194,7 +194,7 @@ podman tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 
 Podman also gives you the ability to copy external files into a container image during the
 build with the [`COPY`][docker-docs-COPY] Dockerfile command.
-Which allows copying a target file from a host file system into the image
+This allows copying a target file from a host file system into the image
 file system
 
 ~~~dockerfile
@@ -227,7 +227,7 @@ pip install --no-cache-dir -q scikit-learn
 ~~~
 {: .output}
 
-then this could be copied into the container image of the previous example during the build
+Then, this could be copied into the container image of the previous example during the build
 and then used (and then removed as it is no longer needed).
 
 Create a new file called `Dockerfile.copy`:
@@ -237,7 +237,7 @@ touch Dockerfile.copy
 ~~~
 {: .source}
 
-and fill it with a modified version of the above Dockerfile, where we now copy `install_python_deps.sh` from the local working directory into the container and use it to install the specified python dependencies:
+and fill it with a modified version of the above Dockerfile, where we now copy `install_python_deps.sh` from the local working directory into the container and use it to install the specified Python dependencies:
 
 ~~~dockerfile
 # Dockerfile.copy
@@ -284,7 +284,7 @@ way to bring them into the container image build.
 ## `ADD`
 
 The `ADD` command is very similar to the `COPY` command, except that the `ADD` command supports two additional features:
-1. Automatic de-compression of compressed files.
+1. Automatic decompression of compressed files.
 2. Automatic fetching of remote URLs (starting with `http://` or `https://`) and cloning of git repositories (starting with `git@`).
 
 When these features are not required, [`COPY` is preferred][add-or-copy].
@@ -318,7 +318,7 @@ podman build -f Dockerfile.add -t add-example
 ~~~
 {: .source}
 
-then, you can run the compiled executable with
+Then, you can run the compiled executable with
 ~~~bash
 podman run --rm add-example ./main
 ~~~
@@ -358,8 +358,8 @@ COPY --from=build main .
 
 > ## Build compatibility
 >
-> Docker [recommends][from-alpine] using the simple and small Alpine linux image when possible.
-> However, programs compiled with one image may not run on another, so in this example I'm using almalinux for both the build stage and the final stage.
+> Docker [recommends][from-alpine] using the simple and small Alpine Linux image when possible.
+> However, programs compiled with one image may not run on another, so in this example, I'm using almalinux for both the build stage and the final stage.
 {: .callout}
 
 
@@ -370,9 +370,9 @@ podman build -f Dockerfile.multistage -t multistage-example
 
 Podman will cache the build stage for further use, so this multi-staged method has the added benefit that making changes to the second stage won't require rebuilding of the first stage.
 
-The `FROM <image> AS <name>` syntax lets us reference the build stage by its `<name>` with the `COPY --from=<name>` command. Without this we would have to reference the build stages in the order they appear (`COPY --from=<0,1,2,...>`).
+The `FROM <image> AS <name>` syntax lets us reference the build stage by its `<name>` with the `COPY --from=<name>` command. Without this, we would have to reference the build stages in the order they appear (`COPY --from=<0,1,2,...>`).
 
-Now, lets look at the sizes of the `Dockerfile.multistage` image versus the `Dockerfile.add` image:
+Now, let's look at the sizes of the `Dockerfile.multistage` image versus the `Dockerfile.add` image:
 
 ~~~bash
 podman images --filter reference=multistage* --filter reference=add*
@@ -386,7 +386,7 @@ localhost/add-example         latest      6d2f891efd09  4 minutes ago  777 MB
 ~~~
 {: .output}
 
-Our multi-stage build saves 570 MB and is 1/4 the size of the single stage build, while still producing the same results for someone using the image:
+Our multi-stage build saves 570 MB and is 1/4 the size of the single-stage build, while still producing the same results for someone using the image:
 
 ~~~bash
 podman run --rm multistage-example ./main
