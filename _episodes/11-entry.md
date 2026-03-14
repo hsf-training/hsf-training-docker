@@ -13,7 +13,7 @@ keypoints:
 - "`ENTRYPOINT` allows you to configure commands that will always run for an executing container"
 ---
 
-So far every time we've run the containers we've typed
+So far, every time we've run the containers we've typed
 
 ~~~bash
 podman run --rm -it <IMAGE>:<TAG> <command>
@@ -39,7 +39,7 @@ SHELL=/bin/bash
 ~~~
 {: .output}
 
-However, if no `/bin/bash` is given then you are placed inside the Python 3.9 REPL.
+However, if no `/bin/bash` is given, then you are placed inside the Python 3.9 REPL.
 
 ~~~bash
 podman run --rm -it python:3.9-slim
@@ -114,7 +114,7 @@ podman run --rm -it defaults-example:latest python3
 
 The [`ENTRYPOINT`][docker-docs-ENTRYPOINT] builder command allows to define a command or
 commands that are **always** run at the "entry" to the container.
-If an `ENTRYPOINT` has been defined then `CMD` provides optional inputs to the `ENTRYPOINT`.
+If an `ENTRYPOINT` has been defined, then `CMD` provides optional inputs to the `ENTRYPOINT`.
 
 Create a file named `entrypoint.sh`
 ~~~bash
@@ -200,7 +200,7 @@ podman run --rm -it defaults-example:latest
 > ## All about `ENTRYPOINT` and `CMD`
 >
 > ENTRYPOINT and CMD can be both in "exec" or "shell" form, although we recommend to use exec form.
-> Exec form must be an array of comma separated quoted arguments and it us executed via the Linux `execv()`. E.g. `CMD ["/usr/bin/ls", "-al"]`
+> Exec form must be an array of comma-separated quoted arguments, and it is executed via the Linux `execv()`. E.g. `CMD ["/usr/bin/ls", "-al"]`
 > Anything else, also if you forget just the quotes, will be considered shell form, it is passed by Docker/Podman to `/bin/sh -c`
 > (as written, with quotes, parentheses, ...), and can use shell features like PATH and expansion. E.g. `CMD ls -al`
 >
