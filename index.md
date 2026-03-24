@@ -23,7 +23,7 @@ Originally developed by Matthew Feickert for the [**2019 USATLAS Computing Bootc
 >
 > - Understand the concept of containers and their role in reproducible research.
 > - Explain the purpose of containerization tools such as Docker and Podman.
-> - Download (pull), run, and manage container images and containers.
+> - Download (pull), run, and manage container images and container instances.
 > - Understand how containers interact with the local file system.
 > - Write and build basic container images using Dockerfiles.
 > - Explain how containers can be shared to support reproducibility and collaboration.
