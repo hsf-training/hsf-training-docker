@@ -3,8 +3,7 @@ layout: lesson
 root: .  # Is the only page that doesn't follow the pattern /:path/index.html
 permalink: index.html  # Is the only page that doesn't follow the pattern /:path/index.html
 ---
-An introduction to using [Docker](https://www.docker.com/) and [Podman](https://podman.io/) as software
-development tools.
+The aim of this module is to introduce [Docker](https://www.docker.com/) and [Podman](https://podman.io/) as software development tools and to explore their role in reproducible research.
 
 Originally developed by Matthew Feickert for the [**2019 USATLAS Computing Bootcamp** at LBNL](https://smeehan12.github.io/2019-08-19-usatlas-computing-bootcamp/).
 
