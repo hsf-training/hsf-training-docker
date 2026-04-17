@@ -166,6 +166,100 @@ For example, debugging problems with software that arise on cross-platform softw
 even just having a specific version of software perform a task (e.g., using Python 2 when
     you don't want it on your machine, or using a specific release of
     [TeX Live][Tex-Live-image] when you aren't ready to update your system release).
+    
+    
+# (Optional) Volume mounting on macOS
+As previously mentioned, Podman on macOS will create a virtual machine to run containers in.
+
+When you run a command like
+~~~bash
+podman run --rm -it -v $PWD:/data almalinux:9
+~~~
+{: .source}
+
+the environment variable `$PWD` will be expanded on the macOS machine (the host), but the volume mounting will be performed between the virtual machine (VM) and the podman container.
+This means that the path `$PWD` must already be mounted between the host and the VM for the `podman run` command to be able to link the path `$PWD` from the VM to the container.
+
+Podman automatically mounts the host's `/Users` to the VM's `/Users`.
+So, as long as the `$PWD` path is a sub-path of the host's `/Users`, is will already be mounted on the VM, and can be then mounted to the container as shown above with the `podman run` command.
+
+
+If you want to mount a path on your host macOS machine not under `/Users`, you will first have to manually mount that path to the VM.
+For example, let's create a file at `/private/tmp/data/datum` (`/private/tmp` is the the path that `/tmp` links to on macOS).
+~~~bash
+# host
+mkdir /private/tmp/data
+touch /private/tmp/data/datum
+~~~
+{: .source}
+
+Then, we will need to recreate the VM with the `/private/tmp/data` host directory mounted to the `/data` VM directory.
+~~~bash
+# host
+podman machine stop
+podman machine rm
+podman machine init -v /private/tmp/data:/data -v /Users:/Users
+podman machine start
+~~~
+{: .source}
+
+Note that `podman machine init -v /private/tmp/data:/data` alone would override the default `/Users:/Users` mounting done by `podman machine init`. Adding the `-v /Users:/Users` flag ensures that these paths remains mounted.
+
+You can check that this directory is mounted properly by connecting to the VM and looking for it under `/data`
+~~~bash
+# host
+podman machine ssh
+~~~
+{: .source}
+
+
+~~~bash
+# VM
+ls /data
+~~~
+{: .source}
+
+
+~~~
+datum
+~~~
+{: .output}
+
+Now (after exiting the VM to go back to the host machine), we can mount the VM `/data` directory to a container `/data` directory by running
+~~~bash
+# host
+podman run --rm -it -v /data:/data almalinux:9
+~~~
+{: .source}
+
+You can check that the file was properly mounted in the container with
+~~~bash
+# container
+ls /data
+~~~
+{: .source}
+
+~~~
+datum
+~~~
+{: .output}
+
+
+<figure>
+<img src="../fig/macos_volume_mounting.svg" alt="Volume mounting on macOS diagram" width=800px />
+  <figcaption>
+    <i>Volume mounting from host to VM to container</i>
+  </figcaption>
+</figure>
+
+
+
+
+
+
+
+
+    
 
 <!--# Running Jupyter from a Docker Container-->
 <!---->
@@ -210,3 +304,4 @@ even just having a specific version of software perform a task (e.g., using Pyth
 [jupyter-docs-server]: https://jupyter.readthedocs.io/en/latest/running.html#starting-the-notebook-server
 
 {% include links.md %}
+
