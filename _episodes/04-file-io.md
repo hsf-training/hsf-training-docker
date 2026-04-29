@@ -245,6 +245,17 @@ datum
 {: .output}
 
 
+Now run these commands to get you podman VM back into its original state for the rest of the tutorial
+~~~
+# host
+podman machine stop
+podman machine rm
+podman machine init
+podman machine start
+~~~
+{: source}
+
+
 <figure>
 <img src="../fig/macos_volume_mounting.svg" alt="Volume mounting on macOS diagram" width=800px />
   <figcaption>
