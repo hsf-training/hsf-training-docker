@@ -48,20 +48,6 @@ podman pull almalinux:9
 ~~~
 {: .source}
 
-> ## No search registry defined
-> Some installations of Podman may end with an error like `Error: unable to pull almalinux:9: unable to find registry in the system`.
-> This is because the default registry is not defined. You can fix this by adding the `docker.io` registry to the command:
-> ~~~bash
-> podman pull docker.io/almalinux:9
-> ~~~
->
-> Or, to pull images by default from Docker Hub, by adding the following line to the `/etc/containers/registries.conf` file:
-> ~~~bash
-> unqualified-search-registries=["docker.io"]
-> ~~~
->
-{: .callout}
-
 > ## Connection errors
 > If using Podman or Docker on a non-Linux machine, you run into an error like `Error: unable to connect to Podman`,
 > make sure that the Podman or Docker desktop application is running.
