@@ -77,7 +77,7 @@ The password is the CLI token found at https://registry.cern.ch/ in your account
 > 
 > If you're not on Linux, you will need to edit these configuration files from within the podman virtual linux machine.
 > You can do this by connectng the the VM with 
-> ~~~
+> ~~~bash
 > podman machine ssh
 > ~~~
 > {: .source}
@@ -85,14 +85,14 @@ The password is the CLI token found at https://registry.cern.ch/ in your account
 > and editing the configuration files there.
 > 
 > Once you are done, exit the VM
-> ~~~
+> ~~~bash
 > exit
 > ~~~
 > {: .source}
 {: .callout}
 
 If you do not have a CERN account , add the following lines to `/etc/containers/registries.conf` to use `docker.io`.
-~~~bash
+~~~toml
 # /etc/containers/registries.conf
 
 unqualified-search-registries=["docker.io"]
@@ -110,6 +110,7 @@ unqualified-search-registries=["docker.io"]
 prefix = "docker.io"
 location = "registry.cern.ch/docker.io"
 ```
+{: .source}
 
 This will first set the default registry to `docker.io`, then it will map `docker.io` to `registry.cern.ch/docker.io`.
 This means that images pulled from `registry.cern.ch/docker.io` appear as if they're coming from `docker.io`.
