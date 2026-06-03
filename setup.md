@@ -76,7 +76,7 @@ The password is the CLI token found at https://registry.cern.ch/ in your account
 > ## MacOS and Windows users
 >
 > If you're not on Linux, you will need to edit these configuration files from within the podman virtual linux machine.
-> You can do this by connectng the the VM with
+> You can do this by connecting the the VM with
 > ~~~bash
 > podman machine ssh
 > ~~~
@@ -133,7 +133,7 @@ this will, by default, be equivalent to
 docker run docker.io/hello-world
 ~~~
 {: .source}
-To pull from the CERN regsitry, you can instead do
+To pull from the CERN registry, you can instead do
 ~~~bash
 docker run registry.cern.ch/docker.io/hello-world
 ~~~
