@@ -121,7 +121,7 @@ python3 -c "import sklearn as sk; print(sk)"
             (__)\       )\/\
                 ||----w |
                 ||     ||
-                
+
 scikit-learn    1.6.1
 <module 'sklearn' from '/usr/local/lib64/python3.9/site-packages/sklearn/__init__.py'>
 ~~~

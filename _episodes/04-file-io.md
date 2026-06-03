@@ -166,8 +166,8 @@ For example, debugging problems with software that arise on cross-platform softw
 even just having a specific version of software perform a task (e.g., using Python 2 when
     you don't want it on your machine, or using a specific release of
     [TeX Live][Tex-Live-image] when you aren't ready to update your system release).
-    
-    
+
+
 # (Optional) Volume mounting on macOS
 As previously mentioned, Podman on macOS will create a virtual machine to run containers in.
 
@@ -270,7 +270,7 @@ podman machine start
 
 
 
-    
+
 
 <!--# Running Jupyter from a Docker Container-->
 <!---->
@@ -315,4 +315,3 @@ podman machine start
 [jupyter-docs-server]: https://jupyter.readthedocs.io/en/latest/running.html#starting-the-notebook-server
 
 {% include links.md %}
-

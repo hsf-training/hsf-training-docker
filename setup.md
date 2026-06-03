@@ -74,16 +74,16 @@ The password is the CLI token found at https://registry.cern.ch/ in your account
 ### Podman
 
 > ## MacOS and Windows users
-> 
+>
 > If you're not on Linux, you will need to edit these configuration files from within the podman virtual linux machine.
-> You can do this by connectng the the VM with 
+> You can do this by connectng the the VM with
 > ~~~bash
 > podman machine ssh
 > ~~~
 > {: .source}
 >
 > and editing the configuration files there.
-> 
+>
 > Once you are done, exit the VM
 > ~~~bash
 > exit
@@ -121,9 +121,9 @@ This mapping can have some unintended side effects, and so if it is causing any 
 ### Docker
 Docker uses `docker.io` by default.
 
-If you are a CERN user and want/need to use the CERN registry, you can prepend `registry.cern.ch/docker.io/` to each image name 
+If you are a CERN user and want/need to use the CERN registry, you can prepend `registry.cern.ch/docker.io/` to each image name
 
-So, for example, the command in the next section (with Docker) is 
+So, for example, the command in the next section (with Docker) is
 ~~~bash
 docker run hello-world
 ~~~
