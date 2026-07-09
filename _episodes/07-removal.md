@@ -39,8 +39,6 @@ podman rm <CONTAINER NAME>
 > >CONTAINER ID        IMAGE         COMMAND             CREATED            STATUS                     PORTS               NAMES
 > ><generated id>      <image:tag>   "/bin/bash"         n seconds ago      Exited (0) t seconds ago                       <name>
 > >
-> ><generated id>
-> >
 > >CONTAINER ID        IMAGE         COMMAND             CREATED            STATUS                     PORTS               NAMES
 > > ~~~
 > > {: .output}

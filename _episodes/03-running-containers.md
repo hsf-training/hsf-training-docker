@@ -26,21 +26,21 @@ You can run in either a detached or foreground (interactive) mode.
 Run the image we pulled as a container with an interactive bash terminal:
 
 ~~~bash
-podman run -it matthewfeickert/intro-to-docker:latest /bin/bash
+podman run -it almalinux:9 /bin/bash
 ~~~
 {: .source}
 
 The `-i` option here enables the interactive session, the `-t` option gives access to a terminal and the `/bin/bash` command makes the container start up in a bash session.
 
-You are now inside the container in an interactive bash session. Check the file directory
+You are now inside the container in an interactive bash session. Try listing the files
 
 ~~~bash
-pwd
+ls
 ~~~
 {: .source}
 
 ~~~
-/home/docker/data
+afs  bin  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run	sbin  srv  sys	tmp  usr  var
 ~~~
 {: .output}
 
@@ -56,8 +56,7 @@ hostname
 ~~~
 {: .output}
 
-Further, check the `os-release` to see that you are actually inside a release of Debian
-(given the [Docker Library's Python image][docker-hub-python] Dockerfile choices)
+Further, check the `os-release` to see that you are actually inside a release of AlmaLinux
 
 ~~~bash
 cat /etc/os-release
@@ -65,27 +64,28 @@ cat /etc/os-release
 {: .source}
 
 ~~~
-PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
-NAME="Debian GNU/Linux"
-VERSION_ID="11"
-VERSION="11 (bullseye)"
-VERSION_CODENAME=bullseye
-ID=debian
-HOME_URL="https://www.debian.org/"
-SUPPORT_URL="https://www.debian.org/support"
-BUG_REPORT_URL="https://bugs.debian.org/"
+NAME="AlmaLinux"
+VERSION="9.7 (Moss Jungle Cat)"
+ID="almalinux"
+ID_LIKE="rhel centos fedora"
+VERSION_ID="9.7"
+PLATFORM_ID="platform:el9"
+PRETTY_NAME="AlmaLinux 9.7 (Moss Jungle Cat)"
+ANSI_COLOR="0;34"
+LOGO="fedora-logo-icon"
+CPE_NAME="cpe:/o:almalinux:almalinux:9::baseos"
+HOME_URL="https://almalinux.org/"
+DOCUMENTATION_URL="https://wiki.almalinux.org/"
+BUG_REPORT_URL="https://bugs.almalinux.org/"
+
+ALMALINUX_MANTISBT_PROJECT="AlmaLinux-9"
+ALMALINUX_MANTISBT_PROJECT_VERSION="9.7"
+REDHAT_SUPPORT_PRODUCT="AlmaLinux"
+REDHAT_SUPPORT_PRODUCT_VERSION="9.7"
+SUPPORT_END=2032-06-01
 ~~~
 {: .output}
 
-> ## Working directory
->
->You may be wondering why you are at `/home/docker/data` inside the container.
->This is the working directory that was set for the image.
->
-> In the next chapters we will see how to build your own images
-> and set parameters such as the working directory.
->{: .source}
-{: .callout}
 
 ## Monitoring Containers
 
@@ -137,7 +137,7 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 Alternatively, you can also give the container a name at creation, using the `--name ` option:
 
 ~~~bash
-podman run -it --name my-fancy-name matthewfeickert/intro-to-docker:latest /bin/bash
+podman run -it --name my-fancy-name almalinux:9 /bin/bash
 ~~~
 {: .source}
 
@@ -219,8 +219,7 @@ podman attach <CONTAINER ID>
 {: .callout}
 
 
-Notice that your entry point is still `/home/docker/data` and then check that your
-`test.txt` still exists
+Check that `test.txt` still exists
 
 ~~~bash
 ls
@@ -228,7 +227,7 @@ ls
 {: .source}
 
 ~~~
-test.txt
+afs  bin  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run	sbin  srv  sys	test.txt  tmp  usr  var
 ~~~
 {: .output}
 
