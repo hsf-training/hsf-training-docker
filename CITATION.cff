@@ -1,0 +1,60 @@
+cff-version: 1.2.0
+title: Introduction to Docker and Podman
+message: >-
+  Please cite this lesson using the metadata from this file when
+  you refer to it in publications or re-use, adapt, or expand on
+  the material in your own teaching.
+authors:
+  - given-names: Matthew
+    family-names: Feickert
+    orcid: https://orcid.org/0000-0003-4124-7862
+  - given-names: Brendan
+    family-names: Regnery
+    orcid: https://orcid.org/0000-0003-1539-923X
+  - given-names: Danika
+    family-names: Eamer
+    orcid: https://orcid.org/0000-0001-5533-6300
+  - given-names: Samuel
+    family-names: Meehan
+    orcid: https://orcid.org/0000-0002-3613-7514
+  - given-names: Marc
+    family-names: Huwiler
+    orcid: https://orcid.org/0000-0002-9806-5907
+  - given-names: Bruno
+    family-names: Alves
+    orcid: https://orcid.org/0000-0001-9752-0624
+  - given-names: Aman
+    family-names: Desai
+    orcid: https://orcid.org/0000-0003-2631-9696
+  - given-names: Marco
+    family-names: Donadoni
+    orcid: https://orcid.org/0000-0003-2922-5505
+  - given-names: Marco
+    family-names: Mambelli
+    orcid: https://orcid.org/0000-0002-9489-2681
+  - given-names: Michael K.
+    family-names: Wilkinson
+    orcid: https://orcid.org/0000-0001-6561-2145
+  - given-names: Michel
+    family-names: Hernandez Villanueva
+    orcid: https://orcid.org/0000-0002-6322-5587
+  - given-names: Valeriia
+    family-names: Lukashenko
+    orcid: https://orcid.org/0000-0002-0630-5185
+  - given-names: Clemens
+    family-names: Lange
+    orcid: https://orcid.org/0000-0002-3632-3157
+  - given-names: Max
+    family-names: Fatouros
+    orcid: https://orcid.org/0000-0002-7438-652X
+  - given-names: Laura
+    family-names: Marqués
+    orcid: https://orcid.org/0000-0002-3593-5557
+  - given-names: Henry
+    family-names: Lütcke
+    orcid: https://orcid.org/0000-0001-7225-4374
+abstract: >-
+  Introduce containers and their role in reproducible research. Participants will learn how to build, run, and share containers using tools like Docker and Podman.
+repository-code: https://github.com/hsf-training/hsf-training-docker
+url: https://hsf-training.github.io/hsf-training-docker/
+license: CC-BY-4.0
