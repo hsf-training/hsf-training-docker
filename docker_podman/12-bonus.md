@@ -60,7 +60,6 @@ To do so, one needs to use GitHub CI/CD. A step-by-step guide is presented here.
 * **Step 4**: Copy-paste the content above and add it to the Dockerfile. (In principle, it is possible to build this image locally, but we will not do that here, as we wish to build it with GitHub CI/CD).
 * **Step 5**: In the `Docker-build-deploy.yml` file, add the following content:
 
-{% raw %}
 ```yaml
 name: Create and publish a Docker image
 
@@ -107,7 +106,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 ```
-{% endraw %}
 
 
 The above script is designed to build and publish a Docker image with [GitHub packages](https://github.com/features/packages).

@@ -15,10 +15,9 @@ keypoints:
 <iframe width="427" height="251" src="https://www.youtube.com/embed/yEnNQAS_LcE?si=jNNapizuEjUoD5lS" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 You can cleanup/remove a container with [`podman rm`][podman-docs-rm]
-~~~bash
+```bash
 podman rm <CONTAINER NAME>
-~~~
-{: .source}
+```
 
 > ## Remove old containers
 >
@@ -27,29 +26,26 @@ podman rm <CONTAINER NAME>
 >
 > > ## Solution
 > >
-> > ~~~bash
+> > ```bash
 > > podman run matthewfeickert/intro-to-docker:latest
 > > podman ps -a
 > > podman rm <CONTAINER NAME>
 > > podman ps -a
-> > ~~~
-> > {: .source}
+> > ```
 > >
-> > ~~~
+> > ```text
 > >CONTAINER ID        IMAGE         COMMAND             CREATED            STATUS                     PORTS               NAMES
 > ><generated id>      <image:tag>   "/bin/bash"         n seconds ago      Exited (0) t seconds ago                       <name>
 > >
 > >CONTAINER ID        IMAGE         COMMAND             CREATED            STATUS                     PORTS               NAMES
-> > ~~~
-> > {: .output}
+> > ```
 > {: .solution}
 {: .challenge}
 
 You can remove an image from your computer entirely with [`podman rmi`][podman-docs-rmi]
-~~~bash
+```bash
 podman rmi <IMAGE ID>
-~~~
-{: .source}
+```
 
 > ## Remove an image
 >
@@ -57,15 +53,14 @@ podman rmi <IMAGE ID>
 >
 > > ## Solution
 > >
-> > ~~~bash
+> > ```bash
 > > podman pull python:2.7-slim
 > > podman images python
 > > podman rmi <IMAGE ID>
 > > podman images python
-> > ~~~
-> > {: .source}
+> > ```
 > >
-> > ~~~
+> > ```text
 > >2.7: Pulling from library/python
 > ><some numbers>: Pull complete
 > ><some numbers>: Pull complete
@@ -97,8 +92,7 @@ podman rmi <IMAGE ID>
 > >
 > >REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 > >python              3.9-slim            e440e2151380        23 hours ago        918MB
-> > ~~~
-> > {: .output}
+> > ```
 > {: .solution}
 {: .challenge}
 
@@ -113,4 +107,3 @@ podman rmi <IMAGE ID>
 [podman-docs-rm]: https://docs.podman.io/en/stable/markdown/podman-rm.1.html
 [podman-docs-rmi]: https://docs.podman.io/en/latest/markdown/podman-rmi.1.html
 
-{% include links.md %}

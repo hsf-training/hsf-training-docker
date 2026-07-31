@@ -25,45 +25,39 @@ You can run in either a detached or foreground (interactive) mode.
 
 Run the image we pulled as a container with an interactive bash terminal:
 
-~~~bash
+```bash
 podman run -it almalinux:9 /bin/bash
-~~~
-{: .source}
+```
 
 The `-i` option here enables the interactive session, the `-t` option gives access to a terminal and the `/bin/bash` command makes the container start up in a bash session.
 
 You are now inside the container in an interactive bash session. Try listing the files
 
-~~~bash
+```bash
 ls
-~~~
-{: .source}
+```
 
-~~~
+```text
 afs  bin  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run	sbin  srv  sys	tmp  usr  var
-~~~
-{: .output}
+```
 
 and check the host to see that you are not in your local host system
 
-~~~bash
+```bash
 hostname
-~~~
-{: .source}
+```
 
-~~~
+```text
 <generated hostname>
-~~~
-{: .output}
+```
 
 Further, check the `os-release` to see that you are actually inside a release of AlmaLinux
 
-~~~bash
+```bash
 cat /etc/os-release
-~~~
-{: .source}
+```
 
-~~~
+```text
 NAME="AlmaLinux"
 VERSION="9.7 (Moss Jungle Cat)"
 ID="almalinux"
@@ -83,8 +77,7 @@ ALMALINUX_MANTISBT_PROJECT_VERSION="9.7"
 REDHAT_SUPPORT_PRODUCT="AlmaLinux"
 REDHAT_SUPPORT_PRODUCT_VERSION="9.7"
 SUPPORT_END=2032-06-01
-~~~
-{: .output}
+```
 
 
 ## Monitoring Containers
@@ -92,54 +85,47 @@ SUPPORT_END=2032-06-01
 Open up a new terminal tab on the host machine and
 [list the containers that are currently running][podman-docs-ps]:
 
-~~~bash
+```bash
 podman ps
-~~~
-{: .source}
+```
 
-~~~
+```text
 CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS              PORTS               NAMES
 <generated id>      <image:tag>   "/bin/bash"         n minutes ago       Up n minutes                            <generated name>
-~~~
-{: .output}
+```
 
 Notice that the name of your container is some randomly generated name.
 To make the name more helpful, [rename][podman-docs-rename] the running container
 
-~~~bash
+```bash
 podman rename <CONTAINER ID> my-example
-~~~
-{: .source}
+```
 
 and then verify it has been renamed
 
-~~~bash
+```bash
 podman ps
-~~~
-{: .source}
+```
 
-~~~
+```text
 CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS              PORTS               NAMES
 <generated id>      <image:tag>   "/bin/bash"         n minutes ago       Up n minutes                            my-example
-~~~
-{: .output}
+```
 
 > ## Renaming by name
 >
 >You can also identify containers to rename by their current name
 >
->~~~bash
+>```bash
 >podman rename <NAME> my-example
->~~~
->{: .source}
+>```
 {: .callout}
 
 Alternatively, you can also give the container a name at creation, using the `--name ` option:
 
-~~~bash
+```bash
 podman run -it --name my-fancy-name almalinux:9 /bin/bash
-~~~
-{: .source}
+```
 
 This way, it has a custom chosen name to start with, which you can use later on to interact with it.
 
@@ -148,52 +134,45 @@ This way, it has a custom chosen name to start with, which you can use later on 
 
 As a test, go back into the terminal used for your container, and create a file in the container
 
-~~~bash
+```bash
 touch test.txt
-~~~
-{: .source}
+```
 
 In the container exit at the command line
 
-~~~bash
+```bash
 exit
-~~~
-{: .source}
+```
 
 You are returned to your shell.
 If you list the containers you will notice that none are running
 
-~~~bash
+```bash
 podman ps
-~~~
-{: .source}
+```
 
-~~~
+```text
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-~~~
-{: .output}
+```
 
 but you can see all containers that have been run and not removed with
 
-~~~bash
+```bash
 podman ps -a
-~~~
-{: .source}
+```
 
-~~~
+```text
 CONTAINER ID        IMAGE         COMMAND             CREATED            STATUS                     PORTS               NAMES
 <generated id>      <image:tag>   "/bin/bash"         n minutes ago      Exited (0) t seconds ago                       my-example
-~~~
-{: .output}
+```
 
 To restart your exited container [start][podman-docs-start] it again and then
 [attach][podman-docs-attach] it interactively to your shell
 
-~~~bash
+```bash
 podman start <CONTAINER ID>
 podman attach <CONTAINER ID>
-~~~
-{: .source}
+```
 
 > ## `exec` command
 > The [attach][podman-docs-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with.
@@ -201,35 +180,32 @@ podman attach <CONTAINER ID>
 > In case you'd like some more flexibility, the [exec][podman-docs-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc.
 >
 > For example, the `exec` equivalent to `attach`ing in our case would look like:
-> ~~~bash
+> ```bash
 > podman start <CONTAINER ID>
 > podman exec -it <CONTAINER ID> /bin/bash
-> ~~~
+> ```
 {: .callout}
 
 > ## Starting and attaching by name
 >
 >You can also start and attach containers by their name
 >
->~~~bash
+>```bash
 >podman start <NAME>
 >podman attach <NAME>
->~~~
->{: .source}
+>```
 {: .callout}
 
 
 Check that `test.txt` still exists
 
-~~~bash
+```bash
 ls
-~~~
-{: .source}
+```
 
-~~~
+```text
 afs  bin  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run	sbin  srv  sys	test.txt  tmp  usr  var
-~~~
-{: .output}
+```
 
 So this shows us that we can exit containers for arbitrary lengths of time and then
 return to our working environment inside of them as desired.
@@ -239,10 +215,9 @@ return to our working environment inside of them as desired.
 >If you want a container to be [cleaned up][podman-docs-run-clean-up] &mdash; that is,
 >deleted &mdash; after you exit it then run with the `--rm` option flag
 >
->~~~bash
+>```bash
 >podman run --rm -it <IMAGE> /bin/bash
->~~~
->{: .source}
+>```
 {: .callout}
 
 [podman-docs-run]: https://docs.podman.io/en/stable/markdown/podman-run.1.html
@@ -254,4 +229,3 @@ return to our working environment inside of them as desired.
 [podman-docs-exec]: https://docs.docker.com/engine/reference/commandline/exec/
 [podman-docs-run-clean-up]: https://docs.podman.io/en/stable/markdown/podman-run.1.html#rm
 
-{% include links.md %}

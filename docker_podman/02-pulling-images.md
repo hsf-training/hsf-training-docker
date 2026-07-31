@@ -43,10 +43,9 @@ There are other ways of doing this, such as using GitLab/GitHub CI/CD, but that'
 To begin with, we're going to [pull][podman-docs-pull] down the image we're going
 to be working in for the tutorial (note: if you did all the docker pulls in the setup instructions, this image will already be on your machine, in which case podman should notice it's there and not attempt to re-pull it unless it's changed in the meantime):
 
-~~~bash
+```bash
 podman pull almalinux:9
-~~~
-{: .source}
+```
 
 > ## Connection errors
 > If using Podman or Docker on a non-Linux machine, you run into an error like `Error: unable to connect to Podman`,
@@ -57,37 +56,32 @@ podman pull almalinux:9
 
 and then [list the images][podman-docs-images] that we have available to us locally
 
-~~~bash
+```bash
 podman images
-~~~
-{: .source}
+```
 
 If you have many images and want to get information on a particular one, you can apply a
 filter, such as the repository name
 
-~~~bash
+```bash
 podman images almalinux:9
-~~~
-{: .source}
+```
 
-~~~
+```text
 REPOSITORY                   TAG         IMAGE ID      CREATED      SIZE
 docker.io/library/almalinux  9           b894a52b4112  5 weeks ago  196 MB
-~~~
-{: .output}
+```
 
 or more explicitly
 
-~~~bash
+```bash
 podman images --filter=reference="almalinux:9"
-~~~
-{: .source}
+```
 
-~~~
+```text
 REPOSITORY                   TAG         IMAGE ID      CREATED      SIZE
 docker.io/library/almalinux  9           b894a52b4112  5 weeks ago  196 MB
-~~~
-{: .output}
+```
 
 You can see here that there is the `TAG` field associated with the
 `almalinux` image.
@@ -95,13 +89,12 @@ Tags are a way of further specifying different versions of the same image.
 As an example, let's pull the buster-slim release tag of the
 [Debian image](https://hub.docker.com/_/debian) (again, if it was already pulled during setup, podman won't attempt to re-pull it unless it's changed since last pulled).
 
-~~~bash
+```bash
 podman pull debian:buster-slim
 podman images debian
-~~~
-{: .source}
+```
 
-~~~
+```text
 Resolved "debian" as an alias (/etc/containers/registries.conf.d/shortnames.conf)
 Trying to pull docker.io/library/debian:buster-slim...
 Getting image source signatures
@@ -112,8 +105,7 @@ e1a7bb630c8baa947c5430a7f0965ef6afe71e88e90547aced2e601a89b68399
 
 REPOSITORY                TAG          IMAGE ID      CREATED        SIZE
 docker.io/library/debian  buster-slim  e1a7bb630c8b  20 months ago  73.3 MB
-~~~
-{: .output}
+```
 
 Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-images] for more information on these commands.
 
@@ -126,20 +118,18 @@ Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-ima
 >
 > > ## Solution
 > >
-> > ~~~bash
+> > ```bash
 > > podman pull python:3.9-slim
 > > podman images --filter=reference="python"
-> > ~~~
-> > {: .source}
+> > ```
 > >
-> > ~~~
+> > ```text
 > > REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
 > > docker.io/library/python          3.9-slim            e440e2151380        2 weeks ago        131 MB
-> > ~~~
+> > ```
 > >
 > >* `python:<version>-slim`: This image does not contain the common packages contained in the default
 > >tag and only contains the minimal packages needed to run Python
-> > {: .output}
 > {: .solution}
 {: .challenge}
 
@@ -150,4 +140,3 @@ Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-ima
 [podman-docs-pull]: https://docs.podman.io/en/latest/markdown/podman-pull.1.html
 [podman-docs-images]: https://docs.podman.io/en/stable/markdown/podman-images.1.html
 
-{% include links.md %}

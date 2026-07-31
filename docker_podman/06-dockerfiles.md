@@ -32,15 +32,14 @@ We will continue with Podman throughout this lesson, but the same commands can b
 As a very simple example of extending the example image, into a new image create a `Dockerfile`
 on your local machine
 
-~~~bash
+```bash
 touch Dockerfile
-~~~
-{: .source}
+```
 
 and then write in it the Docker engine instructions to add [`cowsay`][cowsay] and
 [`scikit-learn`][scikit-learn] to the environment
 
-~~~dockerfile
+```dockerfile
 # Dockerfile
 
 # Specify the base image that we're building the image on top of
@@ -68,8 +67,7 @@ WORKDIR /home/docker
 
 # Run as docker user by default when the container starts up
 USER docker
-~~~
-{: .source}
+```
 
 > ## Dockerfile layers (or: why all these '&&'s??)
 >
@@ -97,22 +95,20 @@ USER docker
 Then, [`build`][podman-docs-build] an image from the `Dockerfile` with Podman and tag it with a
 human-readable name
 
-~~~bash
+```bash
 podman build -f Dockerfile -t extend-example:latest .
-~~~
-{: .source}
+```
 
 You can now run the image as a container and verify for yourself that your additions exist
 
-~~~bash
+```bash
 podman run --rm -it extend-example:latest /bin/bash
 cowsay "Hello from inside the container"
 pip list | grep scikit
 python3 -c "import sklearn as sk; print(sk)"
-~~~
-{: .source}
+```
 
-~~~
+```text
  _________________________________
 < Hello from inside the container >
  ---------------------------------
@@ -124,22 +120,19 @@ python3 -c "import sklearn as sk; print(sk)"
 
 scikit-learn    1.6.1
 <module 'sklearn' from '/usr/local/lib64/python3.9/site-packages/sklearn/__init__.py'>
-~~~
-{: .output}
+```
 
 You can list all images available on your local machine with `podman images`:
-~~~bash
+```bash
 podman images
-~~~
-{: .source}
+```
 
-~~~
+```text
 REPOSITORY                   TAG         IMAGE ID      CREATED        SIZE
 localhost/extend-example     latest      c8b76717b954  2 minutes ago  550 MB
 docker.io/library/almalinux  9           b894a52b4112  5 weeks ago    196 MB
 ...
-~~~
-{: .output}
+```
 
 `docker.io` indicates that the image was pulled from the Docker Hub,
 while `localhost` indicates that the image was built locally.
@@ -153,10 +146,9 @@ New tags can be specified in the `podman build` (or `docker build`) command by g
 times or they can be specified after an image is built by using
 [`podman tag`][podman-docs-tag].
 
-~~~bash
+```bash
 podman tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
-~~~
-{: .source}
+```
 
 > ## Add your own tag
 >
@@ -164,14 +156,13 @@ podman tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 >
 > > ## Solution
 > >
-> > ~~~
+> > ```text
 > >podman images extend-example
 > >podman tag extend-example:latest extend-example:my-tag
 > >podman images extend-example
-> > ~~~
-> > {: .source}
+> > ```
 > >
-> > ~~~
+> > ```text
 > REPOSITORY                TAG         IMAGE ID      CREATED        SIZE
 > localhost/extend-example  latest      c8b76717b954  5 minutes ago  550 MB
 > >
@@ -179,8 +170,7 @@ podman tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 > localhost/extend-example  my-tag      c8b76717b954  5 minutes ago  550 MB
 > localhost/extend-example  latest      c8b76717b954  5 minutes ago  550 MB
 >>
-> > ~~~
-> > {: .output}
+> > ```
 > {: .solution}
 {: .challenge}
 
@@ -197,49 +187,44 @@ build with the [`COPY`][docker-docs-COPY] Dockerfile command.
 This allows copying a target file from a host file system into the image
 file system
 
-~~~dockerfile
+```dockerfile
 COPY <path on host> <path in container image>
-~~~
-{: .source}
+```
 
 For example, if there is a file called `install_python_deps.sh` in the same directory as
 the build is executed from
 
-~~~bash
+```bash
 touch install_python_deps.sh
-~~~
-{: .source}
+```
 
 with contents
 
-~~~bash
+```bash
 cat install_python_deps.sh
-~~~
-{: .source}
+```
 
-~~~
+```text
 #!/usr/bin/env bash
 
 set -e
 
 pip install --upgrade --no-cache-dir pip setuptools wheel
 pip install --no-cache-dir -q scikit-learn
-~~~
-{: .output}
+```
 
 Then, this could be copied into the container image of the previous example during the build
 and then used (and then removed as it is no longer needed).
 
 Create a new file called `Dockerfile.copy`:
 
-~~~bash
+```bash
 touch Dockerfile.copy
-~~~
-{: .source}
+```
 
 and fill it with a modified version of the above Dockerfile, where we now copy `install_python_deps.sh` from the local working directory into the container and use it to install the specified Python dependencies:
 
-~~~dockerfile
+```dockerfile
 # Dockerfile.copy
 
 # Specify the base image that we're building the image on top of
@@ -269,13 +254,11 @@ WORKDIR /home/docker
 
 # Run as docker user by default when the container starts up
 USER docker
-~~~
-{: .source}
+```
 
-~~~bash
+```bash
 podman build -f Dockerfile.copy -t copy-example:latest .
-~~~
-{: .source}
+```
 
 For very complex scripts or files that are on some remote, `COPY` offers a straightforward
 way to bring them into the container image build.
@@ -294,13 +277,12 @@ Note that
 - remote compressed files are not unpacked by default
 
 This behaviour can be changed by adding a `--unpack=true` or `--unpack=false` flag immediately after the `ADD` command:
-~~~dockerfile
+```dockerfile
 ADD --unpack=true <src> <dest>
-~~~
-{: .source}
+```
 
 As an example, let's compile a simple [`main.c`][c-file] file from a remote url:
-~~~dockerfile
+```dockerfile
 # Dockerfile.add
 FROM almalinux:9
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
@@ -310,24 +292,20 @@ RUN dnf -y update && \
     dnf clean all && \
     rm -rf /var/cache/dnf
 RUN clang main.c -o main
-~~~
-{: .source}
+```
 
-~~~bash
+```bash
 podman build -f Dockerfile.add -t add-example
-~~~
-{: .source}
+```
 
 Then, you can run the compiled executable with
-~~~bash
+```bash
 podman run --rm add-example ./main
-~~~
-{: .source}
+```
 
-~~~
+```text
 hello world
-~~~
-{: .output}
+```
 
 ## Multi-Stage Builds
 The tools you use to build your image are often not necessary for a user of the image.
@@ -340,7 +318,7 @@ Files can be copied between stages using the [`COPY --from=<stage>`][copy-from] 
 
 Let's improve on the `Dockerfile.add` example by only copying over the compiled executable:
 
-~~~dockerfile
+```dockerfile
 # Dockerfile.multistage
 FROM almalinux:9 AS build
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
@@ -353,8 +331,7 @@ RUN clang main.c -o main
 
 FROM almalinux:9
 COPY --from=build main .
-~~~
-{: .source}
+```
 
 > ## Build compatibility
 >
@@ -363,10 +340,9 @@ COPY --from=build main .
 {: .callout}
 
 
-~~~bash
+```bash
 podman build -f Dockerfile.multistage -t multistage-example
-~~~
-{: .source}
+```
 
 Podman will cache the build stage for further use, so this multi-staged method has the added benefit that making changes to the second stage won't require rebuilding of the first stage.
 
@@ -374,29 +350,25 @@ The `FROM <image> AS <name>` syntax lets us reference the build stage by its `<n
 
 Now, let's look at the sizes of the `Dockerfile.multistage` image versus the `Dockerfile.add` image:
 
-~~~bash
+```bash
 podman images --filter reference=multistage* --filter reference=add*
-~~~
-{: .source}
+```
 
-~~~
+```text
 REPOSITORY                    TAG         IMAGE ID      CREATED        SIZE
 localhost/multistage-example  latest      ac9640ee042b  4 minutes ago  190 MB
 localhost/add-example         latest      6d2f891efd09  4 minutes ago  777 MB
-~~~
-{: .output}
+```
 
 Our multi-stage build saves 570 MB and is 1/4 the size of the single-stage build, while still producing the same results for someone using the image:
 
-~~~bash
+```bash
 podman run --rm multistage-example ./main
-~~~
-{: .source}
+```
 
-~~~
+```text
 hello world
-~~~
-{: .output}
+```
 
 
 
@@ -414,4 +386,3 @@ hello world
 [from-alpine]: https://docs.docker.com/build/building/best-practices/#from
 
 
-{% include links.md %}

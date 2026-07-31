@@ -35,7 +35,7 @@ As discrete processes, containers take up only as much memory as necessary, maki
 very lightweight and fast to spin up to run:
 
 <figure>
-<img src="../fig/DockerVM.png" alt="Container-based architecture vs virtual machines" style="width:800px"/>
+<img src="fig/DockerVM.png" alt="Container-based architecture vs virtual machines" style="width:800px"/>
   <figcaption>
     <i>Container-based architecture vs virtual machines</i>
   </figcaption>
@@ -52,7 +52,7 @@ very lightweight and fast to spin up to run:
 
 # Docker
 
-<img src="../fig/Docker_logo.png" width="200" alt="Docker logo" />
+<img src="fig/Docker_logo.png" width="200" alt="Docker logo" />
 
 Docker is perhaps the most popular containerization tool these days, particularly in industry.
 It is a platform for developing, shipping, and running applications in containers.
@@ -78,7 +78,7 @@ There are other kids on the block that are in use and gaining popularity, such a
 
 # Why Podman?
 
-<img src="../fig/podman_logo.svg" width="400" alt="Podman logo" />
+<img src="fig/podman_logo.svg" width="400" alt="Podman logo" />
 
 Podman is an open-source alternative to Docker with several advantages.
 For example, Podman is able to run containers as a non-root user out of the box, a big security advantage over Docker.
@@ -107,4 +107,3 @@ Across the tutorial, we will use Podman as the containerization tool, but
 [docker-containers]: https://www.docker.com/resources/what-container
 [docker-hub]: https://hub.docker.com
 
-{% include links.md %}

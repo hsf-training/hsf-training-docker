@@ -15,7 +15,6 @@ may prevent you from using it in certain sites.
 > If you are using Linux, then please also follow these [post installation instructions](https://docs.docker.com/engine/install/linux-postinstall/).
 >
 > Across the tutorial, just replace `podman` by `docker` in the commands and you should be good to go.
->{: .source}
 {: .callout}
 
 The installation of Podman requires sudo privileges. If you don't have them, check if Podman is already installed on your system
@@ -60,12 +59,11 @@ If you do have a CERN account, we will set things up to run from a [CERN-hosted 
 This is preferred, as there is a usage-limit for `docker.io` that can come into effect if multiple people are using it from the same IP address.
 
 To use this CERN registry, regardless of if you use Podman or Docker, you will need to log in with
-~~~
+```text
 podman login registry.cern.ch
 # or
 docker login registry.cern.ch
-~~~
-{: .source}
+```
 
 It will then prompt you for a username and password.
 Use your CERN username.
@@ -77,27 +75,24 @@ The password is the CLI token found at https://registry.cern.ch/ in your account
 >
 > If you're not on Linux, you will need to edit these configuration files from within the podman virtual linux machine.
 > You can do this by connecting the the VM with
-> ~~~bash
+> ```bash
 > podman machine ssh
-> ~~~
-> {: .source}
+> ```
 >
 > and editing the configuration files there.
 >
 > Once you are done, exit the VM
-> ~~~bash
+> ```bash
 > exit
-> ~~~
-> {: .source}
+> ```
 {: .callout}
 
 If you do not have a CERN account , add the following lines to `/etc/containers/registries.conf` to use `docker.io`.
-~~~toml
+```toml
 # /etc/containers/registries.conf
 
 unqualified-search-registries=["docker.io"]
-~~~
-{: .source}
+```
 
 
 If you have a CERN account, add these instead to use `registry.cern.ch/docker.io`
@@ -110,7 +105,6 @@ unqualified-search-registries=["docker.io"]
 prefix = "docker.io"
 location = "registry.cern.ch/docker.io"
 ```
-{: .source}
 
 This will first set the default registry to `docker.io`, then it will map `docker.io` to `registry.cern.ch/docker.io`.
 This means that images pulled from `registry.cern.ch/docker.io` appear as if they're coming from `docker.io`.
@@ -124,20 +118,17 @@ Docker uses `docker.io` by default.
 If you are a CERN user and want/need to use the CERN registry, you can prepend `registry.cern.ch/docker.io/` to each image name
 
 So, for example, the command in the next section (with Docker) is
-~~~bash
+```bash
 docker run hello-world
-~~~
-{: .source}
+```
 this will, by default, be equivalent to
-~~~bash
+```bash
 docker run docker.io/hello-world
-~~~
-{: .source}
+```
 To pull from the CERN registry, you can instead do
-~~~bash
+```bash
 docker run registry.cern.ch/docker.io/hello-world
-~~~
-{: .source}
+```
 after logging in, and similarly prepend `registry.cern.ch/docker.io/` for all the commands in this tutorial.
 
 
@@ -155,12 +146,12 @@ podman run hello-world
 
 Once you've got Podman up and running, do the following docker image pulls in advance to save time during the tutorial:
 
-~~~bash
+```bash
 podman pull almalinux:9
 podman pull debian:buster-slim
 podman pull python:2.7-slim
 podman pull python:3.7-slim
-~~~
+```
 
 ## Analysis Code
 
@@ -183,4 +174,3 @@ It is best if you work through these lessons before the tutorial on Containers, 
   * Use the public EOS datasets mentioned above.
   * If you are from CERN, you can copy the downloaded file to your personal EOS user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`).
 
-{% include links.md %}

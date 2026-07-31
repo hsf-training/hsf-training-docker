@@ -15,44 +15,38 @@ keypoints:
 
 So far, every time we've run the containers we've typed
 
-~~~bash
+```bash
 podman run --rm -it <IMAGE>:<TAG> <command>
-~~~
-{: .source}
+```
 
 like
 
-~~~bash
+```bash
 podman run --rm -it python:3.9-slim /bin/bash
-~~~
-{: .source}
+```
 
 Running this dumps us into a Bash session
 
-~~~bash
+```bash
 echo $SHELL
-~~~
-{: .source}
+```
 
-~~~bash
+```bash
 SHELL=/bin/bash
-~~~
-{: .output}
+```
 
 However, if no `/bin/bash` is given, then you are placed inside the Python 3.9 REPL.
 
-~~~bash
+```bash
 podman run --rm -it python:3.9-slim
-~~~
-{: .source}
+```
 
-~~~
+```text
 Python 3.9.18 (main, Feb 13 2024, 10:56:47)
 [GCC 12.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
-~~~
-{: .output}
+```
 
 These are very different behaviors, so let's understand what is happening.
 
@@ -61,12 +55,11 @@ which is specified in the Dockerfile with [`CMD`][docker-docs-CMD].
 
 Create a file named `Dockerfile.defaults`
 
-~~~bash
+```bash
 touch Dockerfile.defaults
-~~~
-{: .source}
+```
 
-~~~dockerfile
+```dockerfile
 # Dockerfile.defaults
 # Make the base image configurable
 ARG BASE_IMAGE=python:3.9-slim
@@ -87,37 +80,33 @@ WORKDIR ${HOME}/data
 USER docker
 
 CMD ["/bin/bash"]
-~~~
-{: .source}
+```
 
 Now build the dockerfile, specifying its name with the `-f` argument since the engine will otherwise look for a file named `Dockerfile` by default.
 
-~~~
+```text
 podman build -f Dockerfile.defaults -t defaults-example:latest .
-~~~
-{: .source}
+```
 
 Now running
 
-~~~
+```text
 podman run --rm -it defaults-example:latest
-~~~
-{: .source}
+```
 
 again drops you into a Bash shell as specified by `CMD`.
 As has already been seen, `CMD` can be overridden by giving a command after the image
 
-~~~
+```text
 podman run --rm -it defaults-example:latest python3
-~~~
-{: .source}
+```
 
 The [`ENTRYPOINT`][docker-docs-ENTRYPOINT] builder command allows to define a command or
 commands that are **always** run at the "entry" to the container.
 If an `ENTRYPOINT` has been defined, then `CMD` provides optional inputs to the `ENTRYPOINT`.
 
 Create a file named `entrypoint.sh`
-~~~bash
+```bash
 # entrypoint.sh
 #!/usr/bin/env bash
 
@@ -134,11 +123,10 @@ function main() {
 main "$@"
 
 /bin/bash
-~~~
-{: .bash}
+```
 
 And now modify the `Dockerfile.defaults` to use the `entrypoint.sh` script
-~~~
+```text
 # Dockerfile.defaults
 # Make the base image configurable
 ARG BASE_IMAGE=python:3.9-slim
@@ -161,38 +149,33 @@ USER docker
 COPY entrypoint.sh $HOME/entrypoint.sh
 ENTRYPOINT ["/bin/bash", "/home/docker/entrypoint.sh"]
 CMD ["there"]
-~~~
-{: .source}
+```
 Note how `CMD` provides an optional input to `entrypoint.sh`.
 
-~~~
+```text
 podman build -f Dockerfile.defaults -t defaults-example:latest --compress .
-~~~
-{: .source}
+```
 
 So now try
-~~~
+```text
 podman run --rm -it defaults-example:latest
-~~~
-{: .source}
+```
 
 > ## Applied `ENTRYPOINT` and `CMD`
 >
 > What will be the output of
->~~~
+>```text
 >podman run --rm -it defaults-example:latest $USER
->~~~
->{: .source}
+>```
 > and why?
 >
 > > ## Solution
 > >
-> >~~~
+> >```text
 > >
 > >Hello <your user name>
 > >docker@2a99ffabb512:~/data$
-> >~~~
-> >{: .output}
+> >```
 > `$USER` is evaluated and then overrides the default `CMD` to be passed to `entrypoint.sh`
 > {: .solution}
 {: .challenge}
@@ -220,14 +203,13 @@ run an initialization script before anything else in the container, e.g., to dow
 [get secrets from a key-store](https://aws.amazon.com/blogs/opensource/demystifying-entrypoint-cmd-docker/).
 For that, you can use an `entrypoint.sh` like:
 
-~~~
+```text
 #!/bin/sh
 echo "You are running on $(hostname)"
 # download tokens and recrets
 export MY_TOKEN=./token_file.jwt
 bash -c "$*"
-~~~
-{: .source}
+```
 
 The last line is the key to treating the arguments in CMD or the command line as commands.
 Remember to set `entrypoint.sh` as executable and to use the exec form for ENTRYPOINT (`ENTRYPOINT ["./entrypoint.sh"]`)
@@ -238,4 +220,3 @@ instead, which is more efficient than the entrypoint script.
 [docker-docs-CMD]: https://docs.docker.com/engine/reference/builder/#cmd
 [docker-docs-ENTRYPOINT]: https://docs.docker.com/engine/reference/builder/#entrypoint
 
-{% include links.md %}
