@@ -1,0 +1,18 @@
+title: Introduction to Docker and Podman
+author: HSF Training
+copyright: "2026"
+logo: hsf-logo.png
+
+execute:
+  execute_notebooks: "off"
+
+only_build_toc_files: true
+
+repository:
+  url: https://github.com/michmx/2026-08-12-podman
+  path_to_book: docker_podman
+  branch: gh-pages
+
+html:
+  use_issues_button: true
+  use_repository_button: true
