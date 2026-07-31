@@ -1,17 +1,16 @@
----
-title: "Using CMD and ENTRYPOINT in Dockerfiles"
-teaching: 15
-exercises: 10
-questions:
-- "How are default commands set in Dockerfiles?"
-objectives:
-- "Learn how and when to use `CMD`"
-- "Learn how and when to use `ENTRYPOINT`"
-keypoints:
-- "`CMD` provide defaults for an executing container"
-- "`CMD` can provide options for `ENTRYPOINT`"
-- "`ENTRYPOINT` allows you to configure commands that will always run for an executing container"
----
+# Using CMD and ENTRYPOINT in Dockerfiles
+
+:::{admonition} Overview
+:class: note
+**Teaching:** 15 min | **Exercises:** 10 min
+
+**Questions**
+- How are default commands set in Dockerfiles?
+
+**Objectives**
+- Learn how and when to use `CMD`
+- Learn how and when to use `ENTRYPOINT`
+:::
 
 So far, every time we've run the containers we've typed
 
@@ -161,39 +160,39 @@ So now try
 podman run --rm -it defaults-example:latest
 ```
 
-> ## Applied `ENTRYPOINT` and `CMD`
->
-> What will be the output of
->```text
->podman run --rm -it defaults-example:latest $USER
->```
-> and why?
->
-> > ## Solution
-> >
-> >```text
-> >
-> >Hello <your user name>
-> >docker@2a99ffabb512:~/data$
-> >```
-> `$USER` is evaluated and then overrides the default `CMD` to be passed to `entrypoint.sh`
-> {: .solution}
-{: .challenge}
+::::{admonition} Applied `ENTRYPOINT` and `CMD`
+:class: important
+What will be the output of
+```text
+podman run --rm -it defaults-example:latest $USER
+```
+and why?
 
-> ## All about `ENTRYPOINT` and `CMD`
->
-> ENTRYPOINT and CMD can be both in "exec" or "shell" form, although we recommend to use exec form.
-> Exec form must be an array of comma-separated quoted arguments, and it is executed via the Linux `execv()`. E.g. `CMD ["/usr/bin/ls", "-al"]`
-> Anything else, also if you forget just the quotes, will be considered shell form, it is passed by Docker/Podman to `/bin/sh -c`
-> (as written, with quotes, parentheses, ...), and can use shell features like PATH and expansion. E.g. `CMD ls -al`
->
-> At execution, ENTRYPOINT can be overridden with the `--entrypoint` option, CMD with any argument of the invocation.
-> When ENTRYPOINT is in exec form, CMD or the invocatipon arguments are passed as additional arguments (as a single string,
-> with additional "/bin/sh" "-c" arguments if CMD is in shell form).
-> When ENTRYPOINT is in shell form, CMD and invocation arguments are ignored.
->
-> An interactive session, `run -it`, is possible only if the last command (ENTRYPOINT if present, arguments or CMD) is interactive, i.e. not terminating.
-{: .callout}
+:::{admonition} Solution
+:class: dropdown
+```text
+
+Hello <your user name>
+docker@2a99ffabb512:~/data$
+```
+`$USER` is evaluated and then overrides the default `CMD` to be passed to `entrypoint.sh`
+:::
+::::
+
+:::{admonition} All about `ENTRYPOINT` and `CMD`
+:class: tip
+ENTRYPOINT and CMD can be both in "exec" or "shell" form, although we recommend to use exec form.
+Exec form must be an array of comma-separated quoted arguments, and it is executed via the Linux `execv()`. E.g. `CMD ["/usr/bin/ls", "-al"]`
+Anything else, also if you forget just the quotes, will be considered shell form, it is passed by Docker/Podman to `/bin/sh -c`
+(as written, with quotes, parentheses, ...), and can use shell features like PATH and expansion. E.g. `CMD ls -al`
+
+At execution, ENTRYPOINT can be overridden with the `--entrypoint` option, CMD with any argument of the invocation.
+When ENTRYPOINT is in exec form, CMD or the invocatipon arguments are passed as additional arguments (as a single string,
+with additional "/bin/sh" "-c" arguments if CMD is in shell form).
+When ENTRYPOINT is in shell form, CMD and invocation arguments are ignored.
+
+An interactive session, `run -it`, is possible only if the last command (ENTRYPOINT if present, arguments or CMD) is interactive, i.e. not terminating.
+:::
 
 The use case seen above is common for application containers: ENTRYPOINT (in exec form) is used
 for the command and CMD is used for the default arguments that can be easily overridden at invocation.
@@ -216,7 +215,12 @@ Remember to set `entrypoint.sh` as executable and to use the exec form for ENTRY
 Note that if the file to download or value of the variable are known when building the image, you can use the RUN command in the Dockerfile
 instead, which is more efficient than the entrypoint script.
 
-
 [docker-docs-CMD]: https://docs.docker.com/engine/reference/builder/#cmd
 [docker-docs-ENTRYPOINT]: https://docs.docker.com/engine/reference/builder/#entrypoint
 
+:::{admonition} Key Points
+:class: note
+- `CMD` provide defaults for an executing container
+- `CMD` can provide options for `ENTRYPOINT`
+- `ENTRYPOINT` allows you to configure commands that will always run for an executing container
+:::

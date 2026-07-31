@@ -1,22 +1,23 @@
----
-title: "Bonus Episode: Building and deploying a Docker container to Github Packages"
-teaching: 40
-exercises: 0
-questions:
+# Bonus Episode: Building and deploying a Docker container to Github Packages
+
+:::{admonition} Overview
+:class: note
+**Teaching:** 40 min
+
+**Questions**
 - How to build a Docker container for Python packages?
 - How to share Docker images?
-objectives:
-- To be able to build a Docker container and share it via GitHub packages
-keypoints:
-- Python packages can be installed in Docker images along with Ubuntu packages.
-- It is possible to publish and share Docker images over GitHub packages.
----
 
-> ## Prerequisites
-> For this lesson, you will need,
-> * Knowledge of Git [SW Carpentry Git-Novice Lesson](https://swcarpentry.github.io/git-novice/)
-> * Knowledge of GitHub CI/CD [HSF Github CI/CD Lesson](https://hsf-training.github.io/hsf-training-cicd-github/)
-{: .prereq}
+**Objectives**
+- To be able to build a Docker container and share it via GitHub packages
+:::
+
+:::{admonition} Prerequisites
+:class: caution
+For this lesson, you will need,
+* Knowledge of Git [SW Carpentry Git-Novice Lesson](https://swcarpentry.github.io/git-novice/)
+* Knowledge of GitHub CI/CD [HSF Github CI/CD Lesson](https://hsf-training.github.io/hsf-training-cicd-github/)
+:::
 
 ## Docker Container for Python packages
 
@@ -45,9 +46,7 @@ RUN apt-get update \
   && pip3 install iminuit
 ```
 
-
 As we see, several packages are installed.
-
 
 ## Publish Docker images with GitHub Packages and share them!
 
@@ -107,8 +106,12 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 ```
 
-
 The above script is designed to build and publish a Docker image with [GitHub packages](https://github.com/features/packages).
 
-
 * **Step 6**: Add LICENSE and README as recommended in the [SW Carpentry Git-Novice Lesson](https://swcarpentry.github.io/git-novice/), and then the repository is good to go.
+
+:::{admonition} Key Points
+:class: note
+- Python packages can be installed in Docker images along with Ubuntu packages.
+- It is possible to publish and share Docker images over GitHub packages.
+:::

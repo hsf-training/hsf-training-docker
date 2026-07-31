@@ -1,6 +1,4 @@
----
-title: Setup
----
+# Setup
 
 ## Installation
 
@@ -8,14 +6,14 @@ The training module can be followed using either Docker or Podman. We recommend 
 does not require root privileges to use it out of the box. In addition, Docker has licensing restrictions that
 may prevent you from using it in certain sites.
 
-> ## Installing Docker
->
-> If you prefer to use Docker (check with the IT department of your institution before using Docker!), follow the official instructions for [Linux](https://docs.docker.com/engine/install/#server), [Mac](https://docs.docker.com/desktop/install/mac-install/), or [Windows](https://docs.docker.com/desktop/install/windows-install/).
->
-> If you are using Linux, then please also follow these [post installation instructions](https://docs.docker.com/engine/install/linux-postinstall/).
->
-> Across the tutorial, just replace `podman` by `docker` in the commands and you should be good to go.
-{: .callout}
+:::{admonition} Installing Docker
+:class: tip
+If you prefer to use Docker (check with the IT department of your institution before using Docker!), follow the official instructions for [Linux](https://docs.docker.com/engine/install/#server), [Mac](https://docs.docker.com/desktop/install/mac-install/), or [Windows](https://docs.docker.com/desktop/install/windows-install/).
+
+If you are using Linux, then please also follow these [post installation instructions](https://docs.docker.com/engine/install/linux-postinstall/).
+
+Across the tutorial, just replace `podman` by `docker` in the commands and you should be good to go.
+:::
 
 The installation of Podman requires sudo privileges. If you don't have them, check if Podman is already installed on your system
 with:
@@ -48,7 +46,6 @@ The first time that Podman Desktop is executed it will be required to install Po
 
 Podman provides instructions to install it on Windows at the [GitHub repository](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md).
 
-
 ## Configuration
 
 We will now configure Podman or Docker to download (pull) container images from the correct source.
@@ -71,21 +68,21 @@ The password is the CLI token found at https://registry.cern.ch/ in your account
 
 ### Podman
 
-> ## MacOS and Windows users
->
-> If you're not on Linux, you will need to edit these configuration files from within the podman virtual linux machine.
-> You can do this by connecting the the VM with
-> ```bash
-> podman machine ssh
-> ```
->
-> and editing the configuration files there.
->
-> Once you are done, exit the VM
-> ```bash
-> exit
-> ```
-{: .callout}
+:::{admonition} MacOS and Windows users
+:class: tip
+If you're not on Linux, you will need to edit these configuration files from within the podman virtual linux machine.
+You can do this by connecting the the VM with
+```bash
+podman machine ssh
+```
+
+and editing the configuration files there.
+
+Once you are done, exit the VM
+```bash
+exit
+```
+:::
 
 If you do not have a CERN account , add the following lines to `/etc/containers/registries.conf` to use `docker.io`.
 ```toml
@@ -93,7 +90,6 @@ If you do not have a CERN account , add the following lines to `/etc/containers/
 
 unqualified-search-registries=["docker.io"]
 ```
-
 
 If you have a CERN account, add these instead to use `registry.cern.ch/docker.io`
 ```toml
@@ -110,7 +106,6 @@ This will first set the default registry to `docker.io`, then it will map `docke
 This means that images pulled from `registry.cern.ch/docker.io` appear as if they're coming from `docker.io`.
 
 This mapping can have some unintended side effects, and so if it is causing any issues you can just clear the `/etc/containers/registries.conf` file and prepend `registry.cern.ch/docker.io/` to image names manually as we show to do with Docker below. This is, however, more tedious than using the automatic mapping.
-
 
 ### Docker
 Docker uses `docker.io` by default.
@@ -131,16 +126,12 @@ docker run registry.cern.ch/docker.io/hello-world
 ```
 after logging in, and similarly prepend `registry.cern.ch/docker.io/` for all the commands in this tutorial.
 
-
-
 ## Post Installation
 
 Check that you can run Podman with the following command:
 ```bash
 podman run hello-world
 ```
-
-
 
 ### Optional: Fetch images in advance
 
@@ -173,4 +164,3 @@ It is best if you work through these lessons before the tutorial on Containers, 
 * For the fitting code repo, the [fit_simple](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats/blob/master/.gitlab-ci.yml#L5) step in `.gitlab-ci.yml` expects to receive the file `histograms.root` produced by the skimming code. In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://eospublichttp.cern.ch//eos/opendata/cms/upload/apb2023/histograms.root). In any case, you can:
   * Use the public EOS datasets mentioned above.
   * If you are from CERN, you can copy the downloaded file to your personal EOS user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`).
-

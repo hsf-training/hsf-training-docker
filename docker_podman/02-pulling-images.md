@@ -1,22 +1,22 @@
----
-title: "Pulling Images"
-teaching: 10
-exercises: 5
-questions:
-- "How are images downloaded?"
-- "How are images distinguished?"
-objectives:
-- "Pull images from Docker Hub image registry"
-- "List local images"
-- "Introduce image tags"
-keypoints:
-- "Pull images with `podman pull <image-id>`"
-- "List all images on the computer and other information with `podman images`"
-- "Image tags distinguish releases or versions and are appended to the image name with a colon"
----
+# Pulling Images
+
+:::{admonition} Overview
+:class: note
+**Teaching:** 10 min | **Exercises:** 5 min
+
+**Questions**
+- How are images downloaded?
+- How are images distinguished?
+
+**Objectives**
+- Pull images from Docker Hub image registry
+- List local images
+- Introduce image tags
+:::
+
 <iframe width="427" height="251" src="https://www.youtube.com/embed/Wkqt0eJihIA?si=qFVGhTygicu43JUm" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-# Docker Hub
+## Docker Hub
 
 Much like how GitHub allows for web hosting and searching for code, the [Docker Hub][docker-hub]
 image registry allows the same for Docker images.
@@ -30,15 +30,15 @@ pushes to repositories. However, at this moment, enabling such a feature require
 or joining the [Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/).
 There are other ways of doing this, such as using GitLab/GitHub CI/CD, but that's beyond the scope of this training module.
 
-> ## Docker Hub and Podman
->
-> Both Docker and Podman use OCI (Open Container Initiative) compliant images, so you can use the same images with both tools.
-> It means Podman can pull and run images from Docker Hub.
->
-> By default, `podman pull` pulls an image from Docker Hub if a registry is not specified in the command line argument.
-{: .callout}
+:::{admonition} Docker Hub and Podman
+:class: tip
+Both Docker and Podman use OCI (Open Container Initiative) compliant images, so you can use the same images with both tools.
+It means Podman can pull and run images from Docker Hub.
 
-# Pulling Images
+By default, `podman pull` pulls an image from Docker Hub if a registry is not specified in the command line argument.
+:::
+
+## Pulling Images
 
 To begin with, we're going to [pull][podman-docs-pull] down the image we're going
 to be working in for the tutorial (note: if you did all the docker pulls in the setup instructions, this image will already be on your machine, in which case podman should notice it's there and not attempt to re-pull it unless it's changed in the meantime):
@@ -47,12 +47,13 @@ to be working in for the tutorial (note: if you did all the docker pulls in the 
 podman pull almalinux:9
 ```
 
-> ## Connection errors
-> If using Podman or Docker on a non-Linux machine, you run into an error like `Error: unable to connect to Podman`,
-> make sure that the Podman or Docker desktop application is running.
->
-> Remember that in such environments, Podman or Docker use a virtual machine to run the containers.
-{: .callout}
+:::{admonition} Connection errors
+:class: tip
+If using Podman or Docker on a non-Linux machine, you run into an error like `Error: unable to connect to Podman`,
+make sure that the Podman or Docker desktop application is running.
+
+Remember that in such environments, Podman or Docker use a virtual machine to run the containers.
+:::
 
 and then [list the images][podman-docs-images] that we have available to us locally
 
@@ -109,29 +110,29 @@ docker.io/library/debian  buster-slim  e1a7bb630c8b  20 months ago  73.3 MB
 
 Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-images] for more information on these commands.
 
-> ## Pulling Python
->
-> Pull the image python:3.9-slim for Python 3.9, and then list all `python` images on your computer.
->
-> Browse [the official Python images][docker-hub-python] to find available tags and
-> read about image variants. What does `-slim` mean?
->
-> > ## Solution
-> >
-> > ```bash
-> > podman pull python:3.9-slim
-> > podman images --filter=reference="python"
-> > ```
-> >
-> > ```text
-> > REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
-> > docker.io/library/python          3.9-slim            e440e2151380        2 weeks ago        131 MB
-> > ```
-> >
-> >* `python:<version>-slim`: This image does not contain the common packages contained in the default
-> >tag and only contains the minimal packages needed to run Python
-> {: .solution}
-{: .challenge}
+::::{admonition} Pulling Python
+:class: important
+Pull the image python:3.9-slim for Python 3.9, and then list all `python` images on your computer.
+
+Browse [the official Python images][docker-hub-python] to find available tags and
+read about image variants. What does `-slim` mean?
+
+:::{admonition} Solution
+:class: dropdown
+```bash
+podman pull python:3.9-slim
+podman images --filter=reference="python"
+```
+
+```text
+REPOSITORY                        TAG                 IMAGE ID            CREATED             SIZE
+docker.io/library/python          3.9-slim            e440e2151380        2 weeks ago        131 MB
+```
+
+* `python:<version>-slim`: This image does not contain the common packages contained in the default
+tag and only contains the minimal packages needed to run Python
+:::
+::::
 
 [docker-hub]: https://hub.docker.com/
 [docker-hub-billing]: https://www.docker.com/pricing/
@@ -140,3 +141,9 @@ Check the documentation on [pull][podman-docs-pull] and [images][podman-docs-ima
 [podman-docs-pull]: https://docs.podman.io/en/latest/markdown/podman-pull.1.html
 [podman-docs-images]: https://docs.podman.io/en/stable/markdown/podman-images.1.html
 
+:::{admonition} Key Points
+:class: note
+- Pull images with `podman pull <image-id>`
+- List all images on the computer and other information with `podman images`
+- Image tags distinguish releases or versions and are appended to the image name with a colon
+:::

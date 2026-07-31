@@ -1,22 +1,21 @@
----
-title: "Running Containers"
-teaching: 15
-exercises: 5
-questions:
-- "How are containers run?"
-- "How do you monitor containers?"
-- "How are containers exited?"
-- "How are containers restarted?"
-objectives:
-- "Run containers"
-- "Understand container state"
-- "Stop and restart containers"
-keypoints:
-- "Run containers with `podman run <image-id>`"
-- "Monitor containers with `podman ps`"
-- "Exit interactive sessions using the `exit` command"
-- "Restart stopped containers with `podman start`"
----
+# Running Containers
+
+:::{admonition} Overview
+:class: note
+**Teaching:** 15 min | **Exercises:** 5 min
+
+**Questions**
+- How are containers run?
+- How do you monitor containers?
+- How are containers exited?
+- How are containers restarted?
+
+**Objectives**
+- Run containers
+- Understand container state
+- Stop and restart containers
+:::
+
 <iframe width="427" height="251" src="https://www.youtube.com/embed/sebWDiHp9jA?si=R-U1GEVf-afqTIgw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 To use an image as a particular instance on a host machine, you [run][podman-docs-run]
@@ -79,7 +78,6 @@ REDHAT_SUPPORT_PRODUCT_VERSION="9.7"
 SUPPORT_END=2032-06-01
 ```
 
-
 ## Monitoring Containers
 
 Open up a new terminal tab on the host machine and
@@ -112,14 +110,14 @@ CONTAINER ID        IMAGE         COMMAND             CREATED             STATUS
 <generated id>      <image:tag>   "/bin/bash"         n minutes ago       Up n minutes                            my-example
 ```
 
-> ## Renaming by name
->
->You can also identify containers to rename by their current name
->
->```bash
->podman rename <NAME> my-example
->```
-{: .callout}
+:::{admonition} Renaming by name
+:class: tip
+You can also identify containers to rename by their current name
+
+```bash
+podman rename <NAME> my-example
+```
+:::
 
 Alternatively, you can also give the container a name at creation, using the `--name ` option:
 
@@ -129,8 +127,7 @@ podman run -it --name my-fancy-name almalinux:9 /bin/bash
 
 This way, it has a custom chosen name to start with, which you can use later on to interact with it.
 
-
-# Exiting and restarting containers
+## Exiting and restarting containers
 
 As a test, go back into the terminal used for your container, and create a file in the container
 
@@ -174,28 +171,28 @@ podman start <CONTAINER ID>
 podman attach <CONTAINER ID>
 ```
 
-> ## `exec` command
-> The [attach][podman-docs-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with.
->
-> In case you'd like some more flexibility, the [exec][podman-docs-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc.
->
-> For example, the `exec` equivalent to `attach`ing in our case would look like:
-> ```bash
-> podman start <CONTAINER ID>
-> podman exec -it <CONTAINER ID> /bin/bash
-> ```
-{: .callout}
+:::{admonition} `exec` command
+:class: tip
+The [attach][podman-docs-attach] command used here is a handy shortcut to interactively access a running container with the same start command (in this case `/bin/bash`) that it was originally run with.
 
-> ## Starting and attaching by name
->
->You can also start and attach containers by their name
->
->```bash
->podman start <NAME>
->podman attach <NAME>
->```
-{: .callout}
+In case you'd like some more flexibility, the [exec][podman-docs-exec] command lets you run any command in the container, with options similar to the run command to enable an interactive (`-i`) session, etc.
 
+For example, the `exec` equivalent to `attach`ing in our case would look like:
+```bash
+podman start <CONTAINER ID>
+podman exec -it <CONTAINER ID> /bin/bash
+```
+:::
+
+:::{admonition} Starting and attaching by name
+:class: tip
+You can also start and attach containers by their name
+
+```bash
+podman start <NAME>
+podman attach <NAME>
+```
+:::
 
 Check that `test.txt` still exists
 
@@ -210,15 +207,15 @@ afs  bin  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run	sbin  srv
 So this shows us that we can exit containers for arbitrary lengths of time and then
 return to our working environment inside of them as desired.
 
->## Clean up a container
->
->If you want a container to be [cleaned up][podman-docs-run-clean-up] &mdash; that is,
->deleted &mdash; after you exit it then run with the `--rm` option flag
->
->```bash
->podman run --rm -it <IMAGE> /bin/bash
->```
-{: .callout}
+:::{admonition} Clean up a container
+:class: tip
+If you want a container to be [cleaned up][podman-docs-run-clean-up] &mdash; that is,
+deleted &mdash; after you exit it then run with the `--rm` option flag
+
+```bash
+podman run --rm -it <IMAGE> /bin/bash
+```
+:::
 
 [podman-docs-run]: https://docs.podman.io/en/stable/markdown/podman-run.1.html
 [docker-hub-python]: https://github.com/docker-library/python
@@ -229,3 +226,10 @@ return to our working environment inside of them as desired.
 [podman-docs-exec]: https://docs.docker.com/engine/reference/commandline/exec/
 [podman-docs-run-clean-up]: https://docs.podman.io/en/stable/markdown/podman-run.1.html#rm
 
+:::{admonition} Key Points
+:class: note
+- Run containers with `podman run <image-id>`
+- Monitor containers with `podman ps`
+- Exit interactive sessions using the `exit` command
+- Restart stopped containers with `podman start`
+:::

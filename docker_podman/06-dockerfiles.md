@@ -1,21 +1,18 @@
----
-title: "Writing Dockerfiles and Building Images"
-teaching: 30
-exercises: 20
-questions:
-- "How are Dockerfiles written?"
-- "How are images built?"
-objectives:
-- "Write simple Dockerfiles"
-- "Build a container image from a Dockerfile"
-keypoints:
-- "Dockerfiles are written as text file commands to the container engine"
-- "Images are built with `podman build`"
-- "Images can have multiple tags associated to them"
-- "Images can use `COPY` to copy files into them during build"
-- "Images can use `ADD` to copy remote files and extract compressed files"
-- "Images can use multi-stage builds to reduce their final size"
----
+# Writing Dockerfiles and Building Images
+
+:::{admonition} Overview
+:class: note
+**Teaching:** 30 min | **Exercises:** 20 min
+
+**Questions**
+- How are Dockerfiles written?
+- How are images built?
+
+**Objectives**
+- Write simple Dockerfiles
+- Build a container image from a Dockerfile
+:::
+
 <iframe width="427" height="251" src="https://www.youtube.com/embed/NSVXBgYSkBY?si=pAZsMxfkZ2imcL52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Container images are static files that contain a template to create containers on machines.
@@ -69,28 +66,29 @@ WORKDIR /home/docker
 USER docker
 ```
 
-> ## Dockerfile layers (or: why all these '&&'s??)
->
->Each `RUN` command in a Dockerfile creates a new layer to the image.
->In general, each layer should try to do one job, and the fewer layers in an image,
-> the easier it is to compress.
->
-> This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will run in a pipeline and will take place in a single layer
-> When trying to upload and download images on demand, the smaller the size, the better.
->
-> Another thing to keep in mind is that each `RUN` command occurs in its own shell, so any environment variables, etc., set in one `RUN` command will not persist to the next.
-{: .callout}
+:::{admonition} Dockerfile layers (or: why all these '&&'s??)
+:class: tip
+Each `RUN` command in a Dockerfile creates a new layer to the image.
+In general, each layer should try to do one job, and the fewer layers in an image,
+the easier it is to compress.
 
-> ## Garbage cleanup
-> Notice that the last few lines of the `RUN` command clean up and remove unneeded files that get produced during the installation process. This is important for keeping image sizes small, since files produced during each image-building layer will persist into the final image and add unnecessary bulk.
-{: .callout}
+This is why you see all these '&& \'s in the `RUN` command, so that all the shell commands will run in a pipeline and will take place in a single layer
+When trying to upload and download images on demand, the smaller the size, the better.
 
-> ## Don't run as `root`
->
->By default, Docker containers will run as `root`. This is a bad idea and a security concern.
->Instead, set up a default user (like `docker` in the example) and, if needed, give the user
->greater privileges.
-{: .callout}
+Another thing to keep in mind is that each `RUN` command occurs in its own shell, so any environment variables, etc., set in one `RUN` command will not persist to the next.
+:::
+
+:::{admonition} Garbage cleanup
+:class: tip
+Notice that the last few lines of the `RUN` command clean up and remove unneeded files that get produced during the installation process. This is important for keeping image sizes small, since files produced during each image-building layer will persist into the final image and add unnecessary bulk.
+:::
+
+:::{admonition} Don't run as `root`
+:class: tip
+By default, Docker containers will run as `root`. This is a bad idea and a security concern.
+Instead, set up a default user (like `docker` in the example) and, if needed, give the user
+greater privileges.
+:::
 
 Then, [`build`][podman-docs-build] an image from the `Dockerfile` with Podman and tag it with a
 human-readable name
@@ -150,35 +148,34 @@ times or they can be specified after an image is built by using
 podman tag <SOURCE_IMAGE[:TAG]> <TARGET_IMAGE[:TAG]>
 ```
 
-> ## Add your own tag
->
-> Using `podman tag` add a new tag to the image you built.
->
-> > ## Solution
-> >
-> > ```text
-> >podman images extend-example
-> >podman tag extend-example:latest extend-example:my-tag
-> >podman images extend-example
-> > ```
-> >
-> > ```text
-> REPOSITORY                TAG         IMAGE ID      CREATED        SIZE
-> localhost/extend-example  latest      c8b76717b954  5 minutes ago  550 MB
-> >
-> REPOSITORY                TAG         IMAGE ID      CREATED        SIZE
-> localhost/extend-example  my-tag      c8b76717b954  5 minutes ago  550 MB
-> localhost/extend-example  latest      c8b76717b954  5 minutes ago  550 MB
->>
-> > ```
-> {: .solution}
-{: .challenge}
+::::{admonition} Add your own tag
+:class: important
+Using `podman tag` add a new tag to the image you built.
 
-> ## Tags are labels
->
->Note how the image ID didn't change for the two tags: they are the same object.
->Tags are simply convenient human-readable labels.
-{: .callout}
+:::{admonition} Solution
+:class: dropdown
+```text
+podman images extend-example
+podman tag extend-example:latest extend-example:my-tag
+podman images extend-example
+```
+
+```text
+REPOSITORY                TAG         IMAGE ID      CREATED        SIZE
+localhost/extend-example  latest      c8b76717b954  5 minutes ago  550 MB
+
+REPOSITORY                TAG         IMAGE ID      CREATED        SIZE
+localhost/extend-example  my-tag      c8b76717b954  5 minutes ago  550 MB
+localhost/extend-example  latest      c8b76717b954  5 minutes ago  550 MB
+```
+:::
+::::
+
+:::{admonition} Tags are labels
+:class: tip
+Note how the image ID didn't change for the two tags: they are the same object.
+Tags are simply convenient human-readable labels.
+:::
 
 ## `COPY`
 
@@ -225,15 +222,15 @@ touch Dockerfile.copy
 and fill it with a modified version of the above Dockerfile, where we now copy `install_python_deps.sh` from the local working directory into the container and use it to install the specified Python dependencies:
 
 ```dockerfile
-# Dockerfile.copy
+## Dockerfile.copy
 
-# Specify the base image that we're building the image on top of
+## Specify the base image that we're building the image on top of
 FROM almalinux:9
 
-# Build the image as root user
+## Build the image as root user
 USER root
 
-# Run some bash commands to install packages
+## Run some bash commands to install packages
 RUN dnf -y update && \
     dnf -y upgrade && \
     dnf -y install epel-release && \
@@ -246,13 +243,13 @@ COPY install_python_deps.sh install_python_deps.sh
 RUN bash install_python_deps.sh && \
     rm install_python_deps.sh
 
-# Create a new user
+## Create a new user
 RUN useradd -ms /bin/bash docker
 
-# This sets the default working directory when a container is launched from the image
+## This sets the default working directory when a container is launched from the image
 WORKDIR /home/docker
 
-# Run as docker user by default when the container starts up
+## Run as docker user by default when the container starts up
 USER docker
 ```
 
@@ -262,7 +259,6 @@ podman build -f Dockerfile.copy -t copy-example:latest .
 
 For very complex scripts or files that are on some remote, `COPY` offers a straightforward
 way to bring them into the container image build.
-
 
 ## `ADD`
 
@@ -283,7 +279,7 @@ ADD --unpack=true <src> <dest>
 
 As an example, let's compile a simple [`main.c`][c-file] file from a remote url:
 ```dockerfile
-# Dockerfile.add
+## Dockerfile.add
 FROM almalinux:9
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
 RUN dnf -y update && \
@@ -319,7 +315,7 @@ Files can be copied between stages using the [`COPY --from=<stage>`][copy-from] 
 Let's improve on the `Dockerfile.add` example by only copying over the compiled executable:
 
 ```dockerfile
-# Dockerfile.multistage
+## Dockerfile.multistage
 FROM almalinux:9 AS build
 ADD https://raw.githubusercontent.com/oer-particle-physics/hsf-training-docker/refs/heads/gh-pages/examples/main.c .
 RUN dnf -y update && \
@@ -333,12 +329,11 @@ FROM almalinux:9
 COPY --from=build main .
 ```
 
-> ## Build compatibility
->
-> Docker [recommends][from-alpine] using the simple and small Alpine Linux image when possible.
-> However, programs compiled with one image may not run on another, so in this example, I'm using almalinux for both the build stage and the final stage.
-{: .callout}
-
+:::{admonition} Build compatibility
+:class: tip
+Docker [recommends][from-alpine] using the simple and small Alpine Linux image when possible.
+However, programs compiled with one image may not run on another, so in this example, I'm using almalinux for both the build stage and the final stage.
+:::
 
 ```bash
 podman build -f Dockerfile.multistage -t multistage-example
@@ -370,8 +365,6 @@ podman run --rm multistage-example ./main
 hello world
 ```
 
-
-
 [docker-docs-builder]: https://docs.docker.com/engine/reference/builder/
 [example-Dockerfile]: https://github.com/matthewfeickert/intro-to-docker/blob/feat/update-2021-bootcamp/docker/Dockerfile
 [python-docker-image]: https://hub.docker.com/_/python
@@ -385,4 +378,12 @@ hello world
 [copy-from]: https://docs.docker.com/reference/dockerfile/#copy---from
 [from-alpine]: https://docs.docker.com/build/building/best-practices/#from
 
-
+:::{admonition} Key Points
+:class: note
+- Dockerfiles are written as text file commands to the container engine
+- Images are built with `podman build`
+- Images can have multiple tags associated to them
+- Images can use `COPY` to copy files into them during build
+- Images can use `ADD` to copy remote files and extract compressed files
+- Images can use multi-stage builds to reduce their final size
+:::
