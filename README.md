@@ -1,6 +1,6 @@
 # Introduction to Docker and Podman
 
-    
+
 This training module is a condensed version of the [original one](https://github.com/hsf-training/hsf-training-docker), part of the [HSF Training Center](https://hepsoftwarefoundation.org/training/curriculum.html) curriculum.
 Prepared for the [Computational HEP Traineeship Summer School 2026](https://indico.cern.ch/event/1672591/timetable/).
 
@@ -25,7 +25,7 @@ python -m http.server -d docker_podman/_build/html 8000
 
 ## Contributing
 
-We welcome all contributions to improve the lesson! 
+We welcome all contributions to improve the lesson!
 
 To contribute, please check the original repository at the [hsf-training organization](https://github.com/hsf-training/hsf-training-docker), and the current list of [issues](https://github.com/hsf-training/hsf-training-docker/issues) for ideas for contributing to this
 repository. For making your contribution, we use the GitHub flow, which is
