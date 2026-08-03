@@ -1,22 +1,35 @@
 # Introduction to Docker and Podman
 [![HSF Training Center](https://img.shields.io/badge/HSF%20Training%20Center-browse-ff69b4)](https://hepsoftwarefoundation.org/training/curriculum.html)
-[![Build Status](https://travis-ci.org/hsf-training/hsf-training-docker.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-docker)
+[![jupyter-book](https://github.com/michmx/2026-08-12-podman/actions/workflows/book.yml/badge.svg)](https://github.com/michmx/2026-08-12-podman/actions/workflows/book.yml)
 
-This repository generates the corresponding lesson website from [The Carpentries](https://carpentries.org/) repertoire of lessons.
+This repository generates the corresponding lesson website as a [Jupyter Book](https://jupyterbook.org/).
 
 > **Note**
 > Click [here](https://oer-particle-physics.github.io/hsf-training-docker/) for the training website!
 
 The aim of this module is to introduce containers and their role in reproducible research. Participants will learn how to build, run, and share containers using tools like Docker and Podman.
 
+## Building the lesson locally
+
+The lesson source lives in `docker_podman/`. To build and preview it:
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+jupyter-book build docker_podman/
+python -m http.server -d docker_podman/_build/html 8000
+```
+
+CI builds with warnings treated as errors, so please check that
+`jupyter-book build -W --keep-going docker_podman/` passes before opening a pull request.
+
 ## Contributing
 
 We welcome all contributions to improve the lesson! Maintainers will do their best to help you if you have any
 questions, concerns, or experience any difficulties along the way.
 
-We'd like to ask you to familiarize yourself with our [Contribution Guide](CONTRIBUTING.md) and have a look at
-the [more detailed guidelines][lesson-example] on proper formatting, ways to render the lesson locally, and even
-how to write new episodes.
+We'd like to ask you to familiarize yourself with our [Contribution Guide](CONTRIBUTING.md).
 
 Please see the current list of [issues][github-issues] for ideas for contributing to this
 repository. For making your contribution, we use the GitHub flow, which is
@@ -30,10 +43,6 @@ Current maintainers of this lesson are
 
 * [Matthew Feickert](http://www.matthewfeickert.com/)
 * Danika MacDonell <danikam1@uvic.ca>
-
-## Authors
-
-A list of contributors to the lesson can be found in [AUTHORS](AUTHORS)
 
 ## Contributors ✨
 
@@ -70,14 +79,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-## Citation
-
-To cite this lesson, please consult with [CITATION](CITATION)
-
 ## Open Educational Resources (OER) on Zenodo
 
 This lesson is included in the ETH Domain Open Educational Resources for Research Data Management (RDM) community on Zenodo. These resources support researchers, students, and RDM staff in implementing best practices across the research data lifecycle. The materials developed here are published under open licenses (CC BY 4.0) and can be freely reused and adapted for teaching and training initiatives worldwide.
 
-
-[lesson-example]: https://carpentries.github.io/lesson-example
-[github-issues]: https://github.com/matthewfeickert/intro-to-docker/issues
+[github-issues]: https://github.com/michmx/2026-08-12-podman/issues
