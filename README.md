@@ -1,11 +1,12 @@
 # Introduction to Docker and Podman
-[![HSF Training Center](https://img.shields.io/badge/HSF%20Training%20Center-browse-ff69b4)](https://hepsoftwarefoundation.org/training/curriculum.html)
-[![jupyter-book](https://github.com/michmx/2026-08-12-podman/actions/workflows/book.yml/badge.svg)](https://github.com/michmx/2026-08-12-podman/actions/workflows/book.yml)
+
+    
+This training module is a condensed version of the [original one](https://github.com/hsf-training/hsf-training-docker), part of the [HSF Training Center](https://hepsoftwarefoundation.org/training/curriculum.html) curriculum.
+Prepared for the [Computational HEP Traineeship Summer School 2026](https://indico.cern.ch/event/1672591/timetable/).
 
 This repository generates the corresponding lesson website as a [Jupyter Book](https://jupyterbook.org/).
 
-> **Note**
-> Click [here](https://oer-particle-physics.github.io/hsf-training-docker/) for the training website!
+
 
 The aim of this module is to introduce containers and their role in reproducible research. Participants will learn how to build, run, and share containers using tools like Docker and Podman.
 
@@ -21,30 +22,19 @@ jupyter-book build docker_podman/
 python -m http.server -d docker_podman/_build/html 8000
 ```
 
-CI builds with warnings treated as errors, so please check that
-`jupyter-book build -W --keep-going docker_podman/` passes before opening a pull request.
 
 ## Contributing
 
-We welcome all contributions to improve the lesson! Maintainers will do their best to help you if you have any
-questions, concerns, or experience any difficulties along the way.
+We welcome all contributions to improve the lesson! 
 
-We'd like to ask you to familiarize yourself with our [Contribution Guide](CONTRIBUTING.md).
-
-Please see the current list of [issues][github-issues] for ideas for contributing to this
+To contribute, please check the original repository at the [hsf-training organization](https://github.com/hsf-training/hsf-training-docker), and the current list of [issues](https://github.com/hsf-training/hsf-training-docker/issues) for ideas for contributing to this
 repository. For making your contribution, we use the GitHub flow, which is
 nicely explained in the chapter [Contributing to a Project](http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project) in Pro Git
 by Scott Chacon.
 Look for the tag ![good_first_issue](https://img.shields.io/badge/-good%20first%20issue-gold.svg). This indicates that the maintainers will welcome a pull request fixing this issue.
 
-## Maintainer(s)
 
-Current maintainers of this lesson are
-
-* [Matthew Feickert](http://www.matthewfeickert.com/)
-* Danika MacDonell <danikam1@uvic.ca>
-
-## Contributors ✨
+## Original Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -78,9 +68,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## Open Educational Resources (OER) on Zenodo
-
-This lesson is included in the ETH Domain Open Educational Resources for Research Data Management (RDM) community on Zenodo. These resources support researchers, students, and RDM staff in implementing best practices across the research data lifecycle. The materials developed here are published under open licenses (CC BY 4.0) and can be freely reused and adapted for teaching and training initiatives worldwide.
-
-[github-issues]: https://github.com/michmx/2026-08-12-podman/issues
