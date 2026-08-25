@@ -72,7 +72,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Citation
 
-To cite this lesson, please consult with [CITATION](CITATION)
+To cite this lesson, please consult with [CITATION.cff](CITATION.cff), or use the "Cite this repository" button in the sidebar.
 
 ## Open Educational Resources (OER) on Zenodo
 

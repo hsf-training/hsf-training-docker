@@ -1,0 +1,60 @@
+cff-version: 1.2.0
+message: "If you use this lesson, please cite it as below."
+title: "Introduction to Docker and Podman"
+abstract: >-
+  An HSF Training lesson introducing Docker and Podman as software development
+  tools and exploring their role in reproducible research. Originally developed
+  by Matthew Feickert for the 2019 USATLAS Computing Bootcamp at LBNL.
+type: software
+license:
+  - CC-BY-4.0
+  - MIT
+repository-code: "https://github.com/hsf-training/hsf-training-docker"
+url: "https://hsf-training.github.io/hsf-training-docker/"
+version: "v2026.08.19"
+date-released: "2026-08-19"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22016838"
+    description: "Concept DOI resolving to the latest version of this lesson on Zenodo."
+keywords:
+  - training
+  - docker
+  - podman
+  - containers
+  - reproducibility
+  - high energy physics
+authors:
+  - family-names: Feickert
+    given-names: Matthew
+    orcid: "https://orcid.org/0000-0003-4124-7862"
+  - family-names: Eamer
+    given-names: Danika
+    orcid: "https://orcid.org/0000-0001-5533-6300"
+  - family-names: Fatouros
+    given-names: Max
+    orcid: "https://orcid.org/0000-0002-7438-652X"
+  - family-names: Hernández Villanueva
+    given-names: Michel
+    orcid: "https://orcid.org/0000-0002-6322-5587"
+  - family-names: Desai
+    given-names: Aman
+    orcid: "https://orcid.org/0000-0003-2631-9696"
+  - family-names: Donadoni
+    given-names: Marco
+    orcid: "https://orcid.org/0000-0003-2922-5505"
+  - family-names: Lieret
+    given-names: Kilian
+    orcid: "https://orcid.org/0000-0003-2792-7511"
+  - family-names: Lukashenko
+    given-names: Valeriia
+    orcid: "https://orcid.org/0000-0002-0630-5185"
+  - family-names: Mambelli
+    given-names: Marco
+    orcid: "https://orcid.org/0000-0002-9489-2681"
+  - family-names: Meehan
+    given-names: Samuel
+    orcid: "https://orcid.org/0000-0002-3613-7514"
+  - family-names: Regnery
+    given-names: Brendan
+    orcid: "https://orcid.org/0000-0003-1539-923X"
