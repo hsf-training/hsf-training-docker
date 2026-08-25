@@ -1,6 +1,7 @@
 # Introduction to Docker and Podman
 [![HSF Training Center](https://img.shields.io/badge/HSF%20Training%20Center-browse-ff69b4)](https://hepsoftwarefoundation.org/training/curriculum.html)
-[![Build Status](https://travis-ci.org/hsf-training/hsf-training-docker.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-docker)
+[![pages-build-deployment](https://github.com/hsf-training/hsf-training-docker/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/hsf-training/hsf-training-docker/actions/workflows/pages/pages-build-deployment)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22016838.svg)](https://doi.org/10.5281/zenodo.22016838)
 
 This repository generates the corresponding lesson website from [The Carpentries](https://carpentries.org/) repertoire of lessons.
 
@@ -29,7 +30,6 @@ Look for the tag ![good_first_issue](https://img.shields.io/badge/-good%20first%
 Current maintainers of this lesson are
 
 * [Matthew Feickert](http://www.matthewfeickert.com/)
-* Danika MacDonell <danikam1@uvic.ca>
 
 ## Authors
 
@@ -72,7 +72,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Citation
 
-To cite this lesson, please consult with [CITATION](CITATION)
+To cite this lesson, please consult with [CITATION.cff](CITATION.cff), or use the "Cite this repository" button in the sidebar.
 
 ## Open Educational Resources (OER) on Zenodo
 
