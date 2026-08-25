@@ -1,6 +1,7 @@
 # Introduction to Docker and Podman
 [![HSF Training Center](https://img.shields.io/badge/HSF%20Training%20Center-browse-ff69b4)](https://hepsoftwarefoundation.org/training/curriculum.html)
-[![Build Status](https://travis-ci.org/hsf-training/hsf-training-docker.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-docker)
+[![pages-build-deployment](https://github.com/hsf-training/hsf-training-docker/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/hsf-training/hsf-training-docker/actions/workflows/pages/pages-build-deployment)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22016838.svg)](https://doi.org/10.5281/zenodo.22016838)
 
 This repository generates the corresponding lesson website from [The Carpentries](https://carpentries.org/) repertoire of lessons.
 
