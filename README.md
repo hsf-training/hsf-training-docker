@@ -5,7 +5,7 @@
 This repository generates the corresponding lesson website from [The Carpentries](https://carpentries.org/) repertoire of lessons.
 
 > **Note**
-> Click [here](https://oer-particle-physics.github.io/hsf-training-docker/) for the training website!
+> Click [here](https://hsf-training.github.io/hsf-training-docker/) for the training website!
 
 The aim of this module is to introduce containers and their role in reproducible research. Participants will learn how to build, run, and share containers using tools like Docker and Podman.
 
