@@ -37,7 +37,7 @@ A list of contributors to the lesson can be found in [AUTHORS](AUTHORS)
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -77,6 +77,7 @@ To cite this lesson, please consult with [CITATION](CITATION.cff)
 ## Open Educational Resources (OER) on Zenodo
 
 This lesson is included in the [HEP Software Foundation Training Material](https://zenodo.org/communities/hsf-training/records) and in the [ETH Domain Open Educational Resources for Research Data Management](https://zenodo.org/communities/eth-domain-oer-rdm/records) communities on Zenodo.                                    
+
 The materials developed here are published under open licenses (CC BY 4.0) and can be freely reused and adapted for teaching and training initiatives worldwide.
 
 See the Zenodo record: https://doi.org/10.5281/zenodo.22016839
