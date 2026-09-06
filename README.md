@@ -35,7 +35,7 @@ Current maintainers of this lesson are
 
 A list of contributors to the lesson can be found in [AUTHORS](AUTHORS)
 
-## Contributors ✨
+## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -72,12 +72,14 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Citation
 
-To cite this lesson, please consult with [CITATION](CITATION)
+To cite this lesson, please consult with [CITATION](CITATION.cff)
 
 ## Open Educational Resources (OER) on Zenodo
 
-This lesson is included in the ETH Domain Open Educational Resources for Research Data Management (RDM) community on Zenodo. These resources support researchers, students, and RDM staff in implementing best practices across the research data lifecycle. The materials developed here are published under open licenses (CC BY 4.0) and can be freely reused and adapted for teaching and training initiatives worldwide.
+This lesson is included in the [HEP Software Foundation Training Material](https://zenodo.org/communities/hsf-training/records) and in the [ETH Domain Open Educational Resources for Research Data Management](https://zenodo.org/communities/eth-domain-oer-rdm/records) communities on Zenodo.                                    
+The materials developed here are published under open licenses (CC BY 4.0) and can be freely reused and adapted for teaching and training initiatives worldwide.
 
+See the Zenodo record: https://doi.org/10.5281/zenodo.22016839
 
 [lesson-example]: https://carpentries.github.io/lesson-example
 [github-issues]: https://github.com/matthewfeickert/intro-to-docker/issues
