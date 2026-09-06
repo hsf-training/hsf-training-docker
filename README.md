@@ -7,7 +7,7 @@ This repository generates the corresponding lesson website from [The Carpentries
 > **Note**
 > Click [here](https://hsf-training.github.io/hsf-training-docker/) for the training website!
 
-The aim of this module is to introduce containers and their role in reproducible research. Participants will learn how to build, run, and share containers using tools like Docker and Podman.
+This learning module introduces containers and their role in reproducible research. Participants will learn how to build, run, and share containers using tools like Docker and Podman.
 
 ## Contributing
 
