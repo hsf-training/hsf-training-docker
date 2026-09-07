@@ -50,9 +50,6 @@ authors:
   - given-names: Laura
     family-names: Marqués
     orcid: https://orcid.org/0000-0002-3593-5557
-  - given-names: Henry
-    family-names: Lütcke
-    orcid: https://orcid.org/0000-0001-7225-4374
 abstract: >-
   Introduce containers and their role in reproducible research. Participants will learn how to build, run, and share containers using tools like Docker and Podman.
 repository-code: https://github.com/hsf-training/hsf-training-docker
