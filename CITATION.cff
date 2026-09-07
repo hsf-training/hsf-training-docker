@@ -50,8 +50,64 @@ authors:
   - given-names: Laura
     family-names: Marqués
     orcid: https://orcid.org/0000-0002-3593-5557
+  - given-names: Raniere
+    family-names: Silva
+    orcid: https://orcid.org/0000-0002-8381-3749
+  - given-names: François
+    family-names: Michonneau
+    orcid: 
+  - given-names: Greg
+    family-names: Wilson
+    orcid:
+  - given-names: Maxim
+    family-names: Belkin
+    orcid:
+  - given-names: Kilian
+    family-names: Lieret
+    orcid:
+  - given-names: Michel H.
+    family-names: Villanueva
+    orcid:
+  - given-names: Abby Cabunoc
+    family-names: Mayes
+    orcid: https://orcid.org/0000-0003-4959-3049
+  - given-names: Katrin
+    family-names: Leinweber
+    orcid: https://orcid.org/0000-0001-5135-5758
+  - given-names: João
+    family-names: Rodrigues
+    orcid: 
+  - given-names: Rémi
+    family-names: Emonet
+    orcid: 
+  - given-names: Alexander Moreno
+    family-names: Briceño
+    orcid: https://orcid.org/0000-0001-8415-2543
+    orcid: 
+  - given-names: David
+    family-names: Mawdsley
+    orcid: 
+  - given-names: Piotr
+    family-names: Banaszkiewicz
+    orcid: 
+  - given-names: Jemma
+    family-names: Stachelek
+    orcid:
+  - given-names: Michael R.
+    family-names: Crusoe
+    orcid:
+  - given-names: Erin
+    family-names: Becker
+    orcid: https://orcid.org/0000-0002-6832-0233
+  - given-names: William L.
+    family-names: Close
+    orcid: 
+  - given-names: Ana
+    family-names: Conrado
+    orcid: 
 abstract: >-
   Introduce containers and their role in reproducible research. Participants will learn how to build, run, and share containers using tools like Docker and Podman.
 repository-code: https://github.com/hsf-training/hsf-training-docker
 url: https://hsf-training.github.io/hsf-training-docker/
+doi: 10.5281/zenodo.22016839
 license: CC-BY-4.0
