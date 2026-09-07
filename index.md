@@ -28,6 +28,11 @@ Originally developed by Matthew Feickert for the [**2019 USATLAS Computing Bootc
 > - Explain how containers can be shared to support reproducibility and collaboration.
 {: .objectives}
 
+
+<iframe width="100%" style="aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/ZpKaS88ZuO4?si=cNhvIwCsXqLoqxx8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+
 {% include curriculum.html %}
 
 {% include links.md %}
