@@ -66,6 +66,4 @@ keywords:
 repository-code: https://github.com/hsf-training/hsf-training-docker
 url: https://hsf-training.github.io/hsf-training-docker/
 doi: 10.5281/zenodo.22016838
-license:
-  - CC-BY-4.0
-  - MIT
+license: CC-BY-4.0
