@@ -15,7 +15,7 @@ authors:
     family-names: Fatouros
     orcid: https://orcid.org/0000-0002-7438-652X
   - given-names: Michel
-    family-names: Hernandez Villanueva
+    family-names: Hernández Villanueva
     orcid: https://orcid.org/0000-0002-6322-5587
   - given-names: Aman
     family-names: Desai
@@ -45,7 +45,7 @@ authors:
     family-names: Regnery
     orcid: https://orcid.org/0000-0003-1539-923X
 abstract: >-
-  This learning module, developed by the High Energy Physics Software Foundation (HSF), introduces Docker and Podman as software development tools and explores their role in enabling reproducible research.
+  This learning module, developed by the HEP Software Foundation (HSF), introduces Docker and Podman as software development tools and explores their role in enabling reproducible research.
 
   After completing this module, participants will be able to:
   - Understand the concept of containers and their role in reproducible research.
