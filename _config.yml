@@ -49,9 +49,6 @@ workshop_repo: "https://github.com/carpentries/workshop-template"
 workshop_site: "https://carpentries.github.io/workshop-template"
 cc_by_human: "https://creativecommons.org/licenses/by/4.0/"
 hsf_site: "https://hepsoftwarefoundation.org"
-swc_github: "https://github.com/swcarpentry"
-swc_pages: "https://swcarpentry.github.io"
-swc_site: "https://software-carpentry.org"
 
 # Surveys.
 swc_pre_survey: "https://www.surveymonkey.com/r/swc_pre_workshop_v1?workshop_id="

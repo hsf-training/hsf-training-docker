@@ -179,7 +179,7 @@ It is best if you work through these lessons before the tutorial on Containers, 
   * Else, you can remove the ``kinit`` line from `.gitlab-ci.yml` and use the public EOS datasets:
     * `root://eospublic.cern.ch//eos/root-eos/HiggsTauTauReduced` for the skimming repo.
     * `root://eospublic.cern.ch//eos/opendata/cms/upload/apb2023/histograms.root` for the fitting repo.
-* For the fitting code repo, the [fit_simple](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats/blob/master/.gitlab-ci.yml#L5) step in `.gitlab-ci.yml` expects to receive the file `histograms.root` produced by the skimming code. In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://eospublichttp.cern.ch//eos/opendata/cms/upload/apb2023/histograms.root). In any case, you can:
+* For the fitting code repo, the [fit_simple](https://github.com/hsf-training/hsf-training-cms-analysis-snapshot-stats/blob/master/.gitlab-ci.yml#L5) step in `.gitlab-ci.yml` expects to receive the file `histograms.root` produced by the skimming code. In case you haven't had a chance to produce this file yet, it can be downloaded from [here](https://opendata.cern.ch/eos/opendata/cms/upload/apb2023/histograms.root). In any case, you can:
   * Use the public EOS datasets mentioned above.
   * If you are from CERN, you can copy the downloaded file to your personal EOS user space (`root://eosuser.cern.ch//eos/user/[first_letter_of_username]/[username]`).
 
